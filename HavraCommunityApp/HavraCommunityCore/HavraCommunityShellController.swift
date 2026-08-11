@@ -6,7 +6,7 @@ final class HavraCommunityShellController: UIViewController, WKNavigationDelegat
     private static let runtimeScheme = "havra-runtime"
     private static let runtimeHost = "app"
     private static let purchaseBridgeName = "PoetryIAP"
-    private static let coinCatalogRelativePath = "static/common.config/coin-packages.json"
+    private static let coinCatalogRelativePath = "havra-life/market-config/coin-packages.json"
 
     private var didLoadCommunityRuntime = false
     private let runtimeSchemeHandler = HavraRuntimeSchemeHandler()
@@ -336,7 +336,7 @@ final class HavraCommunityShellController: UIViewController, WKNavigationDelegat
     }
 
     private static let runtimeBundleURL: URL? = {
-        Bundle.main.url(forResource: "HavraWebRuntime", withExtension: "bundle")
+        Bundle.main.url(forResource: "HavraLifeAtlas", withExtension: "bundle")
     }()
 
     private static func runtimeResourceURL(_ relativePath: String) -> URL? {
@@ -412,7 +412,7 @@ final class HavraCommunityShellController: UIViewController, WKNavigationDelegat
 private final class HavraRuntimeSchemeHandler: NSObject, WKURLSchemeHandler {
     private let runtimeRootURL: URL?
 
-    init(runtimeRootURL: URL? = Bundle.main.url(forResource: "HavraWebRuntime", withExtension: "bundle")) {
+    init(runtimeRootURL: URL? = Bundle.main.url(forResource: "HavraLifeAtlas", withExtension: "bundle")) {
         self.runtimeRootURL = runtimeRootURL
         super.init()
     }
@@ -449,14 +449,54 @@ private final class HavraRuntimeSchemeHandler: NSObject, WKURLSchemeHandler {
             relativePath = "/index.html"
         }
 
-        relativePath = relativePath.trimmingCharacters(in: CharacterSet(charactersIn: "/"))
+        relativePath = normalizedRelativePath(relativePath)
         guard !relativePath.isEmpty,
-              !relativePath.contains(".."),
               !relativePath.hasPrefix("~") else {
             return nil
         }
 
-        return rootURL.appendingPathComponent(relativePath)
+        return rootURL.appendingPathComponent(communityAtlasPath(for: relativePath))
+    }
+
+    private static func normalizedRelativePath(_ path: String) -> String {
+        let parts = path
+            .split(separator: "/", omittingEmptySubsequences: true)
+            .reduce(into: [String]()) { result, part in
+                switch part {
+                case ".":
+                    return
+                case "..":
+                    if !result.isEmpty {
+                        result.removeLast()
+                    }
+                default:
+                    result.append(String(part))
+                }
+            }
+
+        return parts.joined(separator: "/")
+    }
+
+    private static func communityAtlasPath(for relativePath: String) -> String {
+        let pathAliases = [
+            ("assets/", "havra-entry/"),
+            ("static/add/", "havra-life/publisher-kit/"),
+            ("static/assets/head/", "havra-life/community-media/member-portraits/"),
+            ("static/assets/icons/", "havra-life/community-media/interface-symbols/"),
+            ("static/assets/img/", "havra-life/community-media/scene-stills/"),
+            ("static/assets/tabbar/", "havra-life/community-media/journey-tabs/"),
+            ("static/assets/video/", "havra-life/community-media/story-clips/"),
+            ("static/assets/", "havra-life/community-media/"),
+            ("static/common.config/", "havra-life/market-config/"),
+            ("static/icon/", "havra-life/navigation-symbols/"),
+            ("static/", "havra-life/")
+        ]
+
+        for (legacyPrefix, atlasPrefix) in pathAliases where relativePath.hasPrefix(legacyPrefix) {
+            return atlasPrefix + relativePath.dropFirst(legacyPrefix.count)
+        }
+
+        return relativePath
     }
 
     private static func mimeType(for pathExtension: String) -> String {

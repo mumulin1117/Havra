@@ -7,31 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7A1C9E9B2C94000100A1B2C3 /* HavraWebRuntime.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7A1C9E9A2C94000100A1B2C3 /* HavraWebRuntime.bundle */; };
+		7A1C9E9B2C94000100A1B2C3 /* HavraLifeAtlas.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7A1C9E9A2C94000100A1B2C3 /* HavraLifeAtlas.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		7A1C9E9A2C94000100A1B2C3 /* HavraWebRuntime.bundle */ = {isa = PBXFileReference; lastKnownFileType = wrapper.cfbundle; path = HavraWebRuntime.bundle; sourceTree = "<group>"; };
-		F527C6833029AABF00408B7D /* HavraENPatt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HavraENPatt.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A1C9E9A2C94000100A1B2C3 /* HavraLifeAtlas.bundle */ = {isa = PBXFileReference; lastKnownFileType = wrapper.cfbundle; path = HavraLifeAtlas.bundle; sourceTree = "<group>"; };
+		F527C6833029AABF00408B7D /* Havra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Havra.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		F527C6953029AAC000408B7D /* Exceptions for "HavraENPatt" folder in "HavraENPatt" target */ = {
+		F527C6953029AAC000408B7D /* Exceptions for "HavraCommunityCore" folder in "Havra" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = F527C6823029AABF00408B7D /* HavraENPatt */;
+			target = F527C6823029AABF00408B7D /* Havra */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		F527C6853029AABF00408B7D /* HavraENPatt */ = {
+		F527C6853029AABF00408B7D /* HavraCommunityCore */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				F527C6953029AAC000408B7D /* Exceptions for "HavraENPatt" folder in "HavraENPatt" target */,
+				F527C6953029AAC000408B7D /* Exceptions for "HavraCommunityCore" folder in "Havra" target */,
 			);
-			path = HavraENPatt;
+			path = HavraCommunityCore;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -50,8 +50,8 @@
 		F527C67A3029AABF00408B7D = {
 			isa = PBXGroup;
 			children = (
-				F527C6853029AABF00408B7D /* HavraENPatt */,
-				7A1C9E9A2C94000100A1B2C3 /* HavraWebRuntime.bundle */,
+				F527C6853029AABF00408B7D /* HavraCommunityCore */,
+				7A1C9E9A2C94000100A1B2C3 /* HavraLifeAtlas.bundle */,
 				F527C6843029AABF00408B7D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -59,7 +59,7 @@
 		F527C6843029AABF00408B7D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F527C6833029AABF00408B7D /* HavraENPatt.app */,
+				F527C6833029AABF00408B7D /* Havra.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -67,9 +67,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F527C6823029AABF00408B7D /* HavraENPatt */ = {
+		F527C6823029AABF00408B7D /* Havra */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F527C6963029AAC000408B7D /* Build configuration list for PBXNativeTarget "HavraENPatt" */;
+			buildConfigurationList = F527C6963029AAC000408B7D /* Build configuration list for PBXNativeTarget "Havra" */;
 			buildPhases = (
 				F527C67F3029AABF00408B7D /* Sources */,
 				F527C6803029AABF00408B7D /* Frameworks */,
@@ -80,13 +80,13 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				F527C6853029AABF00408B7D /* HavraENPatt */,
+				F527C6853029AABF00408B7D /* HavraCommunityCore */,
 			);
-			name = HavraENPatt;
+			name = Havra;
 			packageProductDependencies = (
 			);
-			productName = HavraENPatt;
-			productReference = F527C6833029AABF00408B7D /* HavraENPatt.app */;
+			productName = Havra;
+			productReference = F527C6833029AABF00408B7D /* Havra.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -104,7 +104,7 @@
 					};
 				};
 			};
-			buildConfigurationList = F527C67E3029AABF00408B7D /* Build configuration list for PBXProject "HavraENPatt" */;
+			buildConfigurationList = F527C67E3029AABF00408B7D /* Build configuration list for PBXProject "Havra" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -118,7 +118,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F527C6823029AABF00408B7D /* HavraENPatt */,
+				F527C6823029AABF00408B7D /* Havra */,
 			);
 		};
 /* End PBXProject section */
@@ -128,7 +128,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7A1C9E9B2C94000100A1B2C3 /* HavraWebRuntime.bundle in Resources */,
+				7A1C9E9B2C94000100A1B2C3 /* HavraLifeAtlas.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,12 +153,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = HavraENPatt/Info.plist;
+				INFOPLIST_FILE = HavraCommunityCore/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Havra;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -188,12 +189,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = HavraENPatt/Info.plist;
+				INFOPLIST_FILE = HavraCommunityCore/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Havra;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -337,7 +339,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F527C67E3029AABF00408B7D /* Build configuration list for PBXProject "HavraENPatt" */ = {
+		F527C67E3029AABF00408B7D /* Build configuration list for PBXProject "Havra" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F527C6993029AAC000408B7D /* Debug */,
@@ -346,7 +348,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F527C6963029AAC000408B7D /* Build configuration list for PBXNativeTarget "HavraENPatt" */ = {
+		F527C6963029AAC000408B7D /* Build configuration list for PBXNativeTarget "Havra" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F527C6973029AAC000408B7D /* Debug */,
