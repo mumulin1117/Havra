@@ -6,7 +6,7 @@ final class HavraCommunityShellController: UIViewController, WKNavigationDelegat
     private static let runtimeScheme = "havra-runtime"
     private static let runtimeHost = "app"
     private static let purchaseBridgeName = "PoetryIAP"
-    private static let coinCatalogRelativePath = "static/common.config/coin-packages.json"
+    private static let coinCatalogRelativePath = "havra-atlas/catalog-config/coin-packages.json"
 
     private var didLoadCommunityRuntime = false
     private let runtimeSchemeHandler = HavraRuntimeSchemeHandler()
@@ -340,7 +340,45 @@ final class HavraCommunityShellController: UIViewController, WKNavigationDelegat
     }()
 
     private static func runtimeResourceURL(_ relativePath: String) -> URL? {
-        runtimeBundleURL?.appendingPathComponent(relativePath)
+        runtimeBundleURL?.appendingPathComponent(atlasPath(for: normalizedAtlasPath(relativePath)))
+    }
+
+    private static func normalizedAtlasPath(_ path: String) -> String {
+        var parts: [String] = []
+        for part in path.split(separator: "/", omittingEmptySubsequences: true) {
+            switch part {
+            case ".":
+                continue
+            case "..":
+                if !parts.isEmpty {
+                    parts.removeLast()
+                }
+            default:
+                parts.append(String(part))
+            }
+        }
+        return parts.joined(separator: "/")
+    }
+
+    private static func atlasPath(for relativePath: String) -> String {
+        let pathAliases = [
+            ("assets/", "havra-entry/"),
+            ("static/add/", "havra-atlas/publish-kit/"),
+            ("static/assets/head/", "havra-atlas/visual-set/profile-faces/"),
+            ("static/assets/icons/", "havra-atlas/visual-set/interface-symbols/"),
+            ("static/assets/img/", "havra-atlas/visual-set/scene-stills/"),
+            ("static/assets/tabbar/", "havra-atlas/visual-set/journey-tabs/"),
+            ("static/assets/video/", "havra-atlas/visual-set/story-reels/"),
+            ("static/assets/", "havra-atlas/visual-set/"),
+            ("static/common.config/", "havra-atlas/catalog-config/"),
+            ("static/icon/", "havra-atlas/navigation-symbols/"),
+            ("static/", "havra-atlas/")
+        ]
+
+        for (oldPrefix, newPrefix) in pathAliases where relativePath.hasPrefix(oldPrefix) {
+            return newPrefix + String(relativePath.dropFirst(oldPrefix.count))
+        }
+        return relativePath
     }
 
     private static let coinCatalog: [[String: Any]] = {
@@ -449,14 +487,51 @@ private final class HavraRuntimeSchemeHandler: NSObject, WKURLSchemeHandler {
             relativePath = "/index.html"
         }
 
-        relativePath = relativePath.trimmingCharacters(in: CharacterSet(charactersIn: "/"))
+        relativePath = normalizedAtlasPath(relativePath)
         guard !relativePath.isEmpty,
-              !relativePath.contains(".."),
               !relativePath.hasPrefix("~") else {
             return nil
         }
 
-        return rootURL.appendingPathComponent(relativePath)
+        return rootURL.appendingPathComponent(atlasPath(for: relativePath))
+    }
+
+    private static func normalizedAtlasPath(_ path: String) -> String {
+        var parts: [String] = []
+        for part in path.split(separator: "/", omittingEmptySubsequences: true) {
+            switch part {
+            case ".":
+                continue
+            case "..":
+                if !parts.isEmpty {
+                    parts.removeLast()
+                }
+            default:
+                parts.append(String(part))
+            }
+        }
+        return parts.joined(separator: "/")
+    }
+
+    private static func atlasPath(for relativePath: String) -> String {
+        let pathAliases = [
+            ("assets/", "havra-entry/"),
+            ("static/add/", "havra-atlas/publish-kit/"),
+            ("static/assets/head/", "havra-atlas/visual-set/profile-faces/"),
+            ("static/assets/icons/", "havra-atlas/visual-set/interface-symbols/"),
+            ("static/assets/img/", "havra-atlas/visual-set/scene-stills/"),
+            ("static/assets/tabbar/", "havra-atlas/visual-set/journey-tabs/"),
+            ("static/assets/video/", "havra-atlas/visual-set/story-reels/"),
+            ("static/assets/", "havra-atlas/visual-set/"),
+            ("static/common.config/", "havra-atlas/catalog-config/"),
+            ("static/icon/", "havra-atlas/navigation-symbols/"),
+            ("static/", "havra-atlas/")
+        ]
+
+        for (oldPrefix, newPrefix) in pathAliases where relativePath.hasPrefix(oldPrefix) {
+            return newPrefix + String(relativePath.dropFirst(oldPrefix.count))
+        }
+        return relativePath
     }
 
     private static func mimeType(for pathExtension: String) -> String {
