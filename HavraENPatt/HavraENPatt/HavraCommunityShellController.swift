@@ -375,10 +375,31 @@ final class HavraCommunityShellController: UIViewController, WKNavigationDelegat
             ("static/", "havra-atlas/")
         ]
 
+        var mappedPath = relativePath
         for (oldPrefix, newPrefix) in pathAliases where relativePath.hasPrefix(oldPrefix) {
-            return newPrefix + String(relativePath.dropFirst(oldPrefix.count))
+            mappedPath = newPrefix + String(relativePath.dropFirst(oldPrefix.count))
+            break
         }
-        return relativePath
+
+        let stillAliases = [
+            "havra-atlas/visual-set/scene-stills/img_1.png": "havra-atlas/visual-set/scene-stills/river-market-morning.png",
+            "havra-atlas/visual-set/scene-stills/img_2.png": "havra-atlas/visual-set/scene-stills/lantern-evening-lane.png",
+            "havra-atlas/visual-set/scene-stills/img_3.png": "havra-atlas/visual-set/scene-stills/cebu-bright-shore.png",
+            "havra-atlas/visual-set/scene-stills/img_4.png": "havra-atlas/visual-set/scene-stills/bali-cafe-shade.png",
+            "havra-atlas/visual-set/scene-stills/img_5.png": "havra-atlas/visual-set/scene-stills/hanoi-lunch-stall.png",
+            "havra-atlas/visual-set/scene-stills/img_6.png": "havra-atlas/visual-set/scene-stills/manila-sunset-walk.png",
+            "havra-atlas/visual-set/scene-stills/img_7.png": "havra-atlas/visual-set/scene-stills/penang-craft-lane.png",
+            "havra-atlas/visual-set/scene-stills/img_8.png": "havra-atlas/visual-set/scene-stills/orchid-stall-detail.png",
+            "havra-atlas/visual-set/scene-stills/img_9.png": "havra-atlas/visual-set/scene-stills/ferry-daylight-route.png",
+            "havra-atlas/visual-set/scene-stills/img_10.png": "havra-atlas/visual-set/scene-stills/family-table-spread.png",
+            "havra-atlas/visual-set/scene-stills/img_11.png": "havra-atlas/visual-set/scene-stills/festival-lantern-row.png",
+            "havra-atlas/visual-set/scene-stills/img_12.png": "havra-atlas/visual-set/scene-stills/fashion-street-color.png",
+            "havra-atlas/visual-set/scene-stills/img_13.png": "havra-atlas/visual-set/scene-stills/courtyard-game-day.png",
+            "havra-atlas/visual-set/scene-stills/img_14.png": "havra-atlas/visual-set/scene-stills/harbor-ferry-seat.png",
+            "havra-atlas/visual-set/scene-stills/img_15.png": "havra-atlas/visual-set/scene-stills/rainy-shopfront-walk.png"
+        ]
+
+        return stillAliases[mappedPath] ?? mappedPath
     }
 
     private static let coinCatalog: [[String: Any]] = {
@@ -528,10 +549,31 @@ private final class HavraRuntimeSchemeHandler: NSObject, WKURLSchemeHandler {
             ("static/", "havra-atlas/")
         ]
 
+        var mappedPath = relativePath
         for (oldPrefix, newPrefix) in pathAliases where relativePath.hasPrefix(oldPrefix) {
-            return newPrefix + String(relativePath.dropFirst(oldPrefix.count))
+            mappedPath = newPrefix + String(relativePath.dropFirst(oldPrefix.count))
+            break
         }
-        return relativePath
+
+        let stillAliases = [
+            "havra-atlas/visual-set/scene-stills/img_1.png": "havra-atlas/visual-set/scene-stills/river-market-morning.png",
+            "havra-atlas/visual-set/scene-stills/img_2.png": "havra-atlas/visual-set/scene-stills/lantern-evening-lane.png",
+            "havra-atlas/visual-set/scene-stills/img_3.png": "havra-atlas/visual-set/scene-stills/cebu-bright-shore.png",
+            "havra-atlas/visual-set/scene-stills/img_4.png": "havra-atlas/visual-set/scene-stills/bali-cafe-shade.png",
+            "havra-atlas/visual-set/scene-stills/img_5.png": "havra-atlas/visual-set/scene-stills/hanoi-lunch-stall.png",
+            "havra-atlas/visual-set/scene-stills/img_6.png": "havra-atlas/visual-set/scene-stills/manila-sunset-walk.png",
+            "havra-atlas/visual-set/scene-stills/img_7.png": "havra-atlas/visual-set/scene-stills/penang-craft-lane.png",
+            "havra-atlas/visual-set/scene-stills/img_8.png": "havra-atlas/visual-set/scene-stills/orchid-stall-detail.png",
+            "havra-atlas/visual-set/scene-stills/img_9.png": "havra-atlas/visual-set/scene-stills/ferry-daylight-route.png",
+            "havra-atlas/visual-set/scene-stills/img_10.png": "havra-atlas/visual-set/scene-stills/family-table-spread.png",
+            "havra-atlas/visual-set/scene-stills/img_11.png": "havra-atlas/visual-set/scene-stills/festival-lantern-row.png",
+            "havra-atlas/visual-set/scene-stills/img_12.png": "havra-atlas/visual-set/scene-stills/fashion-street-color.png",
+            "havra-atlas/visual-set/scene-stills/img_13.png": "havra-atlas/visual-set/scene-stills/courtyard-game-day.png",
+            "havra-atlas/visual-set/scene-stills/img_14.png": "havra-atlas/visual-set/scene-stills/harbor-ferry-seat.png",
+            "havra-atlas/visual-set/scene-stills/img_15.png": "havra-atlas/visual-set/scene-stills/rainy-shopfront-walk.png"
+        ]
+
+        return stillAliases[mappedPath] ?? mappedPath
     }
 
     private static func mimeType(for pathExtension: String) -> String {
