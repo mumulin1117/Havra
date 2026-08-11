@@ -3,9 +3,9 @@ import UIKit
 import WebKit
 
 final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WKScriptMessageHandler {
-    private static let runtimeScheme = "havra-runtime"
-    private static let runtimeHost = "app"
-    private static let orchardBridgeName = "PoetryIAP"
+    private static let runtimeScheme = HavraOrchardLexicon.runtimeScheme
+    private static let runtimeHost = HavraOrchardLexicon.runtimeHost
+    private static let orchardBridgeName = HavraOrchardLexicon.bridgeName
 
     private var didOpenHavraAtlas = false
     private let atlasRouteHandler = HavraAtlasRouteHandler()
@@ -93,19 +93,19 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
         Task { @MainActor [weak self] in
             await receipt.finish()
             self?.sendOrchardResult([
-                "status": "success",
-                "product_id": receipt.productID,
-                "package_id": receipt.productID,
-                "transaction_id": String(receipt.id),
-                "allow_transaction_fallback": true
+                HavraOrchardLexicon.stateKey: HavraOrchardLexicon.okMark,
+                HavraOrchardLexicon.orchardIDKey: receipt.productID,
+                HavraOrchardLexicon.bundleIDKey: receipt.productID,
+                HavraOrchardLexicon.receiptKey: String(receipt.id),
+                HavraOrchardLexicon.fallbackKey: true
             ])
         }
     }
 
     private func openHavraAtlas() {
-        guard HavraHarvestLedger.resourceURL("index.html") != nil,
-              let runtimeURL = URL(string: "\(Self.runtimeScheme)://\(Self.runtimeHost)/index.html#/") else {
-            showStartupFallback("Havra content is unavailable.")
+        guard HavraHarvestLedger.resourceURL(HavraOrchardLexicon.indexFile) != nil,
+              let runtimeURL = URL(string: Self.runtimeScheme + HavraOrchardLexicon.startPath) else {
+            showStartupFallback(HavraOrchardLexicon.cantFind)
             return
         }
 
@@ -141,66 +141,66 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
     }
 
     func webView(_ atlasSurface: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        showStartupFallback("Havra content could not be opened.")
-        print("Havra web navigation failed:", error.localizedDescription)
+        showStartupFallback(HavraOrchardLexicon.cantOpen)
+        print(HavraOrchardLexicon.navLog, error.localizedDescription)
     }
 
     func webView(_ atlasSurface: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        showStartupFallback("Havra content could not be opened.")
-        print("Havra web provisional navigation failed:", error.localizedDescription)
+        showStartupFallback(HavraOrchardLexicon.cantOpen)
+        print(HavraOrchardLexicon.provLog, error.localizedDescription)
     }
 
     private func handleOrchardPacket(_ packet: [String: Any]) {
-        let requestType = Self.trimmedString(packet["type"])
+        let requestType = Self.trimmedString(packet[HavraOrchardLexicon.typeKey])
         switch requestType {
-        case "startPurchase":
+        case HavraOrchardLexicon.beginSignal:
             Task { @MainActor [weak self] in
                 await self?.openHarvestBundle(from: packet)
             }
-        case "restorePurchases", "startRestore", "restore":
+        case HavraOrchardLexicon.renewSignalA, HavraOrchardLexicon.renewSignalB, HavraOrchardLexicon.renewSignalC:
             Task { @MainActor [weak self] in
-                await self?.restoreHarvestBundles(trailRequestID: Self.trimmedString(packet["request_id"]) ?? "")
+                await self?.restoreHarvestBundles(trailRequestID: Self.trimmedString(packet[HavraOrchardLexicon.requestKey]) ?? "")
             }
         default:
             sendOrchardResult([
-                "status": "failed",
-                "request_id": Self.trimmedString(packet["request_id"]) ?? "",
-                "message": "Unsupported purchase request."
+                HavraOrchardLexicon.stateKey: HavraOrchardLexicon.badMark,
+                HavraOrchardLexicon.requestKey: Self.trimmedString(packet[HavraOrchardLexicon.requestKey]) ?? "",
+                HavraOrchardLexicon.noticeKey: HavraOrchardLexicon.unsupported
             ])
         }
     }
 
     @MainActor
     private func openHarvestBundle(from packet: [String: Any]) async {
-        let packetData = packet["data"] as? [String: Any]
-        let trailRequestID = Self.trimmedString(packet["request_id"])
-            ?? Self.trimmedString(packetData?["request_id"])
+        let packetData = packet[HavraOrchardLexicon.dataKey] as? [String: Any]
+        let trailRequestID = Self.trimmedString(packet[HavraOrchardLexicon.requestKey])
+            ?? Self.trimmedString(packetData?[HavraOrchardLexicon.requestKey])
             ?? ""
-        let orchardItemID = Self.trimmedString(packet["productId"])
-            ?? Self.trimmedString(packet["product_id"])
-            ?? Self.trimmedString(packetData?["product_id"])
-            ?? Self.trimmedString(packetData?["package_id"])
+        let orchardItemID = Self.trimmedString(packet[HavraOrchardLexicon.camelOrchardKey])
+            ?? Self.trimmedString(packet[HavraOrchardLexicon.orchardIDKey])
+            ?? Self.trimmedString(packetData?[HavraOrchardLexicon.orchardIDKey])
+            ?? Self.trimmedString(packetData?[HavraOrchardLexicon.bundleIDKey])
             ?? ""
-        let harvestBundleID = Self.trimmedString(packetData?["package_id"])
-            ?? Self.trimmedString(packet["package_id"])
+        let harvestBundleID = Self.trimmedString(packetData?[HavraOrchardLexicon.bundleIDKey])
+            ?? Self.trimmedString(packet[HavraOrchardLexicon.bundleIDKey])
             ?? orchardItemID
-        let travelerID = Self.trimmedString(packet["user_id"])
-            ?? Self.trimmedString(packetData?["user_id"])
+        let travelerID = Self.trimmedString(packet[HavraOrchardLexicon.travelerKey])
+            ?? Self.trimmedString(packetData?[HavraOrchardLexicon.travelerKey])
             ?? ""
 
         guard !orchardItemID.isEmpty else {
-            sendOrchardFailure(trailRequestID: trailRequestID, harvestBundleID: harvestBundleID, noticeText: "Product identifier is missing.")
+            sendOrchardFailure(trailRequestID: trailRequestID, harvestBundleID: harvestBundleID, noticeText: HavraOrchardLexicon.missingID)
             return
         }
 
         guard HavraHarvestLedger.approvedIDs.contains(orchardItemID) else {
-            sendOrchardFailure(trailRequestID: trailRequestID, harvestBundleID: harvestBundleID, noticeText: "This product is not configured for Havra.")
+            sendOrchardFailure(trailRequestID: trailRequestID, harvestBundleID: harvestBundleID, noticeText: HavraOrchardLexicon.notReady)
             return
         }
 
         do {
             guard let orchardItem = try await Product.products(for: [orchardItemID]).first else {
-                sendOrchardFailure(trailRequestID: trailRequestID, harvestBundleID: harvestBundleID, noticeText: "This product is unavailable from the App Store.")
+                sendOrchardFailure(trailRequestID: trailRequestID, harvestBundleID: harvestBundleID, noticeText: HavraOrchardLexicon.notFound)
                 return
             }
 
@@ -214,21 +214,21 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
                 await receipt.finish()
                 let harvestBundle = HavraHarvestLedger.bundle(for: orchardItemID)
                 sendOrchardResult([
-                    "status": "success",
-                    "request_id": trailRequestID,
-                    "product_id": orchardItemID,
-                    "package_id": harvestBundleID,
-                    "coin_count": HavraHarvestLedger.sunCount(in: harvestBundle),
-                    "transaction_id": String(receipt.id),
-                    "user_id": travelerID,
-                    "allow_transaction_fallback": true
+                    HavraOrchardLexicon.stateKey: HavraOrchardLexicon.okMark,
+                    HavraOrchardLexicon.requestKey: trailRequestID,
+                    HavraOrchardLexicon.orchardIDKey: orchardItemID,
+                    HavraOrchardLexicon.bundleIDKey: harvestBundleID,
+                    HavraOrchardLexicon.sunCountKey: HavraHarvestLedger.sunCount(in: harvestBundle),
+                    HavraOrchardLexicon.receiptKey: String(receipt.id),
+                    HavraOrchardLexicon.travelerKey: travelerID,
+                    HavraOrchardLexicon.fallbackKey: true
                 ])
             case .pending:
-                sendOrchardFailure(trailRequestID: trailRequestID, harvestBundleID: harvestBundleID, noticeText: "The App Store purchase is pending approval.")
+                sendOrchardFailure(trailRequestID: trailRequestID, harvestBundleID: harvestBundleID, noticeText: HavraOrchardLexicon.pending)
             case .userCancelled:
-                sendOrchardFailure(trailRequestID: trailRequestID, harvestBundleID: harvestBundleID, noticeText: "The purchase was cancelled.")
+                sendOrchardFailure(trailRequestID: trailRequestID, harvestBundleID: harvestBundleID, noticeText: HavraOrchardLexicon.cancelled)
             @unknown default:
-                sendOrchardFailure(trailRequestID: trailRequestID, harvestBundleID: harvestBundleID, noticeText: "The App Store returned an unknown purchase state.")
+                sendOrchardFailure(trailRequestID: trailRequestID, harvestBundleID: harvestBundleID, noticeText: HavraOrchardLexicon.unknown)
             }
         } catch {
             sendOrchardFailure(trailRequestID: trailRequestID, harvestBundleID: harvestBundleID, noticeText: Self.orchardNotice(for: error))
@@ -247,31 +247,31 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
 
             let harvestBundle = HavraHarvestLedger.bundle(for: receipt.productID)
             restoredBundles.append([
-                "status": "success",
-                "request_id": trailRequestID,
-                "product_id": receipt.productID,
-                "package_id": receipt.productID,
-                "coin_count": HavraHarvestLedger.sunCount(in: harvestBundle),
-                "transaction_id": String(receipt.id),
-                "allow_transaction_fallback": true
+                HavraOrchardLexicon.stateKey: HavraOrchardLexicon.okMark,
+                HavraOrchardLexicon.requestKey: trailRequestID,
+                HavraOrchardLexicon.orchardIDKey: receipt.productID,
+                HavraOrchardLexicon.bundleIDKey: receipt.productID,
+                HavraOrchardLexicon.sunCountKey: HavraHarvestLedger.sunCount(in: harvestBundle),
+                HavraOrchardLexicon.receiptKey: String(receipt.id),
+                HavraOrchardLexicon.fallbackKey: true
             ])
         }
 
         sendOrchardResult([
-            "status": "success",
-            "request_id": trailRequestID,
-            "purchases": restoredBundles,
-            "restored_purchases": restoredBundles
+            HavraOrchardLexicon.stateKey: HavraOrchardLexicon.okMark,
+            HavraOrchardLexicon.requestKey: trailRequestID,
+            HavraOrchardLexicon.restoredListKey: restoredBundles,
+            HavraOrchardLexicon.restoredMirrorKey: restoredBundles
         ])
     }
 
     private func sendOrchardFailure(trailRequestID: String, harvestBundleID: String, noticeText: String) {
         sendOrchardResult([
-            "status": "failed",
-            "request_id": trailRequestID,
-            "package_id": harvestBundleID,
-            "message": noticeText,
-            "error_message": noticeText
+            HavraOrchardLexicon.stateKey: HavraOrchardLexicon.badMark,
+            HavraOrchardLexicon.requestKey: trailRequestID,
+            HavraOrchardLexicon.bundleIDKey: harvestBundleID,
+            HavraOrchardLexicon.noticeKey: noticeText,
+            HavraOrchardLexicon.errorNoticeKey: noticeText
         ])
     }
 
@@ -282,15 +282,8 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
             return
         }
 
-        let relayScript = """
-        (function() {
-          var harvestPacket = \(packetJSON);
-          if (window.PoetryIAP && typeof window.PoetryIAP.receive === 'function') {
-            window.PoetryIAP.receive(harvestPacket);
-          }
-          window.dispatchEvent(new CustomEvent('poetry-iap-result', { detail: harvestPacket }));
-        })();
-        """
+        let relayScript = HavraOrchardLexicon.relayScript
+            .replacingOccurrences(of: HavraOrchardLexicon.packetToken, with: packetJSON)
         havraCanvas.evaluateJavaScript(relayScript)
     }
 
@@ -311,7 +304,7 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
 
     private static func orchardNotice(for error: Error) -> String {
         if error is HavraOrchardError {
-            return "The App Store transaction could not be verified."
+            return HavraOrchardLexicon.unverified
         }
 
         let nsError = error as NSError
@@ -319,16 +312,16 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
            let storeError = SKError.Code(rawValue: nsError.code) {
             switch storeError {
             case .paymentNotAllowed:
-                return "App Store purchases are disabled on this device."
+                return HavraOrchardLexicon.disabled
             case .storeProductNotAvailable:
-                return "This product is unavailable from the App Store."
+                return HavraOrchardLexicon.notFound
             default:
                 break
             }
         }
 
         if nsError.domain == NSURLErrorDomain {
-            return "Unable to connect to the App Store."
+            return HavraOrchardLexicon.network
         }
 
         return error.localizedDescription

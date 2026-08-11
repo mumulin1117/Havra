@@ -4,7 +4,7 @@ import WebKit
 final class HavraAtlasRouteHandler: NSObject, WKURLSchemeHandler {
     private let atlasRootURL: URL?
 
-    init(atlasRootURL: URL? = Bundle.main.url(forResource: "HavraWebRuntime", withExtension: "bundle")) {
+    init(atlasRootURL: URL? = Bundle.main.url(forResource: HavraAtlasLexicon.runtimeBox, withExtension: HavraAtlasLexicon.boxSuffix)) {
         self.atlasRootURL = atlasRootURL
         super.init()
     }
@@ -37,13 +37,13 @@ final class HavraAtlasRouteHandler: NSObject, WKURLSchemeHandler {
 
     private static func atlasFileURL(for routeURL: URL, atlasRoot: URL) -> URL? {
         var inboundPath = routeURL.path.removingPercentEncoding ?? routeURL.path
-        if inboundPath.isEmpty || inboundPath == "/" {
-            inboundPath = "/index.html"
+        if inboundPath.isEmpty || inboundPath == HavraAtlasLexicon.rootSlash {
+            inboundPath = HavraAtlasLexicon.startLeaf
         }
 
         inboundPath = HavraAtlasPathGuide.foldedAtlasPath(inboundPath)
         guard !inboundPath.isEmpty,
-              !inboundPath.hasPrefix("~") else {
+              !inboundPath.hasPrefix(HavraAtlasLexicon.tildeMark) else {
             return nil
         }
 
@@ -51,45 +51,35 @@ final class HavraAtlasRouteHandler: NSObject, WKURLSchemeHandler {
     }
 
     private static func contentType(for pathExtension: String) -> String {
-        switch pathExtension.lowercased() {
-        case "html":
-            return "text/html"
-        case "js", "mjs":
-            return "application/javascript"
-        case "css":
-            return "text/css"
-        case "json":
-            return "application/json"
-        case "png":
-            return "image/png"
-        case "jpg", "jpeg":
-            return "image/jpeg"
-        case "gif":
-            return "image/gif"
-        case "svg":
-            return "image/svg+xml"
-        case "webp":
-            return "image/webp"
-        case "mp4":
-            return "video/mp4"
-        case "woff":
-            return "font/woff"
-        case "woff2":
-            return "font/woff2"
-        case "ttf":
-            return "font/ttf"
-        default:
-            return "application/octet-stream"
-        }
+        let suffix = pathExtension.lowercased()
+        if suffix == HavraAtlasLexicon.htmlSuffix { return HavraAtlasLexicon.htmlKind }
+        if suffix == HavraAtlasLexicon.scriptSuffix || suffix == HavraAtlasLexicon.moduleSuffix { return HavraAtlasLexicon.scriptKind }
+        if suffix == HavraAtlasLexicon.styleSuffix { return HavraAtlasLexicon.styleKind }
+        if suffix == HavraAtlasLexicon.jsonSuffix { return HavraAtlasLexicon.jsonKind }
+        if suffix == HavraAtlasLexicon.pngSuffix { return HavraAtlasLexicon.pngKind }
+        if suffix == HavraAtlasLexicon.jpgSuffix || suffix == HavraAtlasLexicon.jpegSuffix { return HavraAtlasLexicon.jpgKind }
+        if suffix == HavraAtlasLexicon.gifSuffix { return HavraAtlasLexicon.gifKind }
+        if suffix == HavraAtlasLexicon.svgSuffix { return HavraAtlasLexicon.svgKind }
+        if suffix == HavraAtlasLexicon.webpSuffix { return HavraAtlasLexicon.webpKind }
+        if suffix == HavraAtlasLexicon.reelSuffix { return HavraAtlasLexicon.reelKind }
+        if suffix == HavraAtlasLexicon.woffSuffix { return HavraAtlasLexicon.woffKind }
+        if suffix == HavraAtlasLexicon.woffTwoSuffix { return HavraAtlasLexicon.woffTwoKind }
+        if suffix == HavraAtlasLexicon.ttfSuffix { return HavraAtlasLexicon.ttfKind }
+        return HavraAtlasLexicon.fallbackKind
     }
 
     private static func scriptEncoding(for pathExtension: String) -> String? {
-        switch pathExtension.lowercased() {
-        case "html", "js", "mjs", "css", "json", "svg":
-            return "utf-8"
-        default:
-            return nil
+        let suffix = pathExtension.lowercased()
+        if suffix == HavraAtlasLexicon.htmlSuffix ||
+            suffix == HavraAtlasLexicon.scriptSuffix ||
+            suffix == HavraAtlasLexicon.moduleSuffix ||
+            suffix == HavraAtlasLexicon.styleSuffix ||
+            suffix == HavraAtlasLexicon.jsonSuffix ||
+            suffix == HavraAtlasLexicon.svgSuffix {
+            return HavraAtlasLexicon.utfMark
         }
+
+        return nil
     }
 }
 

@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ = application
         _ = options
         let configuration = UISceneConfiguration(
-            name: "Havra Atlas",
+            name: HavraAtlasLexicon.appSceneName,
             sessionRole: connectingSceneSession.role
         )
         configuration.delegateClass = HavraAtlasSceneKeeper.self

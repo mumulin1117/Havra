@@ -29,5 +29,5 @@ final class HavraOrchardReceiptWatch {
 }
 
 extension Notification.Name {
-    static let havraOrchardReceiptArrived = Notification.Name("HavraOrchardReceiptArrived")
+    static let havraOrchardReceiptArrived = Notification.Name(HavraAtlasLexicon.noticeName)
 }
