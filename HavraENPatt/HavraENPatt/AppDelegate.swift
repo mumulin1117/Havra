@@ -8,7 +8,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ) -> Bool {
         _ = application
         _ = launchOptions
-        HavraPurchaseEventMonitor.shared.startListening()
+        HavraOrchardReceiptWatch.sharedWatch.beginReceiptWatch()
         return true
     }
 
@@ -20,11 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ = application
         _ = options
         let configuration = UISceneConfiguration(
-            name: "Havra Community",
+            name: "Havra Atlas",
             sessionRole: connectingSceneSession.role
         )
-        configuration.delegateClass = SceneDelegate.self
+        configuration.delegateClass = HavraAtlasSceneKeeper.self
         return configuration
     }
 }
-

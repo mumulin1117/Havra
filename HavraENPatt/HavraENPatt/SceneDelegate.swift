@@ -1,21 +1,21 @@
 import UIKit
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-    var window: UIWindow?
+class HavraAtlasSceneKeeper: UIResponder, UIWindowSceneDelegate {
+    var atlasWindow: UIWindow?
 
     func scene(
-        _ scene: UIScene,
-        willConnectTo session: UISceneSession,
-        options connectionOptions: UIScene.ConnectionOptions
+        _ atlasScene: UIScene,
+        willConnectTo atlasSession: UISceneSession,
+        options launchRouteOptions: UIScene.ConnectionOptions
     ) {
-        _ = session
-        _ = connectionOptions
-        guard let windowScene = scene as? UIWindowScene else { return }
+        _ = atlasSession
+        _ = launchRouteOptions
+        guard let atlasWindowScene = atlasScene as? UIWindowScene else { return }
 
-        let appWindow = UIWindow(windowScene: windowScene)
-        appWindow.backgroundColor = UIColor(red: 0.0, green: 0.07, blue: 0.06, alpha: 1.0)
-        appWindow.rootViewController = HavraCommunityShellController()
-        window = appWindow
-        appWindow.makeKeyAndVisible()
+        let atlasWindow = UIWindow(windowScene: atlasWindowScene)
+        atlasWindow.backgroundColor = UIColor(red: 0.0, green: 0.07, blue: 0.06, alpha: 1.0)
+        atlasWindow.rootViewController = HavraShellJaonController()
+        self.atlasWindow = atlasWindow
+        atlasWindow.makeKeyAndVisible()
     }
 }
