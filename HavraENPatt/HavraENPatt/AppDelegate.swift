@@ -8,7 +8,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ) -> Bool {
         _ = application
         _ = launchOptions
-        HavraOrchardReceiptWatch.sharedWatch.beginReceiptWatch()
+        HavramarketFieldNote.patternNotebook.beginReceiptWatch()
         return true
     }
 
@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ = application
         _ = options
         let configuration = UISceneConfiguration(
-            name: HavraAtlasLexicon.appSceneName,
+            name: HavraAtlasLexicon.vientianeRiverEdge,
             sessionRole: connectingSceneSession.role
         )
         configuration.delegateClass = HavraAtlasSceneKeeper.self

@@ -1,17 +1,17 @@
 import Foundation
 import StoreKit
 
-final class HavraOrchardReceiptWatch {
-    static let sharedWatch = HavraOrchardReceiptWatch()
+final class HavramarketFieldNote {
+    static let patternNotebook = HavramarketFieldNote()
 
-    private var receiptTrailTask: Task<Void, Never>?
+    private var kitchenNotebookTrailTask: Task<Void, Never>?
 
     private init() {}
 
     func beginReceiptWatch() {
-        guard receiptTrailTask == nil else { return }
+        guard kitchenNotebookTrailTask == nil else { return }
 
-        receiptTrailTask = Task.detached(priority: .background) {
+        kitchenNotebookTrailTask = Task.detached(priority: .background) {
             for await verification in Transaction.updates {
                 guard case .verified(let receipt) = verification else {
                     continue
@@ -29,5 +29,5 @@ final class HavraOrchardReceiptWatch {
 }
 
 extension Notification.Name {
-    static let havraOrchardReceiptArrived = Notification.Name(HavraAtlasLexicon.noticeName)
+    static let havraOrchardReceiptArrived = Notification.Name(HavraAtlasLexicon.yangonTeaCorner)
 }

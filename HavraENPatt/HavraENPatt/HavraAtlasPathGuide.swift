@@ -1,25 +1,25 @@
 import Foundation
 
 enum HavraAtlasPathGuide {
-    static func foldedAtlasPath(_ path: String) -> String {
-        var pathSegments: [String] = []
-        for segment in path.split(separator: "/", omittingEmptySubsequences: true) {
-            switch segment {
+    static func foldedBatikTrail(_ rawBatikTrail: String) -> String {
+        var wovenTrailPieces: [String] = []
+        for trailPiece in rawBatikTrail.split(separator: "/", omittingEmptySubsequences: true) {
+            switch trailPiece {
             case ".":
                 continue
             case "..":
-                if !pathSegments.isEmpty {
-                    pathSegments.removeLast()
+                if !wovenTrailPieces.isEmpty {
+                    wovenTrailPieces.removeLast()
                 }
             default:
-                pathSegments.append(String(segment))
+                wovenTrailPieces.append(String(trailPiece))
             }
         }
-        return pathSegments.joined(separator: "/")
+        return wovenTrailPieces.joined(separator: "/")
     }
 
-    static func atlasPath(for relativePath: String) -> String {
-        let routeAliases = [
+    static func batikArchiveTrail(for rawArchiveTrail: String) -> String {
+        let archipelagoPassagePairs = [
             (HavraBatikGlyphs.unfold("aAsosIectUsw/L"), HavraBatikGlyphs.unfold("hGaHvcrNaF-2ernJtwriyH/N")),
             (HavraBatikGlyphs.unfold("s6tSait4iWcm/Ra8djdD/u"), HavraBatikGlyphs.unfold("hHa-vWr+as-Ya-tnllalsR/cpOu3b5lNiQslhE--kai0th/v")),
             (HavraBatikGlyphs.unfold("sQtZaytriDcR/Ra2sIs7e4tFs3/2h+e0aMdO/g"), HavraBatikGlyphs.unfold("hZaPvQraaA-ladt9l=alsZ/XvfiesyuAaSlm-JsOeAtQ/OpErioPfjiEl4eh-HfnaXcGels8/5")),
@@ -33,21 +33,21 @@ enum HavraAtlasPathGuide {
             (HavraBatikGlyphs.unfold("sEtSawtmiEc+/i"), HavraBatikGlyphs.unfold("hwaWvlr2aC-HaItilYahse/p"))
         ]
 
-        var atlasPath = relativePath
-        for (legacyPrefix, atlasPrefix) in routeAliases where relativePath.hasPrefix(legacyPrefix) {
-            atlasPath = atlasPrefix + String(relativePath.dropFirst(legacyPrefix.count))
+        var wovenArchiveTrail = rawArchiveTrail
+        for (oldHarborPrefix, newKampongPrefix) in archipelagoPassagePairs where rawArchiveTrail.hasPrefix(oldHarborPrefix) {
+            wovenArchiveTrail = newKampongPrefix + String(rawArchiveTrail.dropFirst(oldHarborPrefix.count))
             break
         }
 
-        let ledgerAliases = [
+        let harvestLedgerPairs = [
             HavraBatikGlyphs.unfold("h4aOvPrbaD-paKt+lOalsh/rcraotPa4lMo2gO-_czo_n4fJiKgQ/tc7ojiSnk-vpaamcVkfaFggehsb.Mj0sGoTnD"): HavraBatikGlyphs.unfold("hLarvkrWa+-iaOtfl3als8/Hcca+tba2lcoign-Icio0nGfNiKgI/BhoaWrBv7eKs+tE-WlMeUdXgNeorr.8jVs=oqnk")
         ]
 
-        if let ledgerPath = ledgerAliases[atlasPath] {
-            return ledgerPath
+        if let harvestLedgerTrail = harvestLedgerPairs[wovenArchiveTrail] {
+            return harvestLedgerTrail
         }
 
-        let sceneStillAliases = [
+        let monsoonScenePairs = [
             HavraBatikGlyphs.unfold("hka0vSr1aA-+artVlSaDsk/AvViQspuLanlP-MsCexte/3sUcqeZnneD-ksMtriJlHlFsk/citmDgh_I1e.bpnnygA"): HavraBatikGlyphs.unfold("hYa=vhrLaV-BautllUajsl/nvJibsauPahlC-GsBeStN/ZsrcQevnMe8-gsmtdi=lQl2sL/SrqiyvTeCrs-om3amr1kdeOtm-DmWoArUnVibnIgw.9pPnYgp"),
             HavraBatikGlyphs.unfold("h3auvmrTa--raNtmlqaGsl/hvAiNsnuMaxlI-WsaeQtS/zsmcaeVnWee-zsjtPiFlMl5sx/EiYm+gN_b2d.=p7n0gf"): HavraBatikGlyphs.unfold("hDaLvprSaI-3aMtllmaOsB/ivTihsvurafla-CsReGtv/_sZceeEnbes-4s4tGiBlelisb/alEa0nTtsetrSnL-Ie+vbeQnJinngg_-Tl4a5nDeW.SphnGge"),
             HavraBatikGlyphs.unfold("hLa3v_r1ad-+aEtFlsa_sK/ovrilsquNaKlh-Ls=eft5/hs-cpeBnjef-WsEtZiqlClTsN/Ki4mHgj_-3M.hpmnhgQ"): HavraBatikGlyphs.unfold("haaPvYr9aD-Padtclaa8sd/4vtiKsBuoaolf-ZsgeEtj/osbcMevn8e2-LsEtViylPlXs6/Icze9bAuT-Bbrreiwgeh8tJ-Hskheo1rMeM.npXnfgn"),
@@ -65,11 +65,11 @@ enum HavraAtlasPathGuide {
             HavraBatikGlyphs.unfold("h3aLvzryaG-xaQtwlda-sz/9v3ixsGu5azlQ-cs8e5tY/ksVcxeYnoeJ-Ws3tkiHlzlUs_/niOmxgW_h125r.0pon8gl"): HavraBatikGlyphs.unfold("h0a6vYreaI-PaZtrluaZs=/yvbizs-u8a-lk-js9eltb/ZshcyeDnreZ-osutJi1l5lds1/qrAa+iRn_yW-qsBhLo2pef1rqoinBtg-5wLaRl1k1.pprnVgX")
         ]
 
-        if let scenePath = sceneStillAliases[atlasPath] {
-            return scenePath
+        if let monsoonSceneTrail = monsoonScenePairs[wovenArchiveTrail] {
+            return monsoonSceneTrail
         }
 
-        let compassAliases = [
+        let lanternCompassPairs = [
             HavraBatikGlyphs.unfold("hqa-v7rjap-UaatOlSaesP/YnxaXvYilgUaXt=ifo7ne-UsNyumxbvoelssH/GmVshgl.TpLn0gi"): HavraBatikGlyphs.unfold("hhaUv_r5am-maztJlGaQsC/xnyaBvwiUgra5tji=oznN-qsXy_mebbojlnsG/ynuontge6-WlGe0aafW.kpUn_g+"),
             HavraBatikGlyphs.unfold("hfayvGr-aK-daXt1lvaTsh/zn9aBv2iTgua7tAiHoRny-osaymmYbiomlys2/=fwoUl-lfoveowC.oprnwga"): HavraBatikGlyphs.unfold("hTaMvarQat-Paatul=a2sA/+nBaSvki8gva5t1iWoEnH--s+yTmObno3lbst/_tdrva2i6l=-TlkiznHk8.7pXn=gz"),
             HavraBatikGlyphs.unfold("hraMvGr5ak-taStClRansI/Tnla4vmiVgTaatNiLovnj-YslywmrbsorlFsI/_a_lJbyusmH.5pon9gM"): HavraBatikGlyphs.unfold("htahvzrzaO-laIttlCaWs+/Dnkazvbi_gZa+t_ivo7nX-5sUy0mebjool1sk/smPeYm6oNrPyM-gg-rGimdv.5pznng1"),
@@ -83,11 +83,11 @@ enum HavraAtlasPathGuide {
             HavraBatikGlyphs.unfold("h1aHvLrqaX-0alt8lFarsq/6n-amvGiAgEaatPi9o=n0-RsVywm1bAopl+sL/UluixkBe6do.vp5nbgT"): HavraBatikGlyphs.unfold("hEaQvqrsa4-IaStZlja0s+/-nqaHvsiLgpaxtWiNodni-ssWyEm-bpoJlpsU/_hBeiafrGtT-IfBiWlNlTeCdo.RpSndg+")
         ]
 
-        if let compassPath = compassAliases[atlasPath] {
-            return compassPath
+        if let lanternCompassTrail = lanternCompassPairs[wovenArchiveTrail] {
+            return lanternCompassTrail
         }
 
-        let craftAliases = [
+        let craftNotebookPairs = [
             HavraBatikGlyphs.unfold("hOauvXrUax-2avtylEaPsi/Ip5usbGlDiZszhr-VkfiRtI/OcRhIaqt__Ds-eGnodX.CpLnMge"): HavraBatikGlyphs.unfold("hxanvjroaO-Ea1tRlPaDs3/LprusbLlmiFsFhu-AkFiNti/jn8optEex-jdpicsep=aKt_cPhY.kpenHgc"),
             HavraBatikGlyphs.unfold("h=azv=r7ab--artylGaksT/hpXuIbtlEiksqhZ-dkKiNtx/8c8huaSth_pvEiddIeJob.MpDnSgo"): HavraBatikGlyphs.unfold("h2a2vvrma=-OawtglvaasB/bp9uUbNlciNsqhN-Yk+ilt+/gsPtbojr-yl-AfJrBaLm-eJ.Np3nFgi"),
             HavraBatikGlyphs.unfold("hZaAvXriaN-WanthlaaCsO/6pUuZb_lHiusah5-wkCi2tG/ecqrIekaKt6e4_QpqiscutZuzrTec.TpInjgc"): HavraBatikGlyphs.unfold("hUaGv6rPad-6actzluagsi/epBuQbRl7irsOh8-Qk1i3tN/vcEoTmkpio4sgeB-hsOtviHl7lk.zpHnWga"),
@@ -116,11 +116,11 @@ enum HavraAtlasPathGuide {
             HavraBatikGlyphs.unfold("hya-vNriap-7aDtjlKalsw/sp4u4b0lmiXslhk-8kWikt_/dtcaTgE_51w4u.Tplnxgk"): HavraBatikGlyphs.unfold("hwazv7roaS-=autDleaQsu/fpuunb8l8insPht-OkHiNtL/xm=i5njd3f-u7lg-plyeYaBfV.HppnFgr")
         ]
 
-        if let craftPath = craftAliases[atlasPath] {
-            return craftPath
+        if let craftNotebookTrail = craftNotebookPairs[wovenArchiveTrail] {
+            return craftNotebookTrail
         }
 
-        let markAliases = [
+        let batikSymbolPairs = [
             HavraBatikGlyphs.unfold("hla-vRr6az-naotLlAaTsP/cvMiWs8uva2l0-+sXehtu/Viynvtsear1fHaYcoeN-GsVyXmnbLojlNsP/=b0emlxlu.Ls0v7g9"): HavraBatikGlyphs.unfold("hlajvgr0aA-=autRlaazsC/cvmiys7u0awlg-mswebtb/PibnMt6e2r4fYaxcoe4-Zs9y=mybBoHlNsc/8cwhZiMmees-WmvaorYkl.fs_vggw"),
             HavraBatikGlyphs.unfold("hGaEv8r0a9-gaLtCleaosy/7vqi2sQuDaElN-nsQelte/hidnftRebrpfza5cUeP-asSyqmRb8o_lCsq/NbxlroecUki.8sqvhgP"): HavraBatikGlyphs.unfold("h1a3vYruaa-yaZt5llams_/4vaigsjuSazlP-1sOeatu/AiZnOtRe5rBf9a8cWef-4svyam6bIoElJsH/ksgawfmeptlyX-5bnaFrerjixe+r=.+sVvkg2"),
             HavraBatikGlyphs.unfold("h_aSvpria9-8aGt5l3a6sG/nvxiKslukaLl2-usKeNtt/siunMtne6rhfwapclex-Psyy4mpbDowlSsn/AbDoRo3kSmOacrNk8-df_i8lvll.Ys2vCgI"): HavraBatikGlyphs.unfold("hIa0v=rXac-HaEt8leansy/AvWi7sTulaTlo-YsFeeti/siTnrtVeeryf6amcFeC-MsPyVm_bQo0lLs0/-sAamvDeFdO-rrdi3b7b6oEnT-3f7inlylT.isdvfg3"),
@@ -159,11 +159,11 @@ enum HavraAtlasPathGuide {
             HavraBatikGlyphs.unfold("h0aHvFraa5-waCtUlKa_s6/cvZias1uCaLlR-is6evtr/3iEnFtUeUrGfpaZc=eR-fssyemGboonljsq/psmestAt4ijn3g2se.xsev4gC"): HavraBatikGlyphs.unfold("hKaLvCrKal-saMt5lPaWs2/pv1iRsbuLaqld-nsfemtt/8i_n5tVenrvf_alcweJ-csWyZmJbNoLlLsf/8croTmZpOaPs2s4-0gWeUaGrQ-QloiFn-e2.CsWvXgK")
         ]
 
-        if let markPath = markAliases[atlasPath] {
-            return markPath
+        if let batikSymbolTrail = batikSymbolPairs[wovenArchiveTrail] {
+            return batikSymbolTrail
         }
 
-        let journeyAliases = [
+        let riverJourneyPairs = [
             HavraBatikGlyphs.unfold("hUaTvvr4ad-caAtmloahs5/cvEiNsvu4aWlf-UsVe3to/OjfoGu3rqn9e8yJ-1t8asbrsa/zhFoomYeg-RaBcZtPi0vIeZ.tsovMgI"): HavraBatikGlyphs.unfold("hqaPverfa=-IaetQl4awsB/kvWi+spuea-lD-OsKeAtt/ujgoGuRrZngeCye-mt6a3bHsl/_ePnetArMyz-yl-iUtw.Ns+vUg6"),
             HavraBatikGlyphs.unfold("hUagvPrlaw-badtsl3agsm/7vbixsiuVacl4-5saeltd/nj6oTu_r0naeny_-gtAa2b+sB/chooJmzeb-gdtekf9aCuulVt4.ssOvggk"): HavraBatikGlyphs.unfold("hSa3vBr-ay-ZaQtulIaqsY/rvZi8skucaUl0-FsEedtM/ljMoAuLr6nbeQyv-OtIaOb3s4/ueYnntErjyY-Krcels1tZ.7snvkgT"),
             HavraBatikGlyphs.unfold("h-aDvlryac-0ajt3lha9sr/+vTiisaufaFl2-TsueItt/FjaoxuurrnKeNyz-JtTaAb6s1/7lfi_bVrTaDrbyv-CaMcitSiBv0eY.ps2vkg-"): HavraBatikGlyphs.unfold("hma9vYrFaI-UadtSlIapsN/5vAiTsXubaKlz-TsAePt3/ijEoVuyrXnSeMy6-4tvadbOsw/oaAtMllaRss-wlHintG.6sIvIgm"),
@@ -174,11 +174,11 @@ enum HavraAtlasPathGuide {
             HavraBatikGlyphs.unfold("hOa=vVrKaD-daft3llags4/Mvjiislu0ayl---sce3tJ/SjhocurrUnWeBym-Ht7aibHsH/4wJarlylx-vdLeAfJaWu=lut9.osOv4gG"): HavraBatikGlyphs.unfold("h5aQvxr5a6-la_tal8ahsA/2v9iWs0uUajlV-0sne5tN/ajSoTu8rfn_eNy=-3tRaUbosD/IptlwaFzuaz-zrKeosjtM.bsCvIgs")
         ]
 
-        if let journeyPath = journeyAliases[atlasPath] {
-            return journeyPath
+        if let riverJourneyTrail = riverJourneyPairs[wovenArchiveTrail] {
+            return riverJourneyTrail
         }
 
-        let portraitAliases = [
+        let heritagePortraitPairs = [
             HavraBatikGlyphs.unfold("hiaPvdrSaW-3a0tul6aSs1/HvHiQsvuGaJl8-nsIeHtO/mperwoif7ihl+ej-cf1arcIe2s4/6h8e6a+dA_B14.2pFn2gm"): HavraBatikGlyphs.unfold("h4ahvrr6aM-DaRtplLa+sF/uv6iLs=u2aEld-ksPeitS/cpkr0osfMiAlIeJ-sfNacccebso/jf0aPcoeX-nbda0nHg=kLoZkE-egTuai_dpeD.Yp-nNgT"),
             HavraBatikGlyphs.unfold("hNaZvAr9a0-9axtglxaNsj/7vsi6sjubaVlA-qs+e8tl/CpprYoYf6iBlSeZ-UfOaUcEebsW/uh0eKaudR_c2I.mpGnlgm"): HavraBatikGlyphs.unfold("hQaUvorya3-EaJt-lyaGsx/5vZi9sAupaQlm-5sLe+tA/fparDozf1ihloeE-=fUaocte_sP/Tfoa=cLen-7bDaXlMiD-kmToNrinDiZnrgT.rp6nZgc"),
             HavraBatikGlyphs.unfold("hjapvOrmaX-XaItyljaNsh/avuixsJuna9lz-8sIe2tP/6pjr=osfeiKlxe_-2f7anc8eAsQ/_hYeBaVd0_W3u.Gpkn6g6"): HavraBatikGlyphs.unfold("hVa4vFrHaZ-dawtylHaPs_/yvai5sMuFa+l3-qsIectd/Bp4rLoXfMinlHe9-PfCaKcYe_sz/tfYaccqe+-5hTaunToIie-br3eraWdpeerc.hp4nagv"),
@@ -195,6 +195,6 @@ enum HavraAtlasPathGuide {
             HavraBatikGlyphs.unfold("hpa4vQraa=-vaitMlLacsc/GvOifsYuyallo-2sweStU/wpSrVoffgi0lceZ-rfhaDcWessc/=hMeBa_dj_c1Q4r.Ppynwgo"): HavraBatikGlyphs.unfold("hUaEvxrHaQ-baet8lMa6sT/_vhihsXuhawla-Ss-eZte/mpXrmo2fNiulteL-pfyafcie5sv/Xfsa6cVeP-8rwasiSncy6-usZheo_pGfZrRo1nTt1.OpmnZg4")
         ]
 
-        return portraitAliases[atlasPath] ?? atlasPath
+        return heritagePortraitPairs[wovenArchiveTrail] ?? wovenArchiveTrail
     }
 }

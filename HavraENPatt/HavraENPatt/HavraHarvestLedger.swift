@@ -60,7 +60,7 @@ E}B)T(N)9;p
     }()
 
     static func resourceURL(_ relativePath: String) -> URL? {
-        bundleRootURL?.appendingPathComponent(HavraAtlasPathGuide.atlasPath(for: relativePath))
+        bundleRootURL?.appendingPathComponent(HavraAtlasPathGuide.batikArchiveTrail(for: relativePath))
     }
 
     static func bundle(for orchardItemID: String) -> [String: Any]? {
@@ -75,7 +75,7 @@ E}B)T(N)9;p
     }
 
     private static let bundleRootURL: URL? = {
-        Bundle.main.url(forResource: HavraBatikGlyphs.unfold("HhaFvmr9ajWeeLb7RTu6nLtoi=mjeM"), withExtension: HavraBatikGlyphs.unfold("bbuFn3drl8e3"))
+        Bundle.main.url(forResource: HavraBatikGlyphs.unfold("bqaznkarntamFnrpixtytaecrdSetfaglhlj"), withExtension: HavraBatikGlyphs.unfold("bbuFn3drl8e3"))
     }()
 
     private static let root: [String: Any] = {

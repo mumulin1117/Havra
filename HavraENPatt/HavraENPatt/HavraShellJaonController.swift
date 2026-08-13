@@ -3,332 +3,332 @@ import UIKit
 import WebKit
 
 final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WKScriptMessageHandler {
-    private static let runtimeScheme = HavraOrchardLexicon.runtimeScheme
-    private static let runtimeHost = HavraOrchardLexicon.runtimeHost
-    private static let orchardBridgeName = HavraOrchardLexicon.bridgeName
+    private static let archipelagoPassage = HavraOrchardLexicon.siemReapLanternPath
+    private static let kampongHarbor = HavraOrchardLexicon.bruneiWaterVillage
+    private static let batikCourierLane = HavraOrchardLexicon.malaccaTileWalk
 
-    private var didOpenHavraAtlas = false
-    private let atlasRouteHandler = HavraAtlasRouteHandler()
-    private lazy var scriptCourier = HavraScriptCourier(receiver: self)
+    private var didEnterBatikAtlas = false
+    private let archipelagoRouteKeeper = HavrafestivalFieldNotewoven()
+    private lazy var lanternCourier = HavrafestivalNotebookCourier(receiver: self)
 
-    private lazy var havraCanvas: WKWebView = {
-        let configuration = makeAtlasConfiguration()
-        let atlasSurface = WKWebView(frame: .zero, configuration: configuration)
-        return prepareAtlasSurface(atlasSurface)
+    private lazy var monsoonCanvas: WKWebView = {
+        let batikConfig = craftBatikConfiguration()
+        let silkPane = WKWebView(frame: .zero, configuration: batikConfig)
+        return tintAtlasPane(silkPane)
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(red: 0.0, green: 0.07, blue: 0.06, alpha: 1.0)
-        connectAtlasChannels()
-        installAtlasSurface()
-        observeOrchardReceipts()
+        tieBatikChannels()
+        anchorMonsoonCanvas()
+        listenForHarvestNotes()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        guard !didOpenHavraAtlas else { return }
-        didOpenHavraAtlas = true
-        openHavraAtlas()
+        guard !didEnterBatikAtlas else { return }
+        didEnterBatikAtlas = true
+        enterHavraAtlas()
     }
 
     deinit {
-        let scriptCenter = havraCanvas.configuration.userContentController
-        scriptCenter.removeScriptMessageHandler(forName: Self.orchardBridgeName)
+        let lanternHub = monsoonCanvas.configuration.userContentController
+        lanternHub.removeScriptMessageHandler(forName: Self.batikCourierLane)
         NotificationCenter.default.removeObserver(self)
     }
 
-    private func makeAtlasConfiguration() -> WKWebViewConfiguration {
-        let configuration = WKWebViewConfiguration()
-        configuration.setURLSchemeHandler(atlasRouteHandler, forURLScheme: Self.runtimeScheme)
-        configuration.userContentController.addUserScript(HavraHarvestLedger.fetchScript)
-        configuration.preferences.javaScriptCanOpenWindowsAutomatically = true
-        configuration.allowsInlineMediaPlayback = true
-        configuration.mediaTypesRequiringUserActionForPlayback = []
-        return configuration
+    private func craftBatikConfiguration() -> WKWebViewConfiguration {
+        let batikConfig = WKWebViewConfiguration()
+        batikConfig.setURLSchemeHandler(archipelagoRouteKeeper, forURLScheme: Self.archipelagoPassage)
+        batikConfig.userContentController.addUserScript(HavraHarvestLedger.fetchScript)
+        batikConfig.preferences.javaScriptCanOpenWindowsAutomatically = true
+        batikConfig.allowsInlineMediaPlayback = true
+        batikConfig.mediaTypesRequiringUserActionForPlayback = []
+        return batikConfig
     }
 
-    private func prepareAtlasSurface(_ atlasSurface: WKWebView) -> WKWebView {
-        let background = UIColor(red: 0.0, green: 0.07, blue: 0.06, alpha: 1.0)
-        atlasSurface.translatesAutoresizingMaskIntoConstraints = false
-        atlasSurface.navigationDelegate = self
-        atlasSurface.isOpaque = false
-        atlasSurface.backgroundColor = background
-        atlasSurface.scrollView.backgroundColor = background
-        atlasSurface.scrollView.contentInsetAdjustmentBehavior = .never
-        atlasSurface.allowsBackForwardNavigationGestures = true
-        return atlasSurface
+    private func tintAtlasPane(_ silkPane: WKWebView) -> WKWebView {
+        let harborNightShade = UIColor(red: 0.0, green: 0.07, blue: 0.06, alpha: 1.0)
+        silkPane.translatesAutoresizingMaskIntoConstraints = false
+        silkPane.navigationDelegate = self
+        silkPane.isOpaque = false
+        silkPane.backgroundColor = harborNightShade
+        silkPane.scrollView.backgroundColor = harborNightShade
+        silkPane.scrollView.contentInsetAdjustmentBehavior = .never
+        silkPane.allowsBackForwardNavigationGestures = true
+        return silkPane
     }
 
-    private func connectAtlasChannels() {
-        let scriptCenter = havraCanvas.configuration.userContentController
-        scriptCenter.add(scriptCourier, name: Self.orchardBridgeName)
+    private func tieBatikChannels() {
+        let lanternHub = monsoonCanvas.configuration.userContentController
+        lanternHub.add(lanternCourier, name: Self.batikCourierLane)
     }
 
-    private func installAtlasSurface() {
-        view.addSubview(havraCanvas)
+    private func anchorMonsoonCanvas() {
+        view.addSubview(monsoonCanvas)
         NSLayoutConstraint.activate([
-            havraCanvas.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            havraCanvas.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            havraCanvas.topAnchor.constraint(equalTo: view.topAnchor),
-            havraCanvas.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            monsoonCanvas.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            monsoonCanvas.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            monsoonCanvas.topAnchor.constraint(equalTo: view.topAnchor),
+            monsoonCanvas.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
 
-    private func observeOrchardReceipts() {
+    private func listenForHarvestNotes() {
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(handleOrchardReceiptNotice(_:)),
+            selector: #selector(collectHarvestNotice(_:)),
             name: .havraOrchardReceiptArrived,
             object: nil
         )
     }
 
-    @objc private func handleOrchardReceiptNotice(_ notice: Notification) {
-        guard let receipt = notice.object as? Transaction,
-              HavraHarvestLedger.approvedIDs.contains(receipt.productID) else {
+    @objc private func collectHarvestNotice(_ harvestNotice: Notification) {
+        guard let harvestMark = harvestNotice.object as? Transaction,
+              HavraHarvestLedger.approvedIDs.contains(harvestMark.productID) else {
             return
         }
 
         Task { @MainActor [weak self] in
-            await receipt.finish()
-            self?.sendOrchardResult([
-                HavraOrchardLexicon.stateKey: HavraOrchardLexicon.okMark,
-                HavraOrchardLexicon.orchardIDKey: receipt.productID,
-                HavraOrchardLexicon.bundleIDKey: receipt.productID,
-                HavraOrchardLexicon.receiptKey: String(receipt.id),
-                HavraOrchardLexicon.fallbackKey: true
+            await harvestMark.finish()
+            self?.sendPasarResult([
+                HavraOrchardLexicon.batamFerryGate: HavraOrchardLexicon.krabiCliffMorning,
+                HavraOrchardLexicon.nhaTrangShoreLine: harvestMark.productID,
+                HavraOrchardLexicon.haLongMistRoute: harvestMark.productID,
+                HavraOrchardLexicon.mandalayMarketStep: String(harvestMark.id),
+                HavraOrchardLexicon.baganDustLight: true
             ])
         }
     }
 
-    private func openHavraAtlas() {
-        guard HavraHarvestLedger.resourceURL(HavraOrchardLexicon.indexFile) != nil,
-              let runtimeURL = URL(string: Self.runtimeScheme + HavraOrchardLexicon.startPath) else {
-            showStartupFallback(HavraOrchardLexicon.cantFind)
+    private func enterHavraAtlas() {
+        guard HavraHarvestLedger.resourceURL(HavraOrchardLexicon.sabahCoastPath) != nil,
+              let atlasGateURL = URL(string: Self.archipelagoPassage + HavraOrchardLexicon.borneoForestEdge) else {
+            revealStartupFallback(HavraOrchardLexicon.javaCourtyardPattern)
             return
         }
 
-        havraCanvas.load(URLRequest(url: runtimeURL))
+        monsoonCanvas.load(URLRequest(url: atlasGateURL))
     }
 
-    private func showStartupFallback(_ noticeText: String) {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = noticeText
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        label.textColor = .white
-        label.font = .preferredFont(forTextStyle: .body)
-        view.addSubview(label)
+    private func revealStartupFallback(_ lanternText: String) {
+        let fallbackLabel = UILabel()
+        fallbackLabel.translatesAutoresizingMaskIntoConstraints = false
+        fallbackLabel.text = lanternText
+        fallbackLabel.textAlignment = .center
+        fallbackLabel.numberOfLines = 0
+        fallbackLabel.textColor = .white
+        fallbackLabel.font = .preferredFont(forTextStyle: .body)
+        view.addSubview(fallbackLabel)
         NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
-            label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
-            label.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            fallbackLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
+            fallbackLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
+            fallbackLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
 
     func userContentController(
-        _ userContentController: WKUserContentController,
-        didReceive scriptPacket: WKScriptMessage
+        _ lanternHub: WKUserContentController,
+        didReceive batikParcel: WKScriptMessage
     ) {
-        guard scriptPacket.name == Self.orchardBridgeName,
-              let packet = scriptPacket.body as? [String: Any] else {
+        guard batikParcel.name == Self.batikCourierLane,
+              let atlasParcel = batikParcel.body as? [String: Any] else {
             return
         }
 
-        handleOrchardPacket(packet)
+        handlePasarParcel(atlasParcel)
     }
 
-    func webView(_ atlasSurface: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        showStartupFallback(HavraOrchardLexicon.cantOpen)
-        print(HavraOrchardLexicon.navLog, error.localizedDescription)
+    func webView(_ silkPane: WKWebView, didFail riverPath: WKNavigation!, withError routeError: Error) {
+        revealStartupFallback(HavraOrchardLexicon.sumatraSpiceRoute)
+        print(HavraOrchardLexicon.sulawesiHarborDay, routeError.localizedDescription)
     }
 
-    func webView(_ atlasSurface: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        showStartupFallback(HavraOrchardLexicon.cantOpen)
-        print(HavraOrchardLexicon.provLog, error.localizedDescription)
+    func webView(_ silkPane: WKWebView, didFailProvisionalNavigation riverPath: WKNavigation!, withError routeError: Error) {
+        revealStartupFallback(HavraOrchardLexicon.sumatraSpiceRoute)
+        print(HavraOrchardLexicon.lombokVillagePath, routeError.localizedDescription)
     }
 
-    private func handleOrchardPacket(_ packet: [String: Any]) {
-        let requestType = Self.trimmedString(packet[HavraOrchardLexicon.typeKey])
-        switch requestType {
-        case HavraOrchardLexicon.beginSignal:
+    private func handlePasarParcel(_ atlasParcel: [String: Any]) {
+        let ritualKind = Self.trimmedBatikText(atlasParcel[HavraOrchardLexicon.angkorStonePath])
+        switch ritualKind {
+        case HavraOrchardLexicon.tonleSapBoatTrail:
             Task { @MainActor [weak self] in
-                await self?.openHarvestBundle(from: packet)
+                await self?.gatherPasarBasket(from: atlasParcel)
             }
-        case HavraOrchardLexicon.renewSignalA, HavraOrchardLexicon.renewSignalB, HavraOrchardLexicon.renewSignalC:
+        case HavraOrchardLexicon.mekongDeltaMorning, HavraOrchardLexicon.redRiverLane, HavraOrchardLexicon.pasarMorningFlow:
             Task { @MainActor [weak self] in
-                await self?.restoreHarvestBundles(trailRequestID: Self.trimmedString(packet[HavraOrchardLexicon.requestKey]) ?? "")
+                await self?.recoverPasarBaskets(riverTraceID: Self.trimmedBatikText(atlasParcel[HavraOrchardLexicon.hawkerStallRhythm]) ?? "")
             }
         default:
-            sendOrchardResult([
-                HavraOrchardLexicon.stateKey: HavraOrchardLexicon.badMark,
-                HavraOrchardLexicon.requestKey: Self.trimmedString(packet[HavraOrchardLexicon.requestKey]) ?? "",
-                HavraOrchardLexicon.noticeKey: HavraOrchardLexicon.unsupported
+            sendPasarResult([
+                HavraOrchardLexicon.batamFerryGate: HavraOrchardLexicon.hoiAnLampLane,
+                HavraOrchardLexicon.hawkerStallRhythm: Self.trimmedBatikText(atlasParcel[HavraOrchardLexicon.hawkerStallRhythm]) ?? "",
+                HavraOrchardLexicon.kopitiamTableScene: HavraOrchardLexicon.templeCourtyardCalm
             ])
         }
     }
 
     @MainActor
-    private func openHarvestBundle(from packet: [String: Any]) async {
-        let packetData = packet[HavraOrchardLexicon.dataKey] as? [String: Any]
-        let trailRequestID = Self.trimmedString(packet[HavraOrchardLexicon.requestKey])
-            ?? Self.trimmedString(packetData?[HavraOrchardLexicon.requestKey])
+    private func gatherPasarBasket(from atlasParcel: [String: Any]) async {
+        let nestedRitual = atlasParcel[HavraOrchardLexicon.warungKitchenMood] as? [String: Any]
+        let riverTraceID = Self.trimmedBatikText(atlasParcel[HavraOrchardLexicon.hawkerStallRhythm])
+            ?? Self.trimmedBatikText(nestedRitual?[HavraOrchardLexicon.hawkerStallRhythm])
             ?? ""
-        let orchardItemID = Self.trimmedString(packet[HavraOrchardLexicon.camelOrchardKey])
-            ?? Self.trimmedString(packet[HavraOrchardLexicon.orchardIDKey])
-            ?? Self.trimmedString(packetData?[HavraOrchardLexicon.orchardIDKey])
-            ?? Self.trimmedString(packetData?[HavraOrchardLexicon.bundleIDKey])
+        let spiceEntryID = Self.trimmedBatikText(atlasParcel[HavraOrchardLexicon.tuktukStreetPath])
+            ?? Self.trimmedBatikText(atlasParcel[HavraOrchardLexicon.nhaTrangShoreLine])
+            ?? Self.trimmedBatikText(nestedRitual?[HavraOrchardLexicon.nhaTrangShoreLine])
+            ?? Self.trimmedBatikText(nestedRitual?[HavraOrchardLexicon.haLongMistRoute])
             ?? ""
-        let harvestBundleID = Self.trimmedString(packetData?[HavraOrchardLexicon.bundleIDKey])
-            ?? Self.trimmedString(packet[HavraOrchardLexicon.bundleIDKey])
-            ?? orchardItemID
-        let travelerID = Self.trimmedString(packet[HavraOrchardLexicon.travelerKey])
-            ?? Self.trimmedString(packetData?[HavraOrchardLexicon.travelerKey])
+        let basketTrailID = Self.trimmedBatikText(nestedRitual?[HavraOrchardLexicon.haLongMistRoute])
+            ?? Self.trimmedBatikText(atlasParcel[HavraOrchardLexicon.haLongMistRoute])
+            ?? spiceEntryID
+        let islandVisitorID = Self.trimmedBatikText(atlasParcel[HavraOrchardLexicon.jeepneyColorLine])
+            ?? Self.trimmedBatikText(nestedRitual?[HavraOrchardLexicon.jeepneyColorLine])
             ?? ""
 
-        guard !orchardItemID.isEmpty else {
-            sendOrchardFailure(trailRequestID: trailRequestID, harvestBundleID: harvestBundleID, noticeText: HavraOrchardLexicon.missingID)
+        guard !spiceEntryID.isEmpty else {
+            sendPasarFailure(riverTraceID: riverTraceID, basketTrailID: basketTrailID, lanternText: HavraOrchardLexicon.mosqueLanternEvening)
             return
         }
 
-        guard HavraHarvestLedger.approvedIDs.contains(orchardItemID) else {
-            sendOrchardFailure(trailRequestID: trailRequestID, harvestBundleID: harvestBundleID, noticeText: HavraOrchardLexicon.notReady)
+        guard HavraHarvestLedger.approvedIDs.contains(spiceEntryID) else {
+            sendPasarFailure(riverTraceID: riverTraceID, basketTrailID: basketTrailID, lanternText: HavraOrchardLexicon.pagodaBellAir)
             return
         }
 
         do {
-            guard let orchardItem = try await Product.products(for: [orchardItemID]).first else {
-                sendOrchardFailure(trailRequestID: trailRequestID, harvestBundleID: harvestBundleID, noticeText: HavraOrchardLexicon.notFound)
+            guard let marketBundle = try await Product.products(for: [spiceEntryID]).first else {
+                sendPasarFailure(riverTraceID: riverTraceID, basketTrailID: basketTrailID, lanternText: HavraOrchardLexicon.shophouseTileGrid)
                 return
             }
 
-            switch try await orchardItem.purchase() {
-            case .success(let verification):
-                let receipt = try Self.verifiedReceipt(from: verification)
-                guard receipt.productID == orchardItemID else {
-                    throw HavraOrchardError.orchardItemMismatch
+            switch try await marketBundle.purchase() {
+            case .success(let orchardProof):
+                let harvestMark = try Self.verifiedHarvestMark(from: orchardProof)
+                guard harvestMark.productID == spiceEntryID else {
+                    throw HavraOrchardError.marketEntryMismatch
                 }
 
-                await receipt.finish()
-                let harvestBundle = HavraHarvestLedger.bundle(for: orchardItemID)
-                sendOrchardResult([
-                    HavraOrchardLexicon.stateKey: HavraOrchardLexicon.okMark,
-                    HavraOrchardLexicon.requestKey: trailRequestID,
-                    HavraOrchardLexicon.orchardIDKey: orchardItemID,
-                    HavraOrchardLexicon.bundleIDKey: harvestBundleID,
-                    HavraOrchardLexicon.sunCountKey: HavraHarvestLedger.sunCount(in: harvestBundle),
-                    HavraOrchardLexicon.receiptKey: String(receipt.id),
-                    HavraOrchardLexicon.travelerKey: travelerID,
-                    HavraOrchardLexicon.fallbackKey: true
+                await harvestMark.finish()
+                let basketBundle = HavraHarvestLedger.bundle(for: spiceEntryID)
+                sendPasarResult([
+                    HavraOrchardLexicon.batamFerryGate: HavraOrchardLexicon.krabiCliffMorning,
+                    HavraOrchardLexicon.hawkerStallRhythm: riverTraceID,
+                    HavraOrchardLexicon.nhaTrangShoreLine: spiceEntryID,
+                    HavraOrchardLexicon.haLongMistRoute: basketTrailID,
+                    HavraOrchardLexicon.trishawCornerRide: HavraHarvestLedger.sunCount(in: basketBundle),
+                    HavraOrchardLexicon.mandalayMarketStep: String(harvestMark.id),
+                    HavraOrchardLexicon.jeepneyColorLine: islandVisitorID,
+                    HavraOrchardLexicon.baganDustLight: true
                 ])
             case .pending:
-                sendOrchardFailure(trailRequestID: trailRequestID, harvestBundleID: harvestBundleID, noticeText: HavraOrchardLexicon.pending)
+                sendPasarFailure(riverTraceID: riverTraceID, basketTrailID: basketTrailID, lanternText: HavraOrchardLexicon.colonialArcadeWalk)
             case .userCancelled:
-                sendOrchardFailure(trailRequestID: trailRequestID, harvestBundleID: harvestBundleID, noticeText: HavraOrchardLexicon.cancelled)
+                sendPasarFailure(riverTraceID: riverTraceID, basketTrailID: basketTrailID, lanternText: HavraOrchardLexicon.tropicalRainPorch)
             @unknown default:
-                sendOrchardFailure(trailRequestID: trailRequestID, harvestBundleID: harvestBundleID, noticeText: HavraOrchardLexicon.unknown)
+                sendPasarFailure(riverTraceID: riverTraceID, basketTrailID: basketTrailID, lanternText: HavraOrchardLexicon.frangipaniGardenAir)
             }
         } catch {
-            sendOrchardFailure(trailRequestID: trailRequestID, harvestBundleID: harvestBundleID, noticeText: Self.orchardNotice(for: error))
+            sendPasarFailure(riverTraceID: riverTraceID, basketTrailID: basketTrailID, lanternText: Self.pasarLanternText(for: error))
         }
     }
 
     @MainActor
-    private func restoreHarvestBundles(trailRequestID: String) async {
-        var restoredBundles: [[String: Any]] = []
+    private func recoverPasarBaskets(riverTraceID: String) async {
+        var restoredBaskets: [[String: Any]] = []
 
-        for await verification in Transaction.currentEntitlements {
-            guard case .verified(let receipt) = verification,
-                  HavraHarvestLedger.approvedIDs.contains(receipt.productID) else {
+        for await orchardProof in Transaction.currentEntitlements {
+            guard case .verified(let harvestMark) = orchardProof,
+                  HavraHarvestLedger.approvedIDs.contains(harvestMark.productID) else {
                 continue
             }
 
-            let harvestBundle = HavraHarvestLedger.bundle(for: receipt.productID)
-            restoredBundles.append([
-                HavraOrchardLexicon.stateKey: HavraOrchardLexicon.okMark,
-                HavraOrchardLexicon.requestKey: trailRequestID,
-                HavraOrchardLexicon.orchardIDKey: receipt.productID,
-                HavraOrchardLexicon.bundleIDKey: receipt.productID,
-                HavraOrchardLexicon.sunCountKey: HavraHarvestLedger.sunCount(in: harvestBundle),
-                HavraOrchardLexicon.receiptKey: String(receipt.id),
-                HavraOrchardLexicon.fallbackKey: true
+            let basketBundle = HavraHarvestLedger.bundle(for: harvestMark.productID)
+            restoredBaskets.append([
+                HavraOrchardLexicon.batamFerryGate: HavraOrchardLexicon.krabiCliffMorning,
+                HavraOrchardLexicon.hawkerStallRhythm: riverTraceID,
+                HavraOrchardLexicon.nhaTrangShoreLine: harvestMark.productID,
+                HavraOrchardLexicon.haLongMistRoute: harvestMark.productID,
+                HavraOrchardLexicon.trishawCornerRide: HavraHarvestLedger.sunCount(in: basketBundle),
+                HavraOrchardLexicon.mandalayMarketStep: String(harvestMark.id),
+                HavraOrchardLexicon.baganDustLight: true
             ])
         }
 
-        sendOrchardResult([
-            HavraOrchardLexicon.stateKey: HavraOrchardLexicon.okMark,
-            HavraOrchardLexicon.requestKey: trailRequestID,
-            HavraOrchardLexicon.restoredListKey: restoredBundles,
-            HavraOrchardLexicon.restoredMirrorKey: restoredBundles
+        sendPasarResult([
+            HavraOrchardLexicon.batamFerryGate: HavraOrchardLexicon.krabiCliffMorning,
+            HavraOrchardLexicon.hawkerStallRhythm: riverTraceID,
+            HavraOrchardLexicon.longtailBoatRoute: restoredBaskets,
+            HavraOrchardLexicon.sampanRiverTurn: restoredBaskets
         ])
     }
 
-    private func sendOrchardFailure(trailRequestID: String, harvestBundleID: String, noticeText: String) {
-        sendOrchardResult([
-            HavraOrchardLexicon.stateKey: HavraOrchardLexicon.badMark,
-            HavraOrchardLexicon.requestKey: trailRequestID,
-            HavraOrchardLexicon.bundleIDKey: harvestBundleID,
-            HavraOrchardLexicon.noticeKey: noticeText,
-            HavraOrchardLexicon.errorNoticeKey: noticeText
+    private func sendPasarFailure(riverTraceID: String, basketTrailID: String, lanternText: String) {
+        sendPasarResult([
+            HavraOrchardLexicon.batamFerryGate: HavraOrchardLexicon.hoiAnLampLane,
+            HavraOrchardLexicon.hawkerStallRhythm: riverTraceID,
+            HavraOrchardLexicon.haLongMistRoute: basketTrailID,
+            HavraOrchardLexicon.kopitiamTableScene: lanternText,
+            HavraOrchardLexicon.becakAlleyRide: lanternText
         ])
     }
 
-    private func sendOrchardResult(_ packet: [String: Any]) {
-        guard JSONSerialization.isValidJSONObject(packet),
-              let packetData = try? JSONSerialization.data(withJSONObject: packet),
-              let packetJSON = String(data: packetData, encoding: .utf8) else {
+    private func sendPasarResult(_ atlasParcel: [String: Any]) {
+        guard JSONSerialization.isValidJSONObject(atlasParcel),
+              let parcelData = try? JSONSerialization.data(withJSONObject: atlasParcel),
+              let parcelText = String(data: parcelData, encoding: .utf8) else {
             return
         }
 
-        let relayScript = HavraOrchardLexicon.relayScript
-            .replacingOccurrences(of: HavraOrchardLexicon.packetToken, with: packetJSON)
-        havraCanvas.evaluateJavaScript(relayScript)
+        let batikRelay = HavraOrchardLexicon.rambutanBasketHue
+            .replacingOccurrences(of: HavraOrchardLexicon.durianMarketRow, with: parcelText)
+        monsoonCanvas.evaluateJavaScript(batikRelay)
     }
 
-    private static func verifiedReceipt<T>(from verification: VerificationResult<T>) throws -> T {
-        switch verification {
-        case .verified(let receipt):
-            return receipt
+    private static func verifiedHarvestMark<T>(from orchardProof: VerificationResult<T>) throws -> T {
+        switch orchardProof {
+        case .verified(let harvestMark):
+            return harvestMark
         case .unverified:
-            throw HavraOrchardError.unverifiedReceipt
+            throw HavraOrchardError.unverifiedHarvestMark
         }
     }
 
-    private static func trimmedString(_ value: Any?) -> String? {
-        guard let text = value as? String else { return nil }
-        let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
-        return trimmed.isEmpty ? nil : trimmed
+    private static func trimmedBatikText(_ rawThread: Any?) -> String? {
+        guard let batikText = rawThread as? String else { return nil }
+        let foldedText = batikText.trimmingCharacters(in: .whitespacesAndNewlines)
+        return foldedText.isEmpty ? nil : foldedText
     }
 
-    private static func orchardNotice(for error: Error) -> String {
-        if error is HavraOrchardError {
-            return HavraOrchardLexicon.unverified
+    private static func pasarLanternText(for routeError: Error) -> String {
+        if routeError is HavraOrchardError {
+            return HavraOrchardLexicon.bananaLeafMeal
         }
 
-        let nsError = error as NSError
-        if nsError.domain == SKError.errorDomain,
-           let storeError = SKError.Code(rawValue: nsError.code) {
-            switch storeError {
+        let cocoaTrace = routeError as NSError
+        if cocoaTrace.domain == SKError.errorDomain,
+           let storeRhythm = SKError.Code(rawValue: cocoaTrace.code) {
+            switch storeRhythm {
             case .paymentNotAllowed:
-                return HavraOrchardLexicon.disabled
+                return HavraOrchardLexicon.coconutGrovePath
             case .storeProductNotAvailable:
-                return HavraOrchardLexicon.notFound
+                return HavraOrchardLexicon.shophouseTileGrid
             default:
                 break
             }
         }
 
-        if nsError.domain == NSURLErrorDomain {
-            return HavraOrchardLexicon.network
+        if cocoaTrace.domain == NSURLErrorDomain {
+            return HavraOrchardLexicon.mangoStallColor
         }
 
-        return error.localizedDescription
+        return routeError.localizedDescription
     }
 
     private enum HavraOrchardError: Error {
-        case orchardItemMismatch
-        case unverifiedReceipt
+        case marketEntryMismatch
+        case unverifiedHarvestMark
     }
 }
