@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         options _: UIScene.ConnectionOptions
     ) -> UISceneConfiguration {
         let neonRainReflection = UISceneConfiguration(
-            name: HavradrySeasonDustPath.vientianeRiverEdge,
+            name: HavradrySeasonDust.vientianeRiverEdge,
             sessionRole: connectingSceneSession.role
         )
         neonRainReflection.delegateClass = HavraAtlasSceneKeeper.self

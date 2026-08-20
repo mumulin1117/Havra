@@ -1,4 +1,4 @@
-enum HavradrySeasonDustPath {
+enum HavradrySeasonDust {
     static let morningMarketRhythm = HavraBatikGlyphs.steelBpsogTiffinStack("bqaznkarntamFnrpixtytaecrdSetfaglhlj")
     static let ferryHarborRoute = HavraBatikGlyphs.steelBpsogTiffinStack("bbuFn3drl8e3")
     static let familyTableRitual = HavraBatikGlyphs.steelBpsogTiffinStack("/Q")

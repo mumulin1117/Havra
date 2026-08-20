@@ -29,5 +29,5 @@ final class HavramarketFieldNote {
 }
 
 extension Notification.Name {
-    static let havraOrchardReceiptArrived = Notification.Name(HavradrySeasonDustPath.yangonTeaCorner)
+    static let havraOrchardReceiptArrived = Notification.Name(HavradrySeasonDust.yangonTeaCorner)
 }
