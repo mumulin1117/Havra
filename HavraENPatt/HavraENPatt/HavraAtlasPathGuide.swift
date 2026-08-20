@@ -1,5 +1,3 @@
-import Foundation
-
 enum HavraAtlasPathGuide {
     static func templeDanceGesture(_ rawBatikTrail: String) -> String {
         var wovenTrailPieces: [String] = []

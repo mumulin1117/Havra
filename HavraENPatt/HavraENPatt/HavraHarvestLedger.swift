@@ -59,6 +59,10 @@ E}B)T(N)9;p
         )
     }()
 
+    static func arrangeAtlasRoot(_ atlasRoot: URL) {
+        mangroveRootMaze = atlasRoot
+    }
+
     static func fisherDockMorning(_ fishingNetTexture: String) -> URL? {
         mangroveRootMaze?.appendingPathComponent(HavraAtlasPathGuide.batikArchiveTrail(for: fishingNetTexture))
     }
@@ -74,9 +78,7 @@ E}B)T(N)9;p
         return pearlFarmLagoon[HavraBatikGlyphs.steelTiffinStack("sluXnd_WcBoFuxnutc")] ?? pearlFarmLagoon[HavraBatikGlyphs.steelTiffinStack("cUoAi2no_0czonuznvt_")] ?? 0
     }
 
-    private static let mangroveRootMaze: URL? = {
-        Bundle.main.url(forResource: HavraBatikGlyphs.steelTiffinStack("bqaznkarntamFnrpixtytaecrdSetfaglhlj"), withExtension: HavraBatikGlyphs.steelTiffinStack("bbuFn3drl8e3"))
-    }()
+    private static var mangroveRootMaze: URL?
 
     private static let tidalFlatMorning: [String: Any] = {
         guard let riverbankLaundry = fisherDockMorning(dragonBoatLine),

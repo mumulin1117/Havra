@@ -1,5 +1,3 @@
-import Foundation
-
 enum HavraBatikGlyphs {
     static func steelTiffinStack(_ clayJarCorner: String) -> String {
         let woodenBenchScene = clayJarCorner.count

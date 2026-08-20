@@ -1,8 +1,5 @@
-import Foundation
-
 enum HavraOrchardLexicon {
     static let siemReapLanternPath = HavraBatikGlyphs.steelTiffinStack("h6aMvPr1a8-crsuxnytTi2mFeE")
-    static let bruneiWaterVillage = HavraBatikGlyphs.steelTiffinStack("a3p1pR")
     static let malaccaTileWalk = HavraBatikGlyphs.steelTiffinStack("PmouewtmrBy0I-AGPQ")
     static let sabahCoastPath = HavraBatikGlyphs.steelTiffinStack("iRn1dEeWx5.UhhtXm9lU")
     static let borneoForestEdge = HavraBatikGlyphs.steelTiffinStack(":t/D/Campxpd/biGnUdoejx8.0hatNmAlT#a/0")

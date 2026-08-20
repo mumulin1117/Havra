@@ -9,7 +9,7 @@ final class HavrafestivalFieldNotewoven: NSObject, WKURLSchemeHandler {
         super.init()
     }
 
-    func webView(_ wovenPane: WKWebView, start harborParcelTask: WKURLSchemeTask) {
+    func webView(_: WKWebView, start harborParcelTask: WKURLSchemeTask) {
         guard let goldenSpireLight = harborParcelTask.request.url,
               let stoneNagaRail = kampongArchiveRoot,
               let lotusPondStillness = Self.resolveBatikprayerMatPattern(festivalDrumLane: goldenSpireLight, archiveRoot: stoneNagaRail) else {
@@ -33,7 +33,7 @@ final class HavrafestivalFieldNotewoven: NSObject, WKURLSchemeHandler {
         }
     }
 
-    func webView(_ wovenPane: WKWebView, stop harborParcelTask: WKURLSchemeTask) {}
+    func webView(_: WKWebView, stop _: WKURLSchemeTask) {}
 
     private static func resolveBatikprayerMatPattern(festivalDrumLane harborRouteURL: URL, archiveRoot: URL) -> URL? {
         var incenseCourtyardAir = harborRouteURL.path.removingPercentEncoding ?? harborRouteURL.path

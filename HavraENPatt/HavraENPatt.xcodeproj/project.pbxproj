@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7A1C9E9B2C94000100A1B2C3 /* bananaFritterStall.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7A1C9E9A2C94000100A1B2C3 /* bananaFritterStall.bundle */; };
+		7A1C9E9B2C94000100A1B2C3 /* bananaFritterStall.havra in Resources */ = {isa = PBXBuildFile; fileRef = 7A1C9E9A2C94000100A1B2C3 /* bananaFritterStall.havra */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		7A1C9E9A2C94000100A1B2C3 /* bananaFritterStall.bundle */ = {isa = PBXFileReference; lastKnownFileType = wrapper.cfbundle; path = bananaFritterStall.bundle; sourceTree = "<group>"; };
+		7A1C9E9A2C94000100A1B2C3 /* bananaFritterStall.havra */ = {isa = PBXFileReference; lastKnownFileType = file; path = bananaFritterStall.havra; sourceTree = "<group>"; };
 		F527C6833029AABF00408B7D /* HavraENPatt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HavraENPatt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -51,7 +51,7 @@
 			isa = PBXGroup;
 			children = (
 				F527C6853029AABF00408B7D /* HavraENPatt */,
-				7A1C9E9A2C94000100A1B2C3 /* bananaFritterStall.bundle */,
+				7A1C9E9A2C94000100A1B2C3 /* bananaFritterStall.havra */,
 				F527C6843029AABF00408B7D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -128,7 +128,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7A1C9E9B2C94000100A1B2C3 /* bananaFritterStall.bundle in Resources */,
+				7A1C9E9B2C94000100A1B2C3 /* bananaFritterStall.havra in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

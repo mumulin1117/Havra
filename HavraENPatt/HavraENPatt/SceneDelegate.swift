@@ -5,11 +5,9 @@ class HavraAtlasSceneKeeper: UIResponder, UIWindowSceneDelegate {
 
     func scene(
         _ atlasScene: UIScene,
-        willConnectTo atlasSession: UISceneSession,
-        options launchRouteOptions: UIScene.ConnectionOptions
+        willConnectTo _: UISceneSession,
+        options _: UIScene.ConnectionOptions
     ) {
-        _ = atlasSession
-        _ = launchRouteOptions
         guard let atlasWindowScene = atlasScene as? UIWindowScene else { return }
 
         let afabricPatternAtlasWindow = UIWindow(windowScene: atlasWindowScene)

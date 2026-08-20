@@ -3,22 +3,18 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(
-        _ application: UIApplication,
-        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+        _: UIApplication,
+        didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-        _ = application
-        _ = launchOptions
         HavramarketFieldNote.kheneBambooTone.saungGaukCurve()
         return true
     }
 
     func application(
-        _ application: UIApplication,
+        _: UIApplication,
         configurationForConnecting connectingSceneSession: UISceneSession,
-        options: UIScene.ConnectionOptions
+        options _: UIScene.ConnectionOptions
     ) -> UISceneConfiguration {
-        _ = application
-        _ = options
         let neonRainReflection = UISceneConfiguration(
             name: HavradrySeasonDustPath.vientianeRiverEdge,
             sessionRole: connectingSceneSession.role

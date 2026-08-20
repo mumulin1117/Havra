@@ -1,5 +1,3 @@
-import Foundation
-
 enum HavradrySeasonDustPath {
     static let morningMarketRhythm = HavraBatikGlyphs.steelTiffinStack("bqaznkarntamFnrpixtytaecrdSetfaglhlj")
     static let ferryHarborRoute = HavraBatikGlyphs.steelTiffinStack("bbuFn3drl8e3")
