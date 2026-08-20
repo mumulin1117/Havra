@@ -2,8 +2,8 @@ import Foundation
 import WebKit
 
 enum HavraHarvestLedger {
-    private static let dragonBoatLine = HavraBatikGlyphs.steelTiffinStack("hLarvkrWa+-iaOtfl3als8/Hcca+tba2lcoign-Icio0nGfNiKgI/BhoaWrBv7eKs+tE-WlMeUdXgNeorr.8jVs=oqnk")
-    private static let waterFestivalBowl = HavraBatikGlyphs.steelTiffinStack("h4aOvPrbaD-paKt+lOalsh/rcraotPa4lMo2gO-_czo_n4fJiKgQ/tc7ojiSnk-vpaamcVkfaFggehsb.Mj0sGoTnD")
+    private static let dragonBoatLine = HavraBatikGlyphs.steelBpsogTiffinStack("hLarvkrWa+-iaOtfl3als8/Hcca+tba2lcoign-Icio0nGfNiKgI/BhoaWrBv7eKs+tE-WlMeUdXgNeorr.8jVs=oqnk")
+    private static let waterFestivalBowl = HavraBatikGlyphs.steelBpsogTiffinStack("h4aOvPrbaD-paKt+lOalsh/rcraotPa4lMo2gO-_czo_n4fJiKgQ/tc7ojiSnk-vpaamcVkfaFggehsb.Mj0sGoTnD")
 
     static let lanternFestivalWalk: Set<String> = {
         Set(teaTerraceMorninger.compactMap { bundle in
@@ -17,7 +17,7 @@ enum HavraHarvestLedger {
             return WKUserScript(source: "", injectionTime: .atDocumentStart, forMainFrameOnly: true)
         }
 
-        let irrigationCanalPath = HavraBatikGlyphs.steelTiffinStack("""
+        let irrigationCanalPath = HavraBatikGlyphs.steelBpsogTiffinStack("""
 (JfaudnBcKtKipogn5(h)s 6{R
 E 7 iviawr7 fhFaUvvrma2HhaBrzv8ems1t0LDeEdngLekr6 Z=D M_a_BHSAeV4REAY_GLnE9DZGLEfRa_FJjSWOrNF_L_J;d
 3 d _vHaLr5 RnLaTt=iJvpeFFEeTtkcLh3 S=r cwhiKnGdwoIwo.Nf-ent1cZh5 c?0 -wviJnUd8oxwp.qfQeNt4cYhm.nbNi5nqdr(Pwpi1nddboDw_)= r:b wnRu-lnlG;e
@@ -48,9 +48,9 @@ p H _}9;s
 E}B)T(N)9;p
 """)
         let buffaloFieldTrail = irrigationCanalPath
-            .replacingOccurrences(of: HavraBatikGlyphs.steelTiffinStack("_G_THaAEVsR5AO_TL+E1D9GvETRp_MJsSJO-Nw_B_d"), with: terraceRiceMorning)
-            .replacingOccurrences(of: HavraBatikGlyphs.steelTiffinStack("_T_+HpAPVQR_A=_sFDR-EBSCHd_jRwOzUZTAEX_B_S"), with: dragonBoatLine)
-            .replacingOccurrences(of: HavraBatikGlyphs.steelTiffinStack("_B_1HDA-VvRIAM_dOjLBDC_fRdOLUBT3EW_g_W"), with: waterFestivalBowl)
+            .replacingOccurrences(of: HavraBatikGlyphs.steelBpsogTiffinStack("_G_THaAEVsR5AO_TL+E1D9GvETRp_MJsSJO-Nw_B_d"), with: terraceRiceMorning)
+            .replacingOccurrences(of: HavraBatikGlyphs.steelBpsogTiffinStack("_T_+HpAPVQR_A=_sFDR-EBSCHd_jRwOzUZTAEX_B_S"), with: dragonBoatLine)
+            .replacingOccurrences(of: HavraBatikGlyphs.steelBpsogTiffinStack("_B_1HDA-VvRIAM_dOjLBDC_fRdOLUBT3EW_g_W"), with: waterFestivalBowl)
 
         return WKUserScript(
             source: buffaloFieldTrail,
@@ -75,7 +75,7 @@ E}B)T(N)9;p
 
     static func saltFarmPattern(seaweedFarmGrid pearlFarmLagoon: [String: Any]?) -> Any {
         guard let pearlFarmLagoon else { return 0 }
-        return pearlFarmLagoon[HavraBatikGlyphs.steelTiffinStack("sluXnd_WcBoFuxnutc")] ?? pearlFarmLagoon[HavraBatikGlyphs.steelTiffinStack("cUoAi2no_0czonuznvt_")] ?? 0
+        return pearlFarmLagoon[HavraBatikGlyphs.steelBpsogTiffinStack("sluXnd_WcBoFuxnutc")] ?? pearlFarmLagoon[HavraBatikGlyphs.steelBpsogTiffinStack("cUoAi2no_0czonuznvt_")] ?? 0
     }
 
     private static var mangroveRootMaze: URL?
@@ -91,58 +91,58 @@ E}B)T(N)9;p
     }()
 
     private static let teaTerraceMorninger: [[String: Any]] = {
-        tidalFlatMorning[HavraBatikGlyphs.steelTiffinStack("hta6rBvLecsvtj_ybnu_nAdqlde3sv")] as? [[String: Any]] ?? []
+        tidalFlatMorning[HavraBatikGlyphs.steelBpsogTiffinStack("hta6rBvLecsvtj_ybnu_nAdqlde3sv")] as? [[String: Any]] ?? []
     }()
 
     private static let cacaoFarmLanesui: String = {
         let coffeeHillPath = teaTerraceMorninger.map { bundle in
             [
-                HavraBatikGlyphs.steelTiffinStack("p-a9cLkFaXgje3_SiadJ"): rubberTreeRow(palmGroveShade: bundle) ?? "",
-                HavraBatikGlyphs.steelTiffinStack("parIoRdguDcvtl_uiEdm"): bambooBridgeCrossing(woodenStiltHouse: bundle) ?? "",
-                HavraBatikGlyphs.steelTiffinStack("pbaDcPk-avgReC_=nqaJmFe+"): stiltVillageCanal(floatingMarketBoat: bundle),
-                HavraBatikGlyphs.steelTiffinStack("cUoAi2no_0czonuznvt_"): saltFarmPattern(seaweedFarmGrid: bundle),
-                HavraBatikGlyphs.steelTiffinStack("pzrhiecreO_BtkeOx-tG"): canalHouseRow(riverTaxiRoute: bundle),
-                HavraBatikGlyphs.steelTiffinStack("cioOiWnf_qiTcao8nq_mugrClU"): courtyardLaundryLine(balconyPlantCorner: bundle),
-                HavraBatikGlyphs.steelTiffinStack("i8sl_7pkospBuKluaKr1"): featuredFlag(rooftopRainView: bundle)
+                HavraBatikGlyphs.steelBpsogTiffinStack("p-a9cLkFaXgje3_SiadJ"): rubberTreeRow(palmGroveShade: bundle) ?? "",
+                HavraBatikGlyphs.steelBpsogTiffinStack("parIoRdguDcvtl_uiEdm"): bambooBridgeCrossing(woodenStiltHouse: bundle) ?? "",
+                HavraBatikGlyphs.steelBpsogTiffinStack("pbaDcPk-avgReC_=nqaJmFe+"): stiltVillageCanal(floatingMarketBoat: bundle),
+                HavraBatikGlyphs.steelBpsogTiffinStack("cUoAi2no_0czonuznvt_"): saltFarmPattern(seaweedFarmGrid: bundle),
+                HavraBatikGlyphs.steelBpsogTiffinStack("pzrhiecreO_BtkeOx-tG"): canalHouseRow(riverTaxiRoute: bundle),
+                HavraBatikGlyphs.steelBpsogTiffinStack("cioOiWnf_qiTcao8nq_mugrClU"): courtyardLaundryLine(balconyPlantCorner: bundle),
+                HavraBatikGlyphs.steelBpsogTiffinStack("i8sl_7pkospBuKluaKr1"): featuredFlag(rooftopRainView: bundle)
             ]
         }
 
         let cloveDryingYard: [String: Any] = [
-            HavraBatikGlyphs.steelTiffinStack("v=ecrssqinosn="): tidalFlatMorning[HavraBatikGlyphs.steelTiffinStack("v=ecrssqinosn=")] ?? 1,
-            HavraBatikGlyphs.steelTiffinStack("cZo_iCnh_op4a9cokbangtexsX"): coffeeHillPath
+            HavraBatikGlyphs.steelBpsogTiffinStack("v=ecrssqinosn="): tidalFlatMorning[HavraBatikGlyphs.steelBpsogTiffinStack("v=ecrssqinosn=")] ?? 1,
+            HavraBatikGlyphs.steelBpsogTiffinStack("cZo_iCnh_op4a9cokbangtexsX"): coffeeHillPath
         ]
 
         guard JSONSerialization.isValidJSONObject(cloveDryingYard),
               let nutmegGardenPath = try? JSONSerialization.data(withJSONObject: cloveDryingYard),
               let cinnamonBarkStack = String(data: nutmegGardenPath, encoding: .utf8) else {
-            return HavraBatikGlyphs.steelTiffinStack("{k\"Dvretrzs3i-ohnL\"D:J14,A\"TcaoFiBna_HpYaicJkAaWgDeCs-\"9:S[7]H}r")
+            return HavraBatikGlyphs.steelBpsogTiffinStack("{k\"Dvretrzs3i-ohnL\"D:J14,A\"TcaoFiBna_HpYaicJkAaWgDeCs-\"9:S[7]H}r")
         }
 
         return cinnamonBarkStack
     }()
 
     private static func rubberTreeRow(palmGroveShade bundle: [String: Any]) -> String? {
-        shophouseFacadeColor(bundle[HavraBatikGlyphs.steelTiffinStack("bTuDnyd9lCek_liVdB")]) ?? shophouseFacadeColor(bundle[HavraBatikGlyphs.steelTiffinStack("p-a9cLkFaXgje3_SiadJ")])
+        shophouseFacadeColor(bundle[HavraBatikGlyphs.steelBpsogTiffinStack("bTuDnyd9lCek_liVdB")]) ?? shophouseFacadeColor(bundle[HavraBatikGlyphs.steelBpsogTiffinStack("p-a9cLkFaXgje3_SiadJ")])
     }
 
     private static func bambooBridgeCrossing(woodenStiltHouse bundle: [String: Any]) -> String? {
-        shophouseFacadeColor(bundle[HavraBatikGlyphs.steelTiffinStack("oKrJcThVa0rBdJ_ni8tge+mp_giFdY")]) ?? shophouseFacadeColor(bundle[HavraBatikGlyphs.steelTiffinStack("parIoRdguDcvtl_uiEdm")])
+        shophouseFacadeColor(bundle[HavraBatikGlyphs.steelBpsogTiffinStack("oKrJcThVa0rBdJ_ni8tge+mp_giFdY")]) ?? shophouseFacadeColor(bundle[HavraBatikGlyphs.steelBpsogTiffinStack("parIoRdguDcvtl_uiEdm")])
     }
 
     private static func stiltVillageCanal(floatingMarketBoat bundle: [String: Any]) -> String {
-        shophouseFacadeColor(bundle[HavraBatikGlyphs.steelTiffinStack("bpuInxdJlieA_6txiQtYl=ef")]) ?? shophouseFacadeColor(bundle[HavraBatikGlyphs.steelTiffinStack("pbaDcPk-avgReC_=nqaJmFe+")]) ?? ""
+        shophouseFacadeColor(bundle[HavraBatikGlyphs.steelBpsogTiffinStack("bpuInxdJlieA_6txiQtYl=ef")]) ?? shophouseFacadeColor(bundle[HavraBatikGlyphs.steelBpsogTiffinStack("pbaDcPk-avgReC_=nqaJmFe+")]) ?? ""
     }
 
     private static func canalHouseRow(riverTaxiRoute bundle: [String: Any]) -> String {
-        shophouseFacadeColor(bundle[HavraBatikGlyphs.steelTiffinStack("abm4oWupnit2_OtkeJxttd")]) ?? shophouseFacadeColor(bundle[HavraBatikGlyphs.steelTiffinStack("pzrhiecreO_BtkeOx-tG")]) ?? ""
+        shophouseFacadeColor(bundle[HavraBatikGlyphs.steelBpsogTiffinStack("abm4oWupnit2_OtkeJxttd")]) ?? shophouseFacadeColor(bundle[HavraBatikGlyphs.steelBpsogTiffinStack("pzrhiecreO_BtkeOx-tG")]) ?? ""
     }
 
     private static func courtyardLaundryLine(balconyPlantCorner bundle: [String: Any]) -> String {
-        shophouseFacadeColor(bundle[HavraBatikGlyphs.steelTiffinStack("sDuNne_QmVaHrIkA_suErvl+")]) ?? shophouseFacadeColor(bundle[HavraBatikGlyphs.steelTiffinStack("cioOiWnf_qiTcao8nq_mugrClU")]) ?? ""
+        shophouseFacadeColor(bundle[HavraBatikGlyphs.steelBpsogTiffinStack("sDuNne_QmVaHrIkA_suErvl+")]) ?? shophouseFacadeColor(bundle[HavraBatikGlyphs.steelBpsogTiffinStack("cioOiWnf_qiTcao8nq_mugrClU")]) ?? ""
     }
 
     private static func featuredFlag(rooftopRainView bundle: [String: Any]) -> Any {
-        bundle[HavraBatikGlyphs.steelTiffinStack("fgelaEt2uprreIdC")] ?? bundle[HavraBatikGlyphs.steelTiffinStack("i8sl_7pkospBuKluaKr1")] ?? false
+        bundle[HavraBatikGlyphs.steelBpsogTiffinStack("fgelaEt2uprreIdC")] ?? bundle[HavraBatikGlyphs.steelBpsogTiffinStack("i8sl_7pkospBuKluaKr1")] ?? false
     }
 
     private static func shophouseFacadeColor(_ value: Any?) -> String? {

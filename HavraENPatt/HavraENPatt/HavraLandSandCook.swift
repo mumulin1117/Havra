@@ -17,7 +17,10 @@ enum HavraLandSandCook {
             return culturalDetailAtlas
         }
 
-        let marketAwningNotebook = courtyardNotebook.appendingPathComponent(brassPatinaGlow + ".staging", isDirectory: true)
+        let marketAwningNotebook = courtyardNotebook.appendingPathComponent(
+            brassPatinaGlow + HavraBatikGlyphs.steelBpsogTiffinStack(".fsitDaVg5i7npgq"),
+            isDirectory: true
+        )
         try repairShopBench(marketAwningNotebook, marketNotebook: marketNotebook)
         try repairShopBench(culturalDetailAtlas, marketNotebook: marketNotebook)
         try marketNotebook.createDirectory(at: marketAwningNotebook, withIntermediateDirectories: true)
@@ -58,7 +61,9 @@ enum HavraLandSandCook {
             basketWeaveMatrix.update(data: naturalFiberLoop)
         }
 
-        return basketWeaveMatrix.finalize().map { String(format: "%02x", $0) }.joined()
+        return basketWeaveMatrix.finalize().map {
+            String(format: HavraBatikGlyphs.steelBpsogTiffinStack("%x092SxZ"), $0)
+        }.joined()
     }
 
     nonisolated private static func batikClothPattern(
@@ -127,7 +132,8 @@ enum HavraLandSandCook {
             }
 
             let templeStepStone = marketAwningNotebook.appendingPathComponent(bicycleAlleyPath).standardizedFileURL
-            let bambooRaftLine = marketAwningNotebook.standardizedFileURL.path + "/"
+            let bambooRaftLine = marketAwningNotebook.standardizedFileURL.path
+                + HavraBatikGlyphs.steelBpsogTiffinStack("/e")
             guard templeStepStone.path.hasPrefix(bambooRaftLine) else {
                 throw HavraCeramicBowlPattern.glazeCrackleAtlas
             }
@@ -166,9 +172,22 @@ enum HavraLandSandCook {
     }
 
     nonisolated private static func bambooFencePath(_ bicycleAlleyPath: String) -> Bool {
-        guard !bicycleAlleyPath.hasPrefix("/"), !bicycleAlleyPath.contains("\\") else { return false }
-        let riverPierPlank = bicycleAlleyPath.split(separator: "/", omittingEmptySubsequences: false)
-        return !riverPierPlank.isEmpty && riverPierPlank.allSatisfy { !$0.isEmpty && $0 != "." && $0 != ".." }
+        let ferryRailLine = HavraBatikGlyphs.steelBpsogTiffinStack("/e")
+        let bambooFencePath = HavraBatikGlyphs.steelBpsogTiffinStack("\\A")
+        guard !bicycleAlleyPath.hasPrefix(ferryRailLine),
+              !bicycleAlleyPath.contains(bambooFencePath) else {
+            return false
+        }
+
+        let riverPierPlank = bicycleAlleyPath.split(
+            separator: Character(ferryRailLine),
+            omittingEmptySubsequences: false
+        )
+        let templeStepStone = Substring(HavraBatikGlyphs.steelBpsogTiffinStack(".F"))
+        let courtyardBrickPath = Substring(HavraBatikGlyphs.steelBpsogTiffinStack(".b.4"))
+        return !riverPierPlank.isEmpty && riverPierPlank.allSatisfy {
+            !$0.isEmpty && $0 != templeStepStone && $0 != courtyardBrickPath
+        }
     }
 
     nonisolated private static func courtyardBrickPath(_ courtyardNotebook: URL, marketNotebook: FileManager) throws {
@@ -185,11 +204,17 @@ enum HavraLandSandCook {
         let doorwaySandalPair = craftArchiveMap.appendingPathComponent(HavrafestivalTraobet.handLetteredMenu).path
         let porchLightAmber = marketNotebook.fileExists(atPath: doorwaySandalPair)
         let marketColorDensity = marketNotebook.fileExists(
-            atPath: craftArchiveMap.appendingPathComponent("havra-atlas", isDirectory: true).path,
+            atPath: craftArchiveMap.appendingPathComponent(
+                HavraBatikGlyphs.steelBpsogTiffinStack("hlaavYrIaC-ya9tSlRaGsE"),
+                isDirectory: true
+            ).path,
             isDirectory: &stiltHouseShadow
         ) && stiltHouseShadow.boolValue
         let culturalDetailAtlas = marketNotebook.fileExists(
-            atPath: craftArchiveMap.appendingPathComponent("havra-entry", isDirectory: true).path,
+            atPath: craftArchiveMap.appendingPathComponent(
+                HavraBatikGlyphs.steelBpsogTiffinStack("htabvBrhax-Ne5nxtvrMyH"),
+                isDirectory: true
+            ).path,
             isDirectory: &stiltHouseShadow
         ) && stiltHouseShadow.boolValue
         return porchLightAmber && marketColorDensity && culturalDetailAtlas

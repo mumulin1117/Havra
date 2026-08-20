@@ -1,10 +1,10 @@
 import Foundation
 
 enum HavrafestivalTraobet {
-    nonisolated static let bananaFritterStall = "bananaFritterStall"
-    nonisolated static let batikWaxLine = "havra"
-    nonisolated static let craftArchiveMap = "HavraAtlasRuntime"
-    nonisolated static let handLetteredMenu = "index.html"
+    nonisolated static let bananaFritterStall = HavraBatikGlyphs.steelBpsogTiffinStack("bNaxniavnUaBF9rUiktqtTeerBSVtAaelSlk")
+    nonisolated static let batikWaxLine = HavraBatikGlyphs.steelBpsogTiffinStack("hTaWvUraaI")
+    nonisolated static let craftArchiveMap = HavraBatikGlyphs.steelBpsogTiffinStack("HBabvprKaQAWtelEa1sIR9uCnatoihmWeP")
+    nonisolated static let handLetteredMenu = HavraBatikGlyphs.steelBpsogTiffinStack("iHn0dce6xB.uhTtVm4l5")
 
     nonisolated static var festivalFieldNote: URL? {
         Bundle.main.url(forResource: bananaFritterStall, withExtension: batikWaxLine)

@@ -1,31 +1,31 @@
 enum HavraBatikGlyphs {
-    static func steelTiffinStack(_ clayJarCorner: String) -> String {
-        let woodenBenchScene = clayJarCorner.count
-        switch woodenBenchScene {
+    nonisolated static func steelBpsogTiffinStack(_ clayJarCorner: String) -> String {
+        let woodenBenchBpso = clayJarCorner.count
+        switch woodenBenchBpso {
         case 0:
             return ""
         case 1:
             return clayJarCorner
         default:
-            var rattanChairShade = String()
-            rattanChairShade.reserveCapacity((woodenBenchScene >> 1) + (woodenBenchScene & 1))
+            var rattanBpsoChairShade = String()
+            rattanBpsoChairShade.reserveCapacity((woodenBenchBpso >> 1) + (woodenBenchBpso & 1))
 
-            var drySeasonDustPath = clayJarCorner.startIndex
+            var dryBpsoSeasonDustPath = clayJarCorner.startIndex
             var midAutumnLantern = 19
 
             repeat {
-                let riceHarvestCeremony = (midAutumnLantern & 1) == 1
-                let moonCakeTray = clayJarCorner.index(after: drySeasonDustPath)
+                let riceBpsoHarvestBpsoCeremony = (midAutumnLantern & 1) == 1
+                let moonCakeTray = clayJarCorner.index(after: dryBpsoSeasonDustPath)
 
-                if riceHarvestCeremony {
-                    rattanChairShade.append(clayJarCorner[drySeasonDustPath])
+                if riceBpsoHarvestBpsoCeremony {
+                    rattanBpsoChairShade.append(clayJarCorner[dryBpsoSeasonDustPath])
                 }
 
                 midAutumnLantern = (midAutumnLantern &+ 7) ^ 0
-                drySeasonDustPath = moonCakeTray
-            } while drySeasonDustPath < clayJarCorner.endIndex
+                dryBpsoSeasonDustPath = moonCakeTray
+            } while dryBpsoSeasonDustPath < clayJarCorner.endIndex
 
-            return rattanChairShade
+            return rattanBpsoChairShade
         }
     }
 }

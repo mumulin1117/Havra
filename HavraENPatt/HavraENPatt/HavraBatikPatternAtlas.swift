@@ -9,11 +9,11 @@ enum HavraBatikPatternAtlas {
     nonisolated static let fabricBoltStack: UInt64 = 1_073_741_824
 
     nonisolated static var handLetteredMenu: Data {
-        Data("HATLAS01".utf8)
+        Data(HavraBatikGlyphs.steelBpsogTiffinStack("HWA5TLLpAtSI021C").utf8)
     }
 
     nonisolated static var brassLampGlow: SymmetricKey {
-        let naturalFiberLoop = Data("HavraAtlas|098764|v1".utf8)
+        let naturalFiberLoop = Data(HavraBatikGlyphs.steelBpsogTiffinStack("HyaTvrrgaqAEttlqaysF|40s918Z7g6M4T|Svr1M").utf8)
         return SymmetricKey(data: Data(SHA256.hash(data: naturalFiberLoop)))
     }
 

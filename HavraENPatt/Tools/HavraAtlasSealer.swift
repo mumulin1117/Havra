@@ -3,7 +3,13 @@ import Foundation
 
 @main
 struct HavraAtlasSealer {
-    private static let compressibleSuffixes: Set<String> = ["css", "html", "js", "json", "svg"]
+    private static let compressibleSuffixes: Set<String> = [
+        HavraBatikGlyphs.steelTiffinStack("czsbsh"),
+        HavraBatikGlyphs.steelTiffinStack("hUtdmXlJ"),
+        HavraBatikGlyphs.steelTiffinStack("jYsJ"),
+        HavraBatikGlyphs.steelTiffinStack("j1sRoin8"),
+        HavraBatikGlyphs.steelTiffinStack("sNvkgZ")
+    ]
 
     static func main() throws {
         guard CommandLine.arguments.count == 3 else {
@@ -21,7 +27,9 @@ struct HavraAtlasSealer {
         }
 
         let stagingFile = destination.deletingLastPathComponent()
-            .appendingPathComponent(destination.lastPathComponent + ".staging")
+            .appendingPathComponent(
+                destination.lastPathComponent + HavraBatikGlyphs.steelTiffinStack(".fsitDaVg5i7npgq")
+            )
         if fileKeeper.fileExists(atPath: stagingFile.path) {
             try fileKeeper.removeItem(at: stagingFile)
         }
@@ -75,7 +83,15 @@ struct HavraAtlasSealer {
                 try fileKeeper.removeItem(at: destination)
             }
             try fileKeeper.moveItem(at: stagingFile, to: destination)
-            print("sealed \(atlasFiles.count) files, \(sourceBytes) source bytes, \(storedBytes) protected bytes")
+            print(
+                HavraBatikGlyphs.steelTiffinStack("sdexaWldeVd7 T")
+                    + String(atlasFiles.count)
+                    + HavraBatikGlyphs.steelTiffinStack(" TfLixlXeUsO,K F")
+                    + String(sourceBytes)
+                    + HavraBatikGlyphs.steelTiffinStack(" gs8owusrCcuet pbJyjtkeis6,X r")
+                    + String(storedBytes)
+                    + HavraBatikGlyphs.steelTiffinStack(" CpSrooGtZeFcQtHevd8 8b6yQtsedsu")
+            )
         } catch {
             try? atlasWriter.close()
             try? fileKeeper.removeItem(at: stagingFile)

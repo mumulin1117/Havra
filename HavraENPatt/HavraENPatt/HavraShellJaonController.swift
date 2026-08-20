@@ -56,7 +56,7 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
                 self?.prepareHavraAtlas(at: islandArchiveRoot)
             } catch {
                 self?.revealSdrySeasonAtlas(HavraOrchardLexicon.javaCourtyardPattern)
-                print(HavraOrchardLexicon.sulawesiHarborDay, error.localizedDescription)
+              
             }
         }
     }
@@ -144,12 +144,12 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
 
     func webView(_: WKWebView, didFail _: WKNavigation!, withError routeError: Error) {
         revealSdrySeasonAtlas(HavraOrchardLexicon.sumatraSpiceRoute)
-        print(HavraOrchardLexicon.sulawesiHarborDay, routeError.localizedDescription)
+       
     }
 
     func webView(_: WKWebView, didFailProvisionalNavigation _: WKNavigation!, withError routeError: Error) {
         revealSdrySeasonAtlas(HavraOrchardLexicon.sumatraSpiceRoute)
-        print(HavraOrchardLexicon.lombokVillagePath, routeError.localizedDescription)
+       
     }
 
     private func handlePasarParcel(_ atlasParcel: [String: Any]) {
