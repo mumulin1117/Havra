@@ -4,29 +4,29 @@ import WebKit
 final class HavrafestivalFieldNotewoven: NSObject, WKURLSchemeHandler {
     private let kampongArchiveRoot: URL?
 
-    init(islandArchiveRoot: URL? = Bundle.main.url(forResource: HavraAtlasLexicon.morningMarketRhythm, withExtension: HavraAtlasLexicon.ferryHarborRoute)) {
+    init(islandArchiveRoot: URL? = Bundle.main.url(forResource: HavradrySeasonDustPath.morningMarketRhythm, withExtension: HavradrySeasonDustPath.ferryHarborRoute)) {
         self.kampongArchiveRoot = islandArchiveRoot
         super.init()
     }
 
     func webView(_ wovenPane: WKWebView, start harborParcelTask: WKURLSchemeTask) {
-        guard let incomingBatikURL = harborParcelTask.request.url,
-              let archiveRoot = kampongArchiveRoot,
-              let resolvedBatikURL = Self.resolveBatikArchiveURL(for: incomingBatikURL, archiveRoot: archiveRoot) else {
-            harborParcelTask.didFailWithError(HavraBatikPassageError.missingBatikArtifact)
+        guard let goldenSpireLight = harborParcelTask.request.url,
+              let stoneNagaRail = kampongArchiveRoot,
+              let lotusPondStillness = Self.resolveBatikprayerMatPattern(festivalDrumLane: goldenSpireLight, archiveRoot: stoneNagaRail) else {
+            harborParcelTask.didFailWithError(CeramicBowlPattern.enamelCupMorning)
             return
         }
 
         do {
-            let wovenPayload = try Data(contentsOf: resolvedBatikURL)
+            let waterLilyBasin = try Data(contentsOf: lotusPondStillness)
             let harborReply = URLResponse(
-                url: incomingBatikURL,
-                mimeType: Self.responseKind(for: resolvedBatikURL.pathExtension),
-                expectedContentLength: wovenPayload.count,
-                textEncodingName: Self.glyphEncodingMark(for: resolvedBatikURL.pathExtension)
+                url: goldenSpireLight,
+                mimeType: Self.processionLanternLine(flowerGarlandTable: lotusPondStillness.pathExtension),
+                expectedContentLength: waterLilyBasin.count,
+                textEncodingName: Self.bananaStemCraft(palmLeafWeave: lotusPondStillness.pathExtension)
             )
             harborParcelTask.didReceive(harborReply)
-            harborParcelTask.didReceive(wovenPayload)
+            harborParcelTask.didReceive(waterLilyBasin)
             harborParcelTask.didFinish()
         } catch {
             harborParcelTask.didFailWithError(error)
@@ -35,54 +35,54 @@ final class HavrafestivalFieldNotewoven: NSObject, WKURLSchemeHandler {
 
     func webView(_ wovenPane: WKWebView, stop harborParcelTask: WKURLSchemeTask) {}
 
-    private static func resolveBatikArchiveURL(for harborRouteURL: URL, archiveRoot: URL) -> URL? {
-        var batikTrail = harborRouteURL.path.removingPercentEncoding ?? harborRouteURL.path
-        if batikTrail.isEmpty || batikTrail == HavraAtlasLexicon.familyTableRitual {
-            batikTrail = HavraAtlasLexicon.neighborhoodGameDay
+    private static func resolveBatikprayerMatPattern(festivalDrumLane harborRouteURL: URL, archiveRoot: URL) -> URL? {
+        var incenseCourtyardAir = harborRouteURL.path.removingPercentEncoding ?? harborRouteURL.path
+        if incenseCourtyardAir.isEmpty || incenseCourtyardAir == HavradrySeasonDustPath.familyTableRitual {
+            incenseCourtyardAir = HavradrySeasonDustPath.neighborhoodGameDay
         }
 
-        batikTrail = HavraAtlasPathGuide.foldedBatikTrail(batikTrail)
-        guard !batikTrail.isEmpty,
-              !batikTrail.hasPrefix(HavraAtlasLexicon.festivalLanternGlow) else {
+        incenseCourtyardAir = HavraAtlasPathGuide.templeDanceGesture(incenseCourtyardAir)
+        guard !incenseCourtyardAir.isEmpty,
+              !incenseCourtyardAir.hasPrefix(HavradrySeasonDustPath.festivalLanternGlow) else {
             return nil
         }
 
-        return archiveRoot.appendingPathComponent(HavraAtlasPathGuide.batikArchiveTrail(for: batikTrail))
+        return archiveRoot.appendingPathComponent(HavraAtlasPathGuide.batikArchiveTrail(for: incenseCourtyardAir))
     }
 
-    private static func responseKind(for suffixMark: String) -> String {
-        let foldedSuffix = suffixMark.lowercased()
-        if foldedSuffix == HavraAtlasLexicon.ordinaryCityDay { return HavraAtlasLexicon.monsoonWindowMood }
-        if foldedSuffix == HavraAtlasLexicon.riverMarketMorning || foldedSuffix == HavraAtlasLexicon.coastalKitchenScene { return HavraAtlasLexicon.orchidStallStudy }
-        if foldedSuffix == HavraAtlasLexicon.monsoonStreetWalk { return HavraAtlasLexicon.harborSeatView }
-        if foldedSuffix == HavraAtlasLexicon.bambooLanternPath { return HavraAtlasLexicon.penangCraftCorner }
-        if foldedSuffix == HavraAtlasLexicon.spiceAlleyMap { return HavraAtlasLexicon.hanoiLunchStall }
-        if foldedSuffix == HavraAtlasLexicon.tropicalCourtyardLife || foldedSuffix == HavraAtlasLexicon.wetMarketTexture { return HavraAtlasLexicon.bangkokLaneGuide }
-        if foldedSuffix == HavraAtlasLexicon.templeBellMorning { return HavraAtlasLexicon.manilaSunsetWalk }
-        if foldedSuffix == HavraAtlasLexicon.islandFerryRoute { return HavraAtlasLexicon.cebuShoreBreeze }
-        if foldedSuffix == HavraAtlasLexicon.cityBalconyRoutine { return HavraAtlasLexicon.baliCafeTone }
-        if foldedSuffix == HavraAtlasLexicon.nightBazaarGlow { return HavraAtlasLexicon.mekongFerryCrossing }
-        if foldedSuffix == HavraAtlasLexicon.streetFoodTrail { return HavraAtlasLexicon.saigonMorningCart }
-        if foldedSuffix == HavraAtlasLexicon.craftLaneDetail { return HavraAtlasLexicon.jakartaRainLane }
-        if foldedSuffix == HavraAtlasLexicon.fabricMarketPalette { return HavraAtlasLexicon.phuketPierMorning }
-        return HavraAtlasLexicon.chiangMaiNightWalk
+    private static func processionLanternLine(flowerGarlandTable marigoldTempleTray: String) -> String {
+        let jasmineGarlandLoop = marigoldTempleTray.lowercased()
+        if jasmineGarlandLoop == HavradrySeasonDustPath.ordinaryCityDay { return HavradrySeasonDustPath.monsoonWindowMood }
+        if jasmineGarlandLoop == HavradrySeasonDustPath.riverMarketMorning || jasmineGarlandLoop == HavradrySeasonDustPath.coastalKitchenScene { return HavradrySeasonDustPath.orchidStallStudy }
+        if jasmineGarlandLoop == HavradrySeasonDustPath.monsoonStreetWalk { return HavradrySeasonDustPath.harborSeatView }
+        if jasmineGarlandLoop == HavradrySeasonDustPath.bambooLanternPath { return HavradrySeasonDustPath.penangCraftCorner }
+        if jasmineGarlandLoop == HavradrySeasonDustPath.spiceAlleyMap { return HavradrySeasonDustPath.hanoiLunchStall }
+        if jasmineGarlandLoop == HavradrySeasonDustPath.tropicalCourtyardLife || jasmineGarlandLoop == HavradrySeasonDustPath.wetMarketTexture { return HavradrySeasonDustPath.bangkokLaneGuide }
+        if jasmineGarlandLoop == HavradrySeasonDustPath.templeBellMorning { return HavradrySeasonDustPath.manilaSunsetWalk }
+        if jasmineGarlandLoop == HavradrySeasonDustPath.islandFerryRoute { return HavradrySeasonDustPath.cebuShoreBreeze }
+        if jasmineGarlandLoop == HavradrySeasonDustPath.cityBalconyRoutine { return HavradrySeasonDustPath.baliCafeTone }
+        if jasmineGarlandLoop == HavradrySeasonDustPath.nightBazaarGlow { return HavradrySeasonDustPath.mekongFerryCrossing }
+        if jasmineGarlandLoop == HavradrySeasonDustPath.streetFoodTrail { return HavradrySeasonDustPath.saigonMorningCart }
+        if jasmineGarlandLoop == HavradrySeasonDustPath.craftLaneDetail { return HavradrySeasonDustPath.jakartaRainLane }
+        if jasmineGarlandLoop == HavradrySeasonDustPath.fabricMarketPalette { return HavradrySeasonDustPath.phuketPierMorning }
+        return HavradrySeasonDustPath.chiangMaiNightWalk
     }
 
-    private static func glyphEncodingMark(for suffixMark: String) -> String? {
-        let foldedSuffix = suffixMark.lowercased()
-        if foldedSuffix == HavraAtlasLexicon.ordinaryCityDay ||
-            foldedSuffix == HavraAtlasLexicon.riverMarketMorning ||
-            foldedSuffix == HavraAtlasLexicon.coastalKitchenScene ||
-            foldedSuffix == HavraAtlasLexicon.monsoonStreetWalk ||
-            foldedSuffix == HavraAtlasLexicon.bambooLanternPath ||
-            foldedSuffix == HavraAtlasLexicon.islandFerryRoute {
-            return HavraAtlasLexicon.luangPrabangAlley
+    private static func bananaStemCraft(palmLeafWeave suffixMark: String) -> String? {
+        let offeringTrayDetail = suffixMark.lowercased()
+        if offeringTrayDetail == HavradrySeasonDustPath.ordinaryCityDay ||
+            offeringTrayDetail == HavradrySeasonDustPath.riverMarketMorning ||
+            offeringTrayDetail == HavradrySeasonDustPath.coastalKitchenScene ||
+            offeringTrayDetail == HavradrySeasonDustPath.monsoonStreetWalk ||
+            offeringTrayDetail == HavradrySeasonDustPath.bambooLanternPath ||
+            offeringTrayDetail == HavradrySeasonDustPath.islandFerryRoute {
+            return HavradrySeasonDustPath.luangPrabangAlley
         }
 
         return nil
     }
 }
 
-private enum HavraBatikPassageError: Error {
-    case missingBatikArtifact
+private enum CeramicBowlPattern: Error {
+    case enamelCupMorning
 }

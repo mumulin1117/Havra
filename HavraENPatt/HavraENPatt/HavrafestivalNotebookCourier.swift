@@ -1,10 +1,10 @@
 import WebKit
 
 final class HavrafestivalNotebookCourier: NSObject, WKScriptMessageHandler {
-    weak var kitchenNotebook: WKScriptMessageHandler?
+    weak var mosaicWallTone: WKScriptMessageHandler?
 
-    init(receiver: WKScriptMessageHandler) {
-        self.kitchenNotebook = receiver
+    init(templeRoofCurve: WKScriptMessageHandler) {
+        self.mosaicWallTone = templeRoofCurve
         super.init()
     }
 
@@ -12,6 +12,6 @@ final class HavrafestivalNotebookCourier: NSObject, WKScriptMessageHandler {
         _ userContentController: WKUserContentController,
         didReceive scriptPacket: WKScriptMessage
     ) {
-        kitchenNotebook?.userContentController(userContentController, didReceive: scriptPacket)
+        mosaicWallTone?.userContentController(userContentController, didReceive: scriptPacket)
     }
 }

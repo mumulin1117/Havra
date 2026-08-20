@@ -1,33 +1,33 @@
 import Foundation
 
 enum HavraBatikGlyphs {
-    static func unfold(_ wovenThread: String) -> String {
-        let batikCount = wovenThread.count
-        switch batikCount {
+    static func steelTiffinStack(_ clayJarCorner: String) -> String {
+        let woodenBenchScene = clayJarCorner.count
+        switch woodenBenchScene {
         case 0:
             return ""
         case 1:
-            return wovenThread
+            return clayJarCorner
         default:
-            var plainThread = String()
-            plainThread.reserveCapacity((batikCount >> 1) + (batikCount & 1))
+            var rattanChairShade = String()
+            rattanChairShade.reserveCapacity((woodenBenchScene >> 1) + (woodenBenchScene & 1))
 
-            var threadCursor = wovenThread.startIndex
-            var lanternStep = 19
+            var drySeasonDustPath = clayJarCorner.startIndex
+            var midAutumnLantern = 19
 
             repeat {
-                let shouldGather = (lanternStep & 1) == 1
-                let nextCursor = wovenThread.index(after: threadCursor)
+                let riceHarvestCeremony = (midAutumnLantern & 1) == 1
+                let moonCakeTray = clayJarCorner.index(after: drySeasonDustPath)
 
-                if shouldGather {
-                    plainThread.append(wovenThread[threadCursor])
+                if riceHarvestCeremony {
+                    rattanChairShade.append(clayJarCorner[drySeasonDustPath])
                 }
 
-                lanternStep = (lanternStep &+ 7) ^ 0
-                threadCursor = nextCursor
-            } while threadCursor < wovenThread.endIndex
+                midAutumnLantern = (midAutumnLantern &+ 7) ^ 0
+                drySeasonDustPath = moonCakeTray
+            } while drySeasonDustPath < clayJarCorner.endIndex
 
-            return plainThread
+            return rattanChairShade
         }
     }
 }

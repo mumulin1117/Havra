@@ -4,78 +4,78 @@ import WebKit
 
 final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WKScriptMessageHandler {
     private static let archipelagoPassage = HavraOrchardLexicon.siemReapLanternPath
-    private static let kampongHarbor = HavraOrchardLexicon.bruneiWaterVillage
-    private static let batikCourierLane = HavraOrchardLexicon.malaccaTileWalk
+    private static let colorDensityAtlas = HavraOrchardLexicon.bruneiWaterVillage
+    private static let shadowDepthAtlas = HavraOrchardLexicon.malaccaTileWalk
 
-    private var didEnterBatikAtlas = false
+    private var mistBandAtlas = false
     private let archipelagoRouteKeeper = HavrafestivalFieldNotewoven()
-    private lazy var lanternCourier = HavrafestivalNotebookCourier(receiver: self)
+    private lazy var canopyLayerAtlas = HavrafestivalNotebookCourier(templeRoofCurve: self)
 
-    private lazy var monsoonCanvas: WKWebView = {
-        let batikConfig = craftBatikConfiguration()
+    private lazy var poolMirrorAtlas: WKWebView = {
+        let batikConfig = pebbleLineAtlas()
         let silkPane = WKWebView(frame: .zero, configuration: batikConfig)
-        return tintAtlasPane(silkPane)
+        return leafVeinAtlas(silkPane)
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(red: 0.0, green: 0.07, blue: 0.06, alpha: 1.0)
-        tieBatikChannels()
-        anchorMonsoonCanvas()
-        listenForHarvestNotes()
+        basilTrayAtlas()
+        corianderLineAtlas()
+        stallLightAtlas()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        guard !didEnterBatikAtlas else { return }
-        didEnterBatikAtlas = true
+        guard !mistBandAtlas else { return }
+        mistBandAtlas = true
         enterHavraAtlas()
     }
 
     deinit {
-        let lanternHub = monsoonCanvas.configuration.userContentController
-        lanternHub.removeScriptMessageHandler(forName: Self.batikCourierLane)
+        let sandbarCurveAtlas = poolMirrorAtlas.configuration.userContentController
+        sandbarCurveAtlas.removeScriptMessageHandler(forName: Self.shadowDepthAtlas)
         NotificationCenter.default.removeObserver(self)
     }
 
-    private func craftBatikConfiguration() -> WKWebViewConfiguration {
-        let batikConfig = WKWebViewConfiguration()
-        batikConfig.setURLSchemeHandler(archipelagoRouteKeeper, forURLScheme: Self.archipelagoPassage)
-        batikConfig.userContentController.addUserScript(HavraHarvestLedger.fetchScript)
-        batikConfig.preferences.javaScriptCanOpenWindowsAutomatically = true
-        batikConfig.allowsInlineMediaPlayback = true
-        batikConfig.mediaTypesRequiringUserActionForPlayback = []
-        return batikConfig
+    private func pebbleLineAtlas() -> WKWebViewConfiguration {
+        let stoneEdgeAtlas = WKWebViewConfiguration()
+        stoneEdgeAtlas.setURLSchemeHandler(archipelagoRouteKeeper, forURLScheme: Self.archipelagoPassage)
+        stoneEdgeAtlas.userContentController.addUserScript(HavraHarvestLedger.harvestRiceField)
+        stoneEdgeAtlas.preferences.javaScriptCanOpenWindowsAutomatically = true
+        stoneEdgeAtlas.allowsInlineMediaPlayback = true
+        stoneEdgeAtlas.mediaTypesRequiringUserActionForPlayback = []
+        return stoneEdgeAtlas
     }
 
-    private func tintAtlasPane(_ silkPane: WKWebView) -> WKWebView {
+    private func leafVeinAtlas(_ nhaTrangShoreLine: WKWebView) -> WKWebView {
         let harborNightShade = UIColor(red: 0.0, green: 0.07, blue: 0.06, alpha: 1.0)
-        silkPane.translatesAutoresizingMaskIntoConstraints = false
-        silkPane.navigationDelegate = self
-        silkPane.isOpaque = false
-        silkPane.backgroundColor = harborNightShade
-        silkPane.scrollView.backgroundColor = harborNightShade
-        silkPane.scrollView.contentInsetAdjustmentBehavior = .never
-        silkPane.allowsBackForwardNavigationGestures = true
-        return silkPane
+        nhaTrangShoreLine.translatesAutoresizingMaskIntoConstraints = false
+        nhaTrangShoreLine.navigationDelegate = self
+        nhaTrangShoreLine.isOpaque = false
+        nhaTrangShoreLine.backgroundColor = harborNightShade
+        nhaTrangShoreLine.scrollView.backgroundColor = harborNightShade
+        nhaTrangShoreLine.scrollView.contentInsetAdjustmentBehavior = .never
+        nhaTrangShoreLine.allowsBackForwardNavigationGestures = true
+        return nhaTrangShoreLine
     }
 
-    private func tieBatikChannels() {
-        let lanternHub = monsoonCanvas.configuration.userContentController
-        lanternHub.add(lanternCourier, name: Self.batikCourierLane)
+    private func basilTrayAtlas() {
+        let coffeeThreadAtlas = poolMirrorAtlas.configuration.userContentController
+        coffeeThreadAtlas.add(canopyLayerAtlas, name: Self.shadowDepthAtlas)
     }
 
-    private func anchorMonsoonCanvas() {
-        view.addSubview(monsoonCanvas)
+    private func corianderLineAtlas() {
+        view.addSubview(poolMirrorAtlas)
         NSLayoutConstraint.activate([
-            monsoonCanvas.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            monsoonCanvas.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            monsoonCanvas.topAnchor.constraint(equalTo: view.topAnchor),
-            monsoonCanvas.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            poolMirrorAtlas.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            poolMirrorAtlas.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            poolMirrorAtlas.topAnchor.constraint(equalTo: view.topAnchor),
+            poolMirrorAtlas.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
 
-    private func listenForHarvestNotes() {
+    private func stallLightAtlas() {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(collectHarvestNotice(_:)),
@@ -86,13 +86,13 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
 
     @objc private func collectHarvestNotice(_ harvestNotice: Notification) {
         guard let harvestMark = harvestNotice.object as? Transaction,
-              HavraHarvestLedger.approvedIDs.contains(harvestMark.productID) else {
+              HavraHarvestLedger.lanternFestivalWalk.contains(harvestMark.productID) else {
             return
         }
 
         Task { @MainActor [weak self] in
             await harvestMark.finish()
-            self?.sendPasarResult([
+            self?.tropicalCourtyardLife([
                 HavraOrchardLexicon.batamFerryGate: HavraOrchardLexicon.krabiCliffMorning,
                 HavraOrchardLexicon.nhaTrangShoreLine: harvestMark.productID,
                 HavraOrchardLexicon.haLongMistRoute: harvestMark.productID,
@@ -103,28 +103,28 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
     }
 
     private func enterHavraAtlas() {
-        guard HavraHarvestLedger.resourceURL(HavraOrchardLexicon.sabahCoastPath) != nil,
+        guard HavraHarvestLedger.fisherDockMorning(HavraOrchardLexicon.sabahCoastPath) != nil,
               let atlasGateURL = URL(string: Self.archipelagoPassage + HavraOrchardLexicon.borneoForestEdge) else {
-            revealStartupFallback(HavraOrchardLexicon.javaCourtyardPattern)
+            revealSdrySeasonAtlas(HavraOrchardLexicon.javaCourtyardPattern)
             return
         }
 
-        monsoonCanvas.load(URLRequest(url: atlasGateURL))
+        poolMirrorAtlas.load(URLRequest(url: atlasGateURL))
     }
 
-    private func revealStartupFallback(_ lanternText: String) {
-        let fallbackLabel = UILabel()
-        fallbackLabel.translatesAutoresizingMaskIntoConstraints = false
-        fallbackLabel.text = lanternText
-        fallbackLabel.textAlignment = .center
-        fallbackLabel.numberOfLines = 0
-        fallbackLabel.textColor = .white
-        fallbackLabel.font = .preferredFont(forTextStyle: .body)
-        view.addSubview(fallbackLabel)
+    private func revealSdrySeasonAtlas(_ midAutumnAtlas: String) {
+        let humidEveningAtlas = UILabel()
+        humidEveningAtlas.translatesAutoresizingMaskIntoConstraints = false
+        humidEveningAtlas.text = midAutumnAtlas
+        humidEveningAtlas.textAlignment = .center
+        humidEveningAtlas.numberOfLines = 0
+        humidEveningAtlas.textColor = .white
+        humidEveningAtlas.font = .preferredFont(forTextStyle: .body)
+        view.addSubview(humidEveningAtlas)
         NSLayoutConstraint.activate([
-            fallbackLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
-            fallbackLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
-            fallbackLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            humidEveningAtlas.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
+            humidEveningAtlas.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
+            humidEveningAtlas.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
 
@@ -132,7 +132,7 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
         _ lanternHub: WKUserContentController,
         didReceive batikParcel: WKScriptMessage
     ) {
-        guard batikParcel.name == Self.batikCourierLane,
+        guard batikParcel.name == Self.shadowDepthAtlas,
               let atlasParcel = batikParcel.body as? [String: Any] else {
             return
         }
@@ -141,28 +141,28 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
     }
 
     func webView(_ silkPane: WKWebView, didFail riverPath: WKNavigation!, withError routeError: Error) {
-        revealStartupFallback(HavraOrchardLexicon.sumatraSpiceRoute)
+        revealSdrySeasonAtlas(HavraOrchardLexicon.sumatraSpiceRoute)
         print(HavraOrchardLexicon.sulawesiHarborDay, routeError.localizedDescription)
     }
 
     func webView(_ silkPane: WKWebView, didFailProvisionalNavigation riverPath: WKNavigation!, withError routeError: Error) {
-        revealStartupFallback(HavraOrchardLexicon.sumatraSpiceRoute)
+        revealSdrySeasonAtlas(HavraOrchardLexicon.sumatraSpiceRoute)
         print(HavraOrchardLexicon.lombokVillagePath, routeError.localizedDescription)
     }
 
     private func handlePasarParcel(_ atlasParcel: [String: Any]) {
-        let ritualKind = Self.trimmedBatikText(atlasParcel[HavraOrchardLexicon.angkorStonePath])
-        switch ritualKind {
+        let flowerParadeAtlas = Self.trimmedBatikText(atlasParcel[HavraOrchardLexicon.angkorStonePath])
+        switch flowerParadeAtlas {
         case HavraOrchardLexicon.tonleSapBoatTrail:
             Task { @MainActor [weak self] in
                 await self?.gatherPasarBasket(from: atlasParcel)
             }
         case HavraOrchardLexicon.mekongDeltaMorning, HavraOrchardLexicon.redRiverLane, HavraOrchardLexicon.pasarMorningFlow:
             Task { @MainActor [weak self] in
-                await self?.recoverPasarBaskets(riverTraceID: Self.trimmedBatikText(atlasParcel[HavraOrchardLexicon.hawkerStallRhythm]) ?? "")
+                await self?.ferryHarborRoute(familyTableRitual: Self.trimmedBatikText(atlasParcel[HavraOrchardLexicon.hawkerStallRhythm]) ?? "")
             }
         default:
-            sendPasarResult([
+            tropicalCourtyardLife([
                 HavraOrchardLexicon.batamFerryGate: HavraOrchardLexicon.hoiAnLampLane,
                 HavraOrchardLexicon.hawkerStallRhythm: Self.trimmedBatikText(atlasParcel[HavraOrchardLexicon.hawkerStallRhythm]) ?? "",
                 HavraOrchardLexicon.kopitiamTableScene: HavraOrchardLexicon.templeCourtyardCalm
@@ -172,110 +172,110 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
 
     @MainActor
     private func gatherPasarBasket(from atlasParcel: [String: Any]) async {
-        let nestedRitual = atlasParcel[HavraOrchardLexicon.warungKitchenMood] as? [String: Any]
-        let riverTraceID = Self.trimmedBatikText(atlasParcel[HavraOrchardLexicon.hawkerStallRhythm])
-            ?? Self.trimmedBatikText(nestedRitual?[HavraOrchardLexicon.hawkerStallRhythm])
+        let boatPaddleAtlas = atlasParcel[HavraOrchardLexicon.warungKitchenMood] as? [String: Any]
+        let dominoPorchAtlas = Self.trimmedBatikText(atlasParcel[HavraOrchardLexicon.hawkerStallRhythm])
+            ?? Self.trimmedBatikText(boatPaddleAtlas?[HavraOrchardLexicon.hawkerStallRhythm])
             ?? ""
-        let spiceEntryID = Self.trimmedBatikText(atlasParcel[HavraOrchardLexicon.tuktukStreetPath])
+        let badmintonYardAtlas = Self.trimmedBatikText(atlasParcel[HavraOrchardLexicon.tuktukStreetPath])
             ?? Self.trimmedBatikText(atlasParcel[HavraOrchardLexicon.nhaTrangShoreLine])
-            ?? Self.trimmedBatikText(nestedRitual?[HavraOrchardLexicon.nhaTrangShoreLine])
-            ?? Self.trimmedBatikText(nestedRitual?[HavraOrchardLexicon.haLongMistRoute])
+            ?? Self.trimmedBatikText(boatPaddleAtlas?[HavraOrchardLexicon.nhaTrangShoreLine])
+            ?? Self.trimmedBatikText(boatPaddleAtlas?[HavraOrchardLexicon.haLongMistRoute])
             ?? ""
-        let basketTrailID = Self.trimmedBatikText(nestedRitual?[HavraOrchardLexicon.haLongMistRoute])
+        let kiteFieldAtlas = Self.trimmedBatikText(boatPaddleAtlas?[HavraOrchardLexicon.haLongMistRoute])
             ?? Self.trimmedBatikText(atlasParcel[HavraOrchardLexicon.haLongMistRoute])
-            ?? spiceEntryID
-        let islandVisitorID = Self.trimmedBatikText(atlasParcel[HavraOrchardLexicon.jeepneyColorLine])
-            ?? Self.trimmedBatikText(nestedRitual?[HavraOrchardLexicon.jeepneyColorLine])
+            ?? badmintonYardAtlas
+        let picnicMatAtlas = Self.trimmedBatikText(atlasParcel[HavraOrchardLexicon.jeepneyColorLine])
+            ?? Self.trimmedBatikText(boatPaddleAtlas?[HavraOrchardLexicon.jeepneyColorLine])
             ?? ""
 
-        guard !spiceEntryID.isEmpty else {
-            sendPasarFailure(riverTraceID: riverTraceID, basketTrailID: basketTrailID, lanternText: HavraOrchardLexicon.mosqueLanternEvening)
+        guard !badmintonYardAtlas.isEmpty else {
+            coastalKitchenScene(monsoonStreetWalk: dominoPorchAtlas, bambooLanternPath: kiteFieldAtlas, spiceAlleyMap: HavraOrchardLexicon.mosqueLanternEvening)
             return
         }
 
-        guard HavraHarvestLedger.approvedIDs.contains(spiceEntryID) else {
-            sendPasarFailure(riverTraceID: riverTraceID, basketTrailID: basketTrailID, lanternText: HavraOrchardLexicon.pagodaBellAir)
+        guard HavraHarvestLedger.lanternFestivalWalk.contains(badmintonYardAtlas) else {
+            coastalKitchenScene(monsoonStreetWalk: dominoPorchAtlas, bambooLanternPath: kiteFieldAtlas, spiceAlleyMap: HavraOrchardLexicon.pagodaBellAir)
             return
         }
 
         do {
-            guard let marketBundle = try await Product.products(for: [spiceEntryID]).first else {
-                sendPasarFailure(riverTraceID: riverTraceID, basketTrailID: basketTrailID, lanternText: HavraOrchardLexicon.shophouseTileGrid)
+            guard let marketBundle = try await Product.products(for: [badmintonYardAtlas]).first else {
+                coastalKitchenScene(monsoonStreetWalk: dominoPorchAtlas, bambooLanternPath: kiteFieldAtlas, spiceAlleyMap: HavraOrchardLexicon.shophouseTileGrid)
                 return
             }
 
             switch try await marketBundle.purchase() {
             case .success(let orchardProof):
-                let harvestMark = try Self.verifiedHarvestMark(from: orchardProof)
-                guard harvestMark.productID == spiceEntryID else {
-                    throw HavraOrchardError.marketEntryMismatch
+                let coconutArcAtlas = try Self.verifiedHarvestMark(from: orchardProof)
+                guard coconutArcAtlas.productID == badmintonYardAtlas else {
+                    throw cityBalconyRoutine.marketEntryMismatch
                 }
 
-                await harvestMark.finish()
-                let basketBundle = HavraHarvestLedger.bundle(for: spiceEntryID)
-                sendPasarResult([
+                await coconutArcAtlas.finish()
+                let morningMarketRhythm = HavraHarvestLedger.boatRepairYard(harborRopeKnot: badmintonYardAtlas)
+                tropicalCourtyardLife([
                     HavraOrchardLexicon.batamFerryGate: HavraOrchardLexicon.krabiCliffMorning,
-                    HavraOrchardLexicon.hawkerStallRhythm: riverTraceID,
-                    HavraOrchardLexicon.nhaTrangShoreLine: spiceEntryID,
-                    HavraOrchardLexicon.haLongMistRoute: basketTrailID,
-                    HavraOrchardLexicon.trishawCornerRide: HavraHarvestLedger.sunCount(in: basketBundle),
-                    HavraOrchardLexicon.mandalayMarketStep: String(harvestMark.id),
-                    HavraOrchardLexicon.jeepneyColorLine: islandVisitorID,
+                    HavraOrchardLexicon.hawkerStallRhythm: dominoPorchAtlas,
+                    HavraOrchardLexicon.nhaTrangShoreLine: badmintonYardAtlas,
+                    HavraOrchardLexicon.haLongMistRoute: kiteFieldAtlas,
+                    HavraOrchardLexicon.trishawCornerRide: HavraHarvestLedger.saltFarmPattern(seaweedFarmGrid: morningMarketRhythm),
+                    HavraOrchardLexicon.mandalayMarketStep: String(coconutArcAtlas.id),
+                    HavraOrchardLexicon.jeepneyColorLine: picnicMatAtlas,
                     HavraOrchardLexicon.baganDustLight: true
                 ])
             case .pending:
-                sendPasarFailure(riverTraceID: riverTraceID, basketTrailID: basketTrailID, lanternText: HavraOrchardLexicon.colonialArcadeWalk)
+                coastalKitchenScene(monsoonStreetWalk: dominoPorchAtlas, bambooLanternPath: kiteFieldAtlas, spiceAlleyMap: HavraOrchardLexicon.colonialArcadeWalk)
             case .userCancelled:
-                sendPasarFailure(riverTraceID: riverTraceID, basketTrailID: basketTrailID, lanternText: HavraOrchardLexicon.tropicalRainPorch)
+                coastalKitchenScene(monsoonStreetWalk: dominoPorchAtlas, bambooLanternPath: kiteFieldAtlas, spiceAlleyMap: HavraOrchardLexicon.tropicalRainPorch)
             @unknown default:
-                sendPasarFailure(riverTraceID: riverTraceID, basketTrailID: basketTrailID, lanternText: HavraOrchardLexicon.frangipaniGardenAir)
+                coastalKitchenScene(monsoonStreetWalk: dominoPorchAtlas, bambooLanternPath: kiteFieldAtlas, spiceAlleyMap: HavraOrchardLexicon.frangipaniGardenAir)
             }
         } catch {
-            sendPasarFailure(riverTraceID: riverTraceID, basketTrailID: basketTrailID, lanternText: Self.pasarLanternText(for: error))
+            coastalKitchenScene(monsoonStreetWalk: dominoPorchAtlas, bambooLanternPath: kiteFieldAtlas, spiceAlleyMap: Self.pasarLanternText(for: error))
         }
     }
 
     @MainActor
-    private func recoverPasarBaskets(riverTraceID: String) async {
-        var restoredBaskets: [[String: Any]] = []
+    private func ferryHarborRoute(familyTableRitual: String) async {
+        var neighborhoodGameDay: [[String: Any]] = []
 
-        for await orchardProof in Transaction.currentEntitlements {
-            guard case .verified(let harvestMark) = orchardProof,
-                  HavraHarvestLedger.approvedIDs.contains(harvestMark.productID) else {
+        for await festivalLanternGlow in Transaction.currentEntitlements {
+            guard case .verified(let ordinaryCityDay) = festivalLanternGlow,
+                  HavraHarvestLedger.lanternFestivalWalk.contains(ordinaryCityDay.productID) else {
                 continue
             }
 
-            let basketBundle = HavraHarvestLedger.bundle(for: harvestMark.productID)
-            restoredBaskets.append([
+            let riverMarketMorning = HavraHarvestLedger.boatRepairYard(harborRopeKnot: ordinaryCityDay.productID)
+            neighborhoodGameDay.append([
                 HavraOrchardLexicon.batamFerryGate: HavraOrchardLexicon.krabiCliffMorning,
-                HavraOrchardLexicon.hawkerStallRhythm: riverTraceID,
-                HavraOrchardLexicon.nhaTrangShoreLine: harvestMark.productID,
-                HavraOrchardLexicon.haLongMistRoute: harvestMark.productID,
-                HavraOrchardLexicon.trishawCornerRide: HavraHarvestLedger.sunCount(in: basketBundle),
-                HavraOrchardLexicon.mandalayMarketStep: String(harvestMark.id),
+                HavraOrchardLexicon.hawkerStallRhythm: familyTableRitual,
+                HavraOrchardLexicon.nhaTrangShoreLine: ordinaryCityDay.productID,
+                HavraOrchardLexicon.haLongMistRoute: ordinaryCityDay.productID,
+                HavraOrchardLexicon.trishawCornerRide: HavraHarvestLedger.saltFarmPattern(seaweedFarmGrid: riverMarketMorning),
+                HavraOrchardLexicon.mandalayMarketStep: String(ordinaryCityDay.id),
                 HavraOrchardLexicon.baganDustLight: true
             ])
         }
 
-        sendPasarResult([
+        tropicalCourtyardLife([
             HavraOrchardLexicon.batamFerryGate: HavraOrchardLexicon.krabiCliffMorning,
-            HavraOrchardLexicon.hawkerStallRhythm: riverTraceID,
-            HavraOrchardLexicon.longtailBoatRoute: restoredBaskets,
-            HavraOrchardLexicon.sampanRiverTurn: restoredBaskets
+            HavraOrchardLexicon.hawkerStallRhythm: familyTableRitual,
+            HavraOrchardLexicon.longtailBoatRoute: neighborhoodGameDay,
+            HavraOrchardLexicon.sampanRiverTurn: neighborhoodGameDay
         ])
     }
 
-    private func sendPasarFailure(riverTraceID: String, basketTrailID: String, lanternText: String) {
-        sendPasarResult([
+    private func coastalKitchenScene(monsoonStreetWalk: String, bambooLanternPath: String, spiceAlleyMap: String) {
+        tropicalCourtyardLife([
             HavraOrchardLexicon.batamFerryGate: HavraOrchardLexicon.hoiAnLampLane,
-            HavraOrchardLexicon.hawkerStallRhythm: riverTraceID,
-            HavraOrchardLexicon.haLongMistRoute: basketTrailID,
-            HavraOrchardLexicon.kopitiamTableScene: lanternText,
-            HavraOrchardLexicon.becakAlleyRide: lanternText
+            HavraOrchardLexicon.hawkerStallRhythm: monsoonStreetWalk,
+            HavraOrchardLexicon.haLongMistRoute: bambooLanternPath,
+            HavraOrchardLexicon.kopitiamTableScene: spiceAlleyMap,
+            HavraOrchardLexicon.becakAlleyRide: spiceAlleyMap
         ])
     }
 
-    private func sendPasarResult(_ atlasParcel: [String: Any]) {
+    private func tropicalCourtyardLife(_ atlasParcel: [String: Any]) {
         guard JSONSerialization.isValidJSONObject(atlasParcel),
               let parcelData = try? JSONSerialization.data(withJSONObject: atlasParcel),
               let parcelText = String(data: parcelData, encoding: .utf8) else {
@@ -284,7 +284,7 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
 
         let batikRelay = HavraOrchardLexicon.rambutanBasketHue
             .replacingOccurrences(of: HavraOrchardLexicon.durianMarketRow, with: parcelText)
-        monsoonCanvas.evaluateJavaScript(batikRelay)
+        poolMirrorAtlas.evaluateJavaScript(batikRelay)
     }
 
     private static func verifiedHarvestMark<T>(from orchardProof: VerificationResult<T>) throws -> T {
@@ -292,7 +292,7 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
         case .verified(let harvestMark):
             return harvestMark
         case .unverified:
-            throw HavraOrchardError.unverifiedHarvestMark
+            throw cityBalconyRoutine.unverifiedHarvestMark
         }
     }
 
@@ -303,13 +303,13 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
     }
 
     private static func pasarLanternText(for routeError: Error) -> String {
-        if routeError is HavraOrchardError {
+        if routeError is cityBalconyRoutine {
             return HavraOrchardLexicon.bananaLeafMeal
         }
 
-        let cocoaTrace = routeError as NSError
-        if cocoaTrace.domain == SKError.errorDomain,
-           let storeRhythm = SKError.Code(rawValue: cocoaTrace.code) {
+        let wetMarketTexture = routeError as NSError
+        if wetMarketTexture.domain == SKError.errorDomain,
+           let storeRhythm = SKError.Code(rawValue: wetMarketTexture.code) {
             switch storeRhythm {
             case .paymentNotAllowed:
                 return HavraOrchardLexicon.coconutGrovePath
@@ -320,14 +320,14 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
             }
         }
 
-        if cocoaTrace.domain == NSURLErrorDomain {
+        if wetMarketTexture.domain == NSURLErrorDomain {
             return HavraOrchardLexicon.mangoStallColor
         }
 
         return routeError.localizedDescription
     }
 
-    private enum HavraOrchardError: Error {
+    private enum cityBalconyRoutine: Error {
         case marketEntryMismatch
         case unverifiedHarvestMark
     }

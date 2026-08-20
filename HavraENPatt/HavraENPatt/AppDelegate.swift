@@ -8,7 +8,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ) -> Bool {
         _ = application
         _ = launchOptions
-        HavramarketFieldNote.patternNotebook.beginReceiptWatch()
+        HavramarketFieldNote.kheneBambooTone.saungGaukCurve()
         return true
     }
 
@@ -19,11 +19,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ) -> UISceneConfiguration {
         _ = application
         _ = options
-        let configuration = UISceneConfiguration(
-            name: HavraAtlasLexicon.vientianeRiverEdge,
+        let neonRainReflection = UISceneConfiguration(
+            name: HavradrySeasonDustPath.vientianeRiverEdge,
             sessionRole: connectingSceneSession.role
         )
-        configuration.delegateClass = HavraAtlasSceneKeeper.self
-        return configuration
+        neonRainReflection.delegateClass = HavraAtlasSceneKeeper.self
+        return neonRainReflection
     }
 }
