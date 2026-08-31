@@ -268,7 +268,9 @@ enum HavraLandSandCook {
             return
         }
 
-        for marketBasketWeave in marketBasketAtlas where marketBasketWeave != culturalDetailAtlas {
+        let retainedArchivePath = culturalDetailAtlas.standardizedFileURL.path
+        for marketBasketWeave in marketBasketAtlas
+            where marketBasketWeave.standardizedFileURL.path != retainedArchivePath {
             try? marketNotebook.removeItem(at: marketBasketWeave)
         }
     }
