@@ -17,9 +17,10 @@ jobs:
       FL_OUTPUT_DIR: build
       LC_ALL: en_US.UTF-8
       LANG: en_US.UTF-8
-      XCODE_PROJECT_PATH: HavraENPatt/HavraENPatt.xcodeproj
-      APP_TARGET: HavraENPatt
-      XCODE_SCHEME: HavraENPatt
+
+      # Fastfile 会自动识别唯一的 App 工程、Target、共享 Scheme 和同级 Workspace。
+      # 只有仓库包含多个候选项时，才在 CircleCI 环境变量中设置：
+      # XCODE_PROJECT_PATH、XCODE_WORKSPACE_PATH、APP_TARGET、XCODE_SCHEME
 
       # 以下敏感变量不要写在 config.yml 中。
       # 请在 CircleCI -> Project Settings -> Environment Variables 中配置：
@@ -78,7 +79,7 @@ jobs:
       - run:
           name: Run Fastlane
           command: |
-            bundle exec fastlane release
+            bundle exec fastlane ios release
 
       - store_artifacts:
           path: build
