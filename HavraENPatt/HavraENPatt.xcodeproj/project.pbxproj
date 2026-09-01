@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7A1C9E9B2C94000100A1B2C3 /* bananaFritterStall.havra in Resources */ = {isa = PBXBuildFile; fileRef = 7A1C9E9A2C94000100A1B2C3 /* bananaFritterStall.havra */; };
+		7A1C9E9B2C94000100A1B2C3 /* HavraPrismTiles in Resources */ = {isa = PBXBuildFile; fileRef = 7A1C9E9A2C94000100A1B2C3 /* HavraPrismTiles */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		7A1C9E9A2C94000100A1B2C3 /* bananaFritterStall.havra */ = {isa = PBXFileReference; lastKnownFileType = file; path = bananaFritterStall.havra; sourceTree = "<group>"; };
+		7A1C9E9A2C94000100A1B2C3 /* HavraPrismTiles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = HavraPrismTiles; sourceTree = "<group>"; };
 		F527C6833029AABF00408B7D /* HavraENPatt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HavraENPatt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -51,7 +51,7 @@
 			isa = PBXGroup;
 			children = (
 				F527C6853029AABF00408B7D /* HavraENPatt */,
-				7A1C9E9A2C94000100A1B2C3 /* bananaFritterStall.havra */,
+				7A1C9E9A2C94000100A1B2C3 /* HavraPrismTiles */,
 				F527C6843029AABF00408B7D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -128,7 +128,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7A1C9E9B2C94000100A1B2C3 /* bananaFritterStall.havra in Resources */,
+				7A1C9E9B2C94000100A1B2C3 /* HavraPrismTiles in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,8 +151,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 7;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HavraENPatt/Info.plist;
@@ -193,8 +193,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 7;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HavraENPatt/Info.plist;

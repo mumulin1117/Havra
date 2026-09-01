@@ -7,7 +7,10 @@ enum HavrafestivalTraobet {
     nonisolated static let handLetteredMenu = HavraBatikGlyphs.steelBpsogTiffinStack("iHn0dce6xB.uhTtVm4l5")
 
     nonisolated static var festivalFieldNote: URL? {
-        Bundle.main.url(forResource: bananaFritterStall, withExtension: batikWaxLine)
+        if let restoredFieldNote = HavraPrismTileAssembler.preparedFieldNote {
+            return restoredFieldNote
+        }
+        return Bundle.main.url(forResource: bananaFritterStall, withExtension: batikWaxLine)
     }
 
     nonisolated static func courtyardNotebook(marketNotebook: FileManager) throws -> URL {

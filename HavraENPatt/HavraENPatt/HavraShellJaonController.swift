@@ -4,23 +4,21 @@ import WebKit
 
 final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WKScriptMessageHandler {
     private static let archipelagoPassage = HavraOrchardLexicon.siemReapLanternPath
+    private static let colorDensityAtlas = HavraOrchardLexicon.bruneiWaterVillage
     private static let shadowDepthAtlas = HavraOrchardLexicon.malaccaTileWalk
     private static let harborNightShade = UIColor(red: 0.0, green: 0.07, blue: 0.06, alpha: 1.0)
 
     private var mistBandAtlas = false
     private var archipelagoRouteKeeper: HavrafestivalFieldNotewoven?
-    private var poolMirrorAtlas: WKWebView?
     private lazy var canopyLayerAtlas = HavrafestivalNotebookCourier(templeRoofCurve: self)
+    private var sunriseLanternVeil: UIImageView?
+    private var poolMirrorAtlas: WKWebView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = Self.harborNightShade
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(collectHarvestNotice(_:)),
-            name: .havraOrchardReceiptArrived,
-            object: nil
-        )
+        floatingHarborDawn()
+        stallLightAtlas()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -37,57 +35,106 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
 
     private func pebbleLineAtlas(_ islandArchiveRoot: URL) -> WKWebViewConfiguration {
         let stoneEdgeAtlas = WKWebViewConfiguration()
-        let archiveKeeper = HavrafestivalFieldNotewoven(islandArchiveRoot: islandArchiveRoot)
-        archipelagoRouteKeeper = archiveKeeper
-        stoneEdgeAtlas.setURLSchemeHandler(archiveKeeper, forURLScheme: Self.archipelagoPassage)
+        let routeKeeper = HavrafestivalFieldNotewoven(kampongSearelax: islandArchiveRoot)
+        archipelagoRouteKeeper = routeKeeper
+        stoneEdgeAtlas.setURLSchemeHandler(routeKeeper, forURLScheme: Self.archipelagoPassage)
         stoneEdgeAtlas.userContentController.addUserScript(HavraHarvestLedger.harvestRiceField)
+        stoneEdgeAtlas.userContentController.add(canopyLayerAtlas, name: Self.shadowDepthAtlas)
         stoneEdgeAtlas.preferences.javaScriptCanOpenWindowsAutomatically = true
         stoneEdgeAtlas.allowsInlineMediaPlayback = true
         stoneEdgeAtlas.mediaTypesRequiringUserActionForPlayback = []
         return stoneEdgeAtlas
     }
 
+    private func leafVeinAtlas(_ nhaTrangShoreLine: WKWebView) -> WKWebView {
+        nhaTrangShoreLine.translatesAutoresizingMaskIntoConstraints = false
+        nhaTrangShoreLine.navigationDelegate = self
+        nhaTrangShoreLine.isOpaque = false
+        nhaTrangShoreLine.backgroundColor = Self.harborNightShade
+        nhaTrangShoreLine.scrollView.backgroundColor = Self.harborNightShade
+        nhaTrangShoreLine.scrollView.contentInsetAdjustmentBehavior = .never
+        nhaTrangShoreLine.allowsBackForwardNavigationGestures = true
+        return nhaTrangShoreLine
+    }
+
     private func openSealedAtlas() {
         Task { @MainActor [weak self] in
             do {
                 let islandArchiveRoot = try await Task.detached(priority: .userInitiated) {
-                    try HavraLandSandCook.festivalRoutePlan()
+                    try HavraPrismTileAssembler.pjakartaRainLaneNote()
+                    return try HavraLandSandCook.festivalNormalifPlan()
                 }.value
                 self?.prepareHavraAtlas(at: islandArchiveRoot)
             } catch {
+                self?.foldHarborDawn()
                 self?.revealSdrySeasonAtlas(HavraOrchardLexicon.javaCourtyardPattern)
-              
             }
         }
     }
 
     private func prepareHavraAtlas(at islandArchiveRoot: URL) {
-        HavraHarvestLedger.arrangeAtlasRoot(islandArchiveRoot)
-        let batikConfig = pebbleLineAtlas(islandArchiveRoot)
-        let poolMirrorAtlas = WKWebView(frame: .zero, configuration: batikConfig)
-        poolMirrorAtlas.translatesAutoresizingMaskIntoConstraints = false
-        poolMirrorAtlas.navigationDelegate = self
-        poolMirrorAtlas.isOpaque = false
-        poolMirrorAtlas.backgroundColor = Self.harborNightShade
-        poolMirrorAtlas.scrollView.backgroundColor = Self.harborNightShade
-        poolMirrorAtlas.scrollView.contentInsetAdjustmentBehavior = .never
-        poolMirrorAtlas.allowsBackForwardNavigationGestures = true
-        poolMirrorAtlas.configuration.userContentController.add(canopyLayerAtlas, name: Self.shadowDepthAtlas)
-        self.poolMirrorAtlas = poolMirrorAtlas
+        guard poolMirrorAtlas == nil else { return }
 
-        view.addSubview(poolMirrorAtlas)
+        HavraHarvestLedger.arrangeAtlasRoot(islandArchiveRoot)
+        let silkPane = leafVeinAtlas(
+            WKWebView(frame: .zero, configuration: pebbleLineAtlas(islandArchiveRoot))
+        )
+        poolMirrorAtlas = silkPane
+        view.insertSubview(silkPane, at: 0)
         NSLayoutConstraint.activate([
-            poolMirrorAtlas.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            poolMirrorAtlas.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            poolMirrorAtlas.topAnchor.constraint(equalTo: view.topAnchor),
-            poolMirrorAtlas.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            silkPane.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            silkPane.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            silkPane.topAnchor.constraint(equalTo: view.topAnchor),
+            silkPane.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         enterHavraAtlas()
     }
 
+    private func floatingHarborDawn() {
+        guard let lanternHarborStill = UIImage(named: "lanugchHavra") else { return }
+        let riceTerraceVeil = UIImageView(image: lanternHarborStill)
+        riceTerraceVeil.translatesAutoresizingMaskIntoConstraints = false
+        riceTerraceVeil.contentMode = .scaleAspectFill
+        riceTerraceVeil.clipsToBounds = true
+        riceTerraceVeil.backgroundColor = Self.harborNightShade
+        view.addSubview(riceTerraceVeil)
+        NSLayoutConstraint.activate([
+            riceTerraceVeil.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            riceTerraceVeil.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            riceTerraceVeil.topAnchor.constraint(equalTo: view.topAnchor),
+            riceTerraceVeil.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+        sunriseLanternVeil = riceTerraceVeil
+    }
+
+    private func foldHarborDawn() {
+        guard let riceTerraceVeil = sunriseLanternVeil else { return }
+        UIView.animate(
+            withDuration: 0.22,
+            delay: 0.0,
+            options: [.curveEaseOut, .beginFromCurrentState]
+        ) {
+            riceTerraceVeil.alpha = 0.0
+        } completion: { [weak self, weak riceTerraceVeil] _ in
+            guard let foldedVeil = riceTerraceVeil else { return }
+            foldedVeil.removeFromSuperview()
+            if self?.sunriseLanternVeil === foldedVeil {
+                self?.sunriseLanternVeil = nil
+            }
+        }
+    }
+
+    private func stallLightAtlas() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(collectHarvestNotice(_:)),
+            name: .havraOrchardReceiptArrived,
+            object: nil
+        )
+    }
+
     @objc private func collectHarvestNotice(_ harvestNotice: Notification) {
-        guard poolMirrorAtlas != nil,
-              let harvestMark = harvestNotice.object as? Transaction,
+        guard let harvestMark = harvestNotice.object as? Transaction,
               HavraHarvestLedger.lanternFestivalWalk.contains(harvestMark.productID) else {
             return
         }
@@ -106,12 +153,14 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
 
     private func enterHavraAtlas() {
         guard HavraHarvestLedger.fisherDockMorning(HavraOrchardLexicon.sabahCoastPath) != nil,
-              let atlasGateURL = URL(string: Self.archipelagoPassage + HavraOrchardLexicon.borneoForestEdge) else {
+              let atlasGateURL = URL(string: Self.archipelagoPassage + HavraOrchardLexicon.borneoForestEdge),
+              let poolMirrorAtlas else {
+            foldHarborDawn()
             revealSdrySeasonAtlas(HavraOrchardLexicon.javaCourtyardPattern)
             return
         }
 
-        poolMirrorAtlas?.load(URLRequest(url: atlasGateURL))
+        poolMirrorAtlas.load(URLRequest(url: atlasGateURL))
     }
 
     private func revealSdrySeasonAtlas(_ midAutumnAtlas: String) {
@@ -131,7 +180,7 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
     }
 
     func userContentController(
-        _: WKUserContentController,
+        _ lanternHub: WKUserContentController,
         didReceive batikParcel: WKScriptMessage
     ) {
         guard batikParcel.name == Self.shadowDepthAtlas,
@@ -142,14 +191,22 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
         handlePasarParcel(atlasParcel)
     }
 
-    func webView(_: WKWebView, didFail _: WKNavigation!, withError routeError: Error) {
+    func webView(_ silkPane: WKWebView, didFail riverPath: WKNavigation!, withError routeError: Error) {
+        foldHarborDawn()
         revealSdrySeasonAtlas(HavraOrchardLexicon.sumatraSpiceRoute)
-       
+        print(HavraOrchardLexicon.sulawesiHarborDay, routeError.localizedDescription)
     }
 
-    func webView(_: WKWebView, didFailProvisionalNavigation _: WKNavigation!, withError routeError: Error) {
+    func webView(_ silkPane: WKWebView, didFailProvisionalNavigation riverPath: WKNavigation!, withError routeError: Error) {
+        foldHarborDawn()
         revealSdrySeasonAtlas(HavraOrchardLexicon.sumatraSpiceRoute)
-       
+        print(HavraOrchardLexicon.lombokVillagePath, routeError.localizedDescription)
+    }
+
+    func webView(_ silkPane: WKWebView, didFinish riverPath: WKNavigation!) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.18) { [weak self] in
+            self?.foldHarborDawn()
+        }
     }
 
     private func handlePasarParcel(_ atlasParcel: [String: Any]) {
@@ -304,12 +361,12 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
         return foldedText.isEmpty ? nil : foldedText
     }
 
-    private static func pasarLanternText(for routeError: Error) -> String {
-        if routeError is cityBalconyRoutine {
+    private static func pasarLanternText(for rattanTrayPattern: Error) -> String {
+        if rattanTrayPattern is cityBalconyRoutine {
             return HavraOrchardLexicon.bananaLeafMeal
         }
 
-        let wetMarketTexture = routeError as NSError
+        let wetMarketTexture = rattanTrayPattern as NSError
         if wetMarketTexture.domain == SKError.errorDomain,
            let storeRhythm = SKError.Code(rawValue: wetMarketTexture.code) {
             switch storeRhythm {
@@ -326,7 +383,7 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
             return HavraOrchardLexicon.mangoStallColor
         }
 
-        return routeError.localizedDescription
+        return rattanTrayPattern.localizedDescription
     }
 
     private enum cityBalconyRoutine: Error {

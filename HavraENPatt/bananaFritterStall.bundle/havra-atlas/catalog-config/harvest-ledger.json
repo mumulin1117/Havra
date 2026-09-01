@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "harvest_bundles": [
+    {
+      "bundle_id": "jgpxqwniyvdaopwe",
+      "orchard_item_id": "jgpxqwniyvdaopwe",
+      "bundle_title": "275 Diamonds",
+      "sun_count": 275,
+      "amount_text": "$0.99",
+      "sun_mark_url": "/havra-atlas/visual-set/coin-sm.png",
+      "featured": false
+    },
+    {
+      "bundle_id": "fejpvfvqifjlaayd",
+      "orchard_item_id": "fejpvfvqifjlaayd",
+      "bundle_title": "550 Diamonds",
+      "sun_count": 550,
+      "amount_text": "$1.99",
+      "sun_mark_url": "/havra-atlas/visual-set/coin-sm.png",
+      "featured": false
+    },
+    {
+      "bundle_id": "yvpblxfsspduobvv",
+      "orchard_item_id": "yvpblxfsspduobvv",
+      "bundle_title": "1,150 Diamonds",
+      "sun_count": 1150,
+      "amount_text": "$4.99",
+      "sun_mark_url": "/havra-atlas/visual-set/coin-sm.png",
+      "featured": false
+    },
+    {
+      "bundle_id": "harviyeuhfksjlkshu",
+      "orchard_item_id": "harviyeuhfksjlkshu",
+      "bundle_title": "1,850 Diamonds",
+      "sun_count": 1850,
+      "amount_text": "$7.99",
+      "sun_mark_url": "/havra-atlas/visual-set/coin-sm.png",
+      "featured": true
+    },
+    {
+      "bundle_id": "spfwowrhhonbldmc",
+      "orchard_item_id": "spfwowrhhonbldmc",
+      "bundle_title": "2,350 Diamonds",
+      "sun_count": 2350,
+      "amount_text": "$9.99",
+      "sun_mark_url": "/havra-atlas/visual-set/coin-sm.png",
+      "featured": false
+    },
+    {
+      "bundle_id": "exommnnzyoidbzpi",
+      "orchard_item_id": "exommnnzyoidbzpi",
+      "bundle_title": "4,750 Diamonds",
+      "sun_count": 4750,
+      "amount_text": "$19.99",
+      "sun_mark_url": "/havra-atlas/visual-set/coin-sm.png",
+      "featured": false
+    },
+    {
+      "bundle_id": "sbyrpsuybgxrqpbq",
+      "orchard_item_id": "sbyrpsuybgxrqpbq",
+      "bundle_title": "9,550 Diamonds",
+      "sun_count": 9550,
+      "amount_text": "$49.99",
+      "sun_mark_url": "/havra-atlas/visual-set/coin-sm.png",
+      "featured": false
+    },
+    {
+      "bundle_id": "pwbtgwsykccltaty",
+      "orchard_item_id": "pwbtgwsykccltaty",
+      "bundle_title": "21,150 Diamonds",
+      "sun_count": 21150,
+      "amount_text": "$99.99",
+      "sun_mark_url": "/havra-atlas/visual-set/coin-sm.png",
+      "featured": false
+    }
+  ]
+}

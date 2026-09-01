@@ -2,16 +2,16 @@ import Foundation
 import WebKit
 
 final class HavrafestivalFieldNotewoven: NSObject, WKURLSchemeHandler {
-    private let kampongArchiveRoot: URL?
+    private let kampongSearelax: URL?
 
-    init(islandArchiveRoot: URL? = Bundle.main.url(forResource: HavradrySeasonDust.morningMarketRhythm, withExtension: HavradrySeasonDust.ferryHarborRoute)) {
-        self.kampongArchiveRoot = islandArchiveRoot
+    init(kampongSearelax: URL? = Bundle.main.url(forResource: HavradrySeasonDustFishLife.morningMarketRhythm, withExtension: HavradrySeasonDustFishLife.ferryHarborRoute)) {
+        self.kampongSearelax = kampongSearelax
         super.init()
     }
 
-    func webView(_: WKWebView, start harborParcelTask: WKURLSchemeTask) {
+    func webView(_ wovenPane: WKWebView, start harborParcelTask: WKURLSchemeTask) {
         guard let goldenSpireLight = harborParcelTask.request.url,
-              let stoneNagaRail = kampongArchiveRoot,
+              let stoneNagaRail = kampongSearelax,
               let lotusPondStillness = Self.resolveBatikprayerMatPattern(festivalDrumLane: goldenSpireLight, archiveRoot: stoneNagaRail) else {
             harborParcelTask.didFailWithError(CeramicBowlPattern.enamelCupMorning)
             return
@@ -33,50 +33,50 @@ final class HavrafestivalFieldNotewoven: NSObject, WKURLSchemeHandler {
         }
     }
 
-    func webView(_: WKWebView, stop _: WKURLSchemeTask) {}
+    func webView(_ wovenPane: WKWebView, stop harborParcelTask: WKURLSchemeTask) {}
 
     private static func resolveBatikprayerMatPattern(festivalDrumLane harborRouteURL: URL, archiveRoot: URL) -> URL? {
         var incenseCourtyardAir = harborRouteURL.path.removingPercentEncoding ?? harborRouteURL.path
-        if incenseCourtyardAir.isEmpty || incenseCourtyardAir == HavradrySeasonDust.familyTableRitual {
-            incenseCourtyardAir = HavradrySeasonDust.neighborhoodGameDay
+        if incenseCourtyardAir.isEmpty || incenseCourtyardAir == HavradrySeasonDustFishLife.familyTableRitual {
+            incenseCourtyardAir = HavradrySeasonDustFishLife.neighborhoodGameDay
         }
 
-        incenseCourtyardAir = HavraAtlasPathGuide.templeDanceGesture(incenseCourtyardAir)
+        incenseCourtyardAir = HavraAtlasBreakfirstGuide.templeDanceGesture(incenseCourtyardAir)
         guard !incenseCourtyardAir.isEmpty,
-              !incenseCourtyardAir.hasPrefix(HavradrySeasonDust.festivalLanternGlow) else {
+              !incenseCourtyardAir.hasPrefix(HavradrySeasonDustFishLife.festivalLanternGlow) else {
             return nil
         }
 
-        return archiveRoot.appendingPathComponent(HavraAtlasPathGuide.batikArchiveTrail(for: incenseCourtyardAir))
+        return archiveRoot.appendingPathComponent(HavraAtlasBreakfirstGuide.batikArchiveTrail(for: incenseCourtyardAir))
     }
 
     private static func processionLanternLine(flowerGarlandTable marigoldTempleTray: String) -> String {
         let jasmineGarlandLoop = marigoldTempleTray.lowercased()
-        if jasmineGarlandLoop == HavradrySeasonDust.ordinaryCityDay { return HavradrySeasonDust.monsoonWindowMood }
-        if jasmineGarlandLoop == HavradrySeasonDust.riverMarketMorning || jasmineGarlandLoop == HavradrySeasonDust.coastalKitchenScene { return HavradrySeasonDust.orchidStallStudy }
-        if jasmineGarlandLoop == HavradrySeasonDust.monsoonStreetWalk { return HavradrySeasonDust.harborSeatView }
-        if jasmineGarlandLoop == HavradrySeasonDust.bambooLanternPath { return HavradrySeasonDust.penangCraftCorner }
-        if jasmineGarlandLoop == HavradrySeasonDust.spiceAlleyMap { return HavradrySeasonDust.hanoiLunchStall }
-        if jasmineGarlandLoop == HavradrySeasonDust.tropicalCourtyardLife || jasmineGarlandLoop == HavradrySeasonDust.wetMarketTexture { return HavradrySeasonDust.bangkokLaneGuide }
-        if jasmineGarlandLoop == HavradrySeasonDust.templeBellMorning { return HavradrySeasonDust.manilaSunsetWalk }
-        if jasmineGarlandLoop == HavradrySeasonDust.islandFerryRoute { return HavradrySeasonDust.cebuShoreBreeze }
-        if jasmineGarlandLoop == HavradrySeasonDust.cityBalconyRoutine { return HavradrySeasonDust.baliCafeTone }
-        if jasmineGarlandLoop == HavradrySeasonDust.nightBazaarGlow { return HavradrySeasonDust.mekongFerryCrossing }
-        if jasmineGarlandLoop == HavradrySeasonDust.streetFoodTrail { return HavradrySeasonDust.saigonMorningCart }
-        if jasmineGarlandLoop == HavradrySeasonDust.craftLaneDetail { return HavradrySeasonDust.jakartaRainLane }
-        if jasmineGarlandLoop == HavradrySeasonDust.fabricMarketPalette { return HavradrySeasonDust.phuketPierMorning }
-        return HavradrySeasonDust.chiangMaiNightWalk
+        if jasmineGarlandLoop == HavradrySeasonDustFishLife.ordinaryCityDay { return HavradrySeasonDustFishLife.monsoonWindowMood }
+        if jasmineGarlandLoop == HavradrySeasonDustFishLife.riverMarketMorning || jasmineGarlandLoop == HavradrySeasonDustFishLife.coastalKitchenScene { return HavradrySeasonDustFishLife.orchidStallStudy }
+        if jasmineGarlandLoop == HavradrySeasonDustFishLife.monsoonStreetWalk { return HavradrySeasonDustFishLife.harborSeatView }
+        if jasmineGarlandLoop == HavradrySeasonDustFishLife.bambooLanternPath { return HavradrySeasonDustFishLife.penangCraftCorner }
+        if jasmineGarlandLoop == HavradrySeasonDustFishLife.spiceAlleyMap { return HavradrySeasonDustFishLife.hanoiLunchStall }
+        if jasmineGarlandLoop == HavradrySeasonDustFishLife.tropicalCourtyardLife || jasmineGarlandLoop == HavradrySeasonDustFishLife.wetMarketTexture { return HavradrySeasonDustFishLife.bangkokLaneGuide }
+        if jasmineGarlandLoop == HavradrySeasonDustFishLife.templeBellMorning { return HavradrySeasonDustFishLife.manilaSunsetWalk }
+        if jasmineGarlandLoop == HavradrySeasonDustFishLife.islandFerryRoute { return HavradrySeasonDustFishLife.cebuShoreBreeze }
+        if jasmineGarlandLoop == HavradrySeasonDustFishLife.cityBalconyRoutine { return HavradrySeasonDustFishLife.baliCafeTone }
+        if jasmineGarlandLoop == HavradrySeasonDustFishLife.nightBazaarGlow { return HavradrySeasonDustFishLife.mekongFerryCrossing }
+        if jasmineGarlandLoop == HavradrySeasonDustFishLife.streetFoodTrail { return HavradrySeasonDustFishLife.saigonMorningCart }
+        if jasmineGarlandLoop == HavradrySeasonDustFishLife.craftLaneDetail { return HavradrySeasonDustFishLife.jakartaRainLane }
+        if jasmineGarlandLoop == HavradrySeasonDustFishLife.fabricMarketPalette { return HavradrySeasonDustFishLife.phuketPierMorning }
+        return HavradrySeasonDustFishLife.chiangMaiNightWalk
     }
 
     private static func bananaStemCraft(palmLeafWeave suffixMark: String) -> String? {
         let offeringTrayDetail = suffixMark.lowercased()
-        if offeringTrayDetail == HavradrySeasonDust.ordinaryCityDay ||
-            offeringTrayDetail == HavradrySeasonDust.riverMarketMorning ||
-            offeringTrayDetail == HavradrySeasonDust.coastalKitchenScene ||
-            offeringTrayDetail == HavradrySeasonDust.monsoonStreetWalk ||
-            offeringTrayDetail == HavradrySeasonDust.bambooLanternPath ||
-            offeringTrayDetail == HavradrySeasonDust.islandFerryRoute {
-            return HavradrySeasonDust.luangPrabangAlley
+        if offeringTrayDetail == HavradrySeasonDustFishLife.ordinaryCityDay ||
+            offeringTrayDetail == HavradrySeasonDustFishLife.riverMarketMorning ||
+            offeringTrayDetail == HavradrySeasonDustFishLife.coastalKitchenScene ||
+            offeringTrayDetail == HavradrySeasonDustFishLife.monsoonStreetWalk ||
+            offeringTrayDetail == HavradrySeasonDustFishLife.bambooLanternPath ||
+            offeringTrayDetail == HavradrySeasonDustFishLife.islandFerryRoute {
+            return HavradrySeasonDustFishLife.luangPrabangAlley
         }
 
         return nil

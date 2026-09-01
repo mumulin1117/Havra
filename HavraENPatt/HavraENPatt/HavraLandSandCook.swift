@@ -2,7 +2,7 @@ import CryptoKit
 import Foundation
 
 enum HavraLandSandCook {
-    nonisolated static func festivalRoutePlan() throws -> URL {
+    nonisolated static func festivalNormalifPlan() throws -> URL {
         let marketNotebook = FileManager.default
         guard let festivalFieldNote = HavrafestivalTraobet.festivalFieldNote else {
             throw HavraCeramicBowlPattern.bananaFritterStall
