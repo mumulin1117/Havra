@@ -17,6 +17,9 @@ jobs:
       FL_OUTPUT_DIR: build
       LC_ALL: en_US.UTF-8
       LANG: en_US.UTF-8
+      XCODE_PROJECT_PATH: HavraENPatt/HavraENPatt.xcodeproj
+      APP_TARGET: HavraENPatt
+      XCODE_SCHEME: HavraENPatt
 
       # 以下敏感变量不要写在 config.yml 中。
       # 请在 CircleCI -> Project Settings -> Environment Variables 中配置：

@@ -53,10 +53,14 @@ platform :ios do
     project_path = ENV["XCODE_PROJECT_PATH"].to_s.strip
     project_path = File.expand_path(project_path, project_root) unless project_path.empty?
     if project_path.empty?
-      project_paths = Dir[File.join(project_root, "*.xcodeproj")]
+      project_paths = Dir[File.join(project_root, "**", "*.xcodeproj")].select do |path|
+        File.directory?(path) && !path.include?("/vendor/") && !path.include?("/build/")
+      end.sort
       project_path = project_paths.first if project_paths.one?
     end
-    UI.user_error!("Set XCODE_PROJECT_PATH to the app's .xcodeproj") unless File.directory?(project_path)
+    unless File.directory?(project_path)
+      UI.user_error!("Set XCODE_PROJECT_PATH to the app's .xcodeproj (repository root: #{project_root})")
+    end
 
     application_targets = Xcodeproj::Project.open(project_path).targets.select do |target|
       target.product_type == "com.apple.product-type.application"
@@ -66,8 +70,14 @@ platform :ios do
     application_target_names = application_targets.map(&:name)
     UI.user_error!("Set APP_TARGET to the application target") unless application_target_names.include?(app_target)
 
+    scheme = ENV["XCODE_SCHEME"].to_s.strip
+    scheme = app_target if scheme.empty?
+    shared_scheme_path = File.join(project_path, "xcshareddata", "xcschemes", "#{scheme}.xcscheme")
+    UI.user_error!("Set XCODE_SCHEME to a shared scheme") unless File.file?(shared_scheme_path)
+
     UI.important "Signing project = #{project_path}"
     UI.important "Signing target = #{app_target}"
+    UI.important "Build scheme = #{scheme}"
 
     update_code_signing_settings(
       path: project_path,
@@ -81,6 +91,9 @@ platform :ios do
     )
 
     gym(
+      project: project_path,
+      scheme: scheme,
+      configuration: "Release",
       export_method: export_method,
       export_options: {
         signingStyle: "manual",
