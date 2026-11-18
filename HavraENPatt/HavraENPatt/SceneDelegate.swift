@@ -14,8 +14,12 @@ class HavraAtlasSceneKeeper: UIResponder, UIWindowSceneDelegate {
 
         let afabricPatternAtlasWindow = UIWindow(windowScene: atlasWindowScene)
         afabricPatternAtlasWindow.backgroundColor = UIColor(red: 0.0, green: 0.07, blue: 0.06, alpha: 1.0)
-        afabricPatternAtlasWindow.rootViewController = HavraShellJaonController()
+        afabricPatternAtlasWindow.rootViewController = HavraLifeRoutes()
         self.islandFieldNoteWindow = afabricPatternAtlasWindow
         afabricPatternAtlasWindow.makeKeyAndVisible()
+    }
+
+    func sceneDidBecomeActive(_ scene: UIScene) {
+        Task { await FamilyTableRitual.crystalDreamCanvas.luminousPath() }
     }
 }

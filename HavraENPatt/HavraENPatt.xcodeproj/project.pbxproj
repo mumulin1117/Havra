@@ -31,6 +31,9 @@
 			exceptions = (
 				F527C6953029AAC000408B7D /* Exceptions for "HavraENPatt" folder in "HavraENPatt" target */,
 			);
+			explicitFolders = (
+				HavraLife/Web,
+			);
 			path = HavraENPatt;
 			sourceTree = "<group>";
 		};
@@ -150,14 +153,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = HavraENPatt/HavraLife/HavraLife.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
+				HAVRA_APNS_ENVIRONMENT = development;
 				INFOPLIST_FILE = HavraENPatt/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Havra;
-				INFOPLIST_KEY_NSCameraUsageDescription = "Havra uses the camera to help you capture everyday local moments, cultural details, and community scenes you choose to share.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Havra uses the camera for the age eligibility and face liveness check during sign-up and to capture moments you choose to share.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Havra uses the microphone to include ambient sound when you create richer community moments.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Havra uses your photo library so you can choose saved memories, neighborhood scenes, and cultural snapshots to share.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -192,14 +197,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = HavraENPatt/HavraLife/HavraLife.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
+				HAVRA_APNS_ENVIRONMENT = production;
 				INFOPLIST_FILE = HavraENPatt/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Havra;
-				INFOPLIST_KEY_NSCameraUsageDescription = "Havra uses the camera to help you capture everyday local moments, cultural details, and community scenes you choose to share.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Havra uses the camera for the age eligibility and face liveness check during sign-up and to capture moments you choose to share.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Havra uses the microphone to include ambient sound when you create richer community moments.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Havra uses your photo library so you can choose saved memories, neighborhood scenes, and cultural snapshots to share.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

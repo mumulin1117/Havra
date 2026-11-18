@@ -8,6 +8,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ) -> Bool {
         _ = application
         _ = launchOptions
+        FamilyTableRitual.crystalDreamCanvas.gentleMood()
         HavramarketFieldNote.kheneBambooTone.saungGaukCurve()
         return true
     }

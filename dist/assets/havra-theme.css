@@ -1,0 +1,71 @@
+/* Havra palette for the delivered registration, legal and verification pages. */
+:root {
+  --color-bg: #050505;
+  --color-nav-button: #21170f;
+  --color-text: #fff7eb;
+  --color-muted: #cdbfad;
+  --color-surface: #241a13;
+  --color-border: #523d2a;
+  --color-accent: #f6d18a;
+  --color-action-bg: linear-gradient(90deg, #F6D18A 0%, #E9B45A 100%);
+  --color-on-accent: #2f1f0e;
+  --color-accent-soft: #f6d18a24;
+  --color-notice-surface: #2b1d13;
+  --color-notice-detail: #e6d5be;
+  --color-login-notice-surface: #21170f;
+  --color-login-notice-border: #523d2a;
+  --color-login-notice-muted: #cdbfad;
+  --color-login-notice-action: #f6d18a;
+  --color-age-badge: #8a4e2c;
+  --color-face-surface: #23170f;
+  --color-face-border: #523d2a;
+  --color-face-muted: #cdbfad;
+  --color-face-paper: #fff7eb;
+  --color-face-ink: #26190f;
+  --color-face-placeholder: #efe2d3;
+  --color-face-secondary: #654a36;
+  --color-face-alert: #ffb7a2;
+  --havra-backdrop: url("./common/havra-background.png");
+}
+
+body {
+  background: var(--color-bg) var(--havra-backdrop) center / 100% 100% no-repeat;
+}
+
+#app {
+  background: transparent;
+  box-shadow: none;
+}
+
+.scene-stage { background: transparent; }
+
+/* Keep full-page backgrounds opaque during the existing slide transitions. */
+.app-page[data-v-c80c9eb8]:not(:is(.scene-register-forward-enter-active, .scene-register-back-enter-active, .face-capture)) {
+  background: var(--color-bg) var(--havra-backdrop) center / 100vw 100% no-repeat;
+}
+
+.app-page__footer[data-v-c80c9eb8] { background: transparent; }
+
+.welcome__logo[data-v-caeb8d42] {
+  border-radius: 23%;
+  box-shadow: 0 8px 28px #e9b45a21;
+}
+
+.app-button[data-v-6745ae00] { border-radius: 16px; }
+
+.app-button--secondary[data-v-6745ae00] {
+  border-color: #9e7440;
+  background: #241a13;
+  color: var(--color-accent);
+}
+
+.legal-links[data-v-75251509] button { color: var(--color-accent); }
+
+/* Keep the capture UI on a light surface for the existing camera instructions. */
+.face-tips__confirm[data-v-a7ddff0e],
+html .face-runtime .liveness-detector .amplify-button--primary,
+html .face-runtime .liveness-detector .amplify-button--primary:is(:hover, :disabled) {
+  border-radius: 16px;
+  background: var(--color-action-bg);
+  color: var(--color-on-accent);
+}

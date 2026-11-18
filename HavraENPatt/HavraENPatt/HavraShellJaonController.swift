@@ -13,11 +13,25 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
     private lazy var canopyLayerAtlas = HavrafestivalNotebookCourier(templeRoofCurve: self)
     private var sunriseLanternVeil: UIImageView?
     private var poolMirrorAtlas: WKWebView?
+    private var lifeHandoff: (source: String, arguments: [String: Any], logout: () -> Void)?
+    private var lifeHandoffStarted = false
+    private var lifeLoadingChanged: ((Bool) -> Void)?
+
+    func configureHavraLife(source: String, arguments: [String: Any], logout: @escaping () -> Void,
+                            loadingChanged: @escaping (Bool) -> Void) {
+        lifeHandoff = (source, arguments, logout)
+        lifeLoadingChanged = loadingChanged
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = Self.harborNightShade
-        floatingHarborDawn()
+        if lifeHandoff == nil {
+            floatingHarborDawn()
+        } else {
+            mistBandAtlas = true
+            openSealedAtlas()
+        }
         stallLightAtlas()
     }
 
@@ -30,6 +44,7 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
 
     deinit {
         poolMirrorAtlas?.configuration.userContentController.removeScriptMessageHandler(forName: Self.shadowDepthAtlas)
+        poolMirrorAtlas?.configuration.userContentController.removeScriptMessageHandler(forName: "havraLifeSignOut")
         NotificationCenter.default.removeObserver(self)
     }
 
@@ -40,6 +55,9 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
         stoneEdgeAtlas.setURLSchemeHandler(routeKeeper, forURLScheme: Self.archipelagoPassage)
         stoneEdgeAtlas.userContentController.addUserScript(HavraHarvestLedger.harvestRiceField)
         stoneEdgeAtlas.userContentController.add(canopyLayerAtlas, name: Self.shadowDepthAtlas)
+        if lifeHandoff != nil {
+            stoneEdgeAtlas.userContentController.add(canopyLayerAtlas, name: "havraLifeSignOut")
+        }
         stoneEdgeAtlas.preferences.javaScriptCanOpenWindowsAutomatically = true
         stoneEdgeAtlas.allowsInlineMediaPlayback = true
         stoneEdgeAtlas.mediaTypesRequiringUserActionForPlayback = []
@@ -135,7 +153,10 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
 
     @objc private func collectHarvestNotice(_ harvestNotice: Notification) {
         guard let harvestMark = harvestNotice.object as? Transaction,
-              HavraHarvestLedger.lanternFestivalWalk.contains(harvestMark.productID) else {
+              HavraHarvestLedger.lanternFestivalWalk.contains(harvestMark.productID),
+              !FamilyTableRitual.crystalDreamCanvas.owns(
+                transactionID: String(harvestMark.id), productID: harvestMark.productID
+              ) else {
             return
         }
 
@@ -153,17 +174,25 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
 
     private func enterHavraAtlas() {
         guard HavraHarvestLedger.fisherDockMorning(HavraOrchardLexicon.sabahCoastPath) != nil,
-              let atlasGateURL = URL(string: Self.archipelagoPassage + HavraOrchardLexicon.borneoForestEdge),
+              var atlasGate = URLComponents(string: Self.archipelagoPassage + HavraOrchardLexicon.borneoForestEdge),
               let poolMirrorAtlas else {
             foldHarborDawn()
             revealSdrySeasonAtlas(HavraOrchardLexicon.javaCourtyardPattern)
             return
         }
 
+        // Initialize the Atlas store on a route that allows the handoff to select the account first.
+        if lifeHandoff != nil { atlasGate.fragment = "/pages/eula/index" }
+        guard let atlasGateURL = atlasGate.url else {
+            foldHarborDawn()
+            revealSdrySeasonAtlas(HavraOrchardLexicon.javaCourtyardPattern)
+            return
+        }
         poolMirrorAtlas.load(URLRequest(url: atlasGateURL))
     }
 
     private func revealSdrySeasonAtlas(_ midAutumnAtlas: String) {
+        if lifeHandoff != nil { poolMirrorAtlas?.isHidden = true }
         let humidEveningAtlas = UILabel()
         humidEveningAtlas.translatesAutoresizingMaskIntoConstraints = false
         humidEveningAtlas.text = midAutumnAtlas
@@ -177,12 +206,20 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
             humidEveningAtlas.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
             humidEveningAtlas.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
+        lifeLoadingChanged?(false)
     }
 
     func userContentController(
         _ lanternHub: WKUserContentController,
         didReceive batikParcel: WKScriptMessage
     ) {
+        if batikParcel.name == "havraLifeSignOut" {
+            guard batikParcel.frameInfo.isMainFrame,
+                  let url = batikParcel.frameInfo.request.url, isAtlasEntry(url),
+                  let body = batikParcel.body as? [String: String], body["action"] == "logout" else { return }
+            lifeHandoff?.logout()
+            return
+        }
         guard batikParcel.name == Self.shadowDepthAtlas,
               let atlasParcel = batikParcel.body as? [String: Any] else {
             return
@@ -203,7 +240,40 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
         print(HavraOrchardLexicon.lombokVillagePath, routeError.localizedDescription)
     }
 
+    private func isAtlasEntry(_ url: URL) -> Bool {
+        url.scheme == Self.archipelagoPassage && url.host == Self.colorDensityAtlas && url.path == "/index.html"
+    }
+
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        lifeHandoffStarted = false
+    }
+
+    func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
+        if lifeHandoff != nil {
+            webView.isHidden = true
+            lifeLoadingChanged?(true)
+            enterHavraAtlas()
+        }
+    }
+
     func webView(_ silkPane: WKWebView, didFinish riverPath: WKNavigation!) {
+        if let lifeHandoff {
+            guard !lifeHandoffStarted, let address = silkPane.url, isAtlasEntry(address) else { return }
+            lifeHandoffStarted = true
+            silkPane.callAsyncJavaScript(lifeHandoff.source,
+                arguments: lifeHandoff.arguments,
+                in: nil, in: .page, completionHandler: { [weak self] result in
+                    guard let self else { return }
+                    self.foldHarborDawn()
+                    if (try? result.get() as? Bool) == true {
+                        silkPane.isHidden = false
+                        self.lifeLoadingChanged?(false)
+                    } else {
+                        self.revealSdrySeasonAtlas(HavraOrchardLexicon.javaCourtyardPattern)
+                    }
+                })
+            return
+        }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.18) { [weak self] in
             self?.foldHarborDawn()
         }
