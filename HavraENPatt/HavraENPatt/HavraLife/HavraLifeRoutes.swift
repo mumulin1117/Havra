@@ -66,7 +66,8 @@ final class HavraLifeRoutes: UIViewController {
             current = controller
             controller.view.accessibilityElementsHidden = false
         }
-        loading.setLoading(isLoading, blocksInteraction: blocksInteraction, overLaunchArtwork: current == nil)
+        loading.setLoading(isLoading, immediately: controller is HavraShellJaonController,
+                           blocksInteraction: blocksInteraction, overLaunchArtwork: current == nil)
     }
 
     private func stage(_ page: HavraLifeWebPage) {

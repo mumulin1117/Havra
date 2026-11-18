@@ -7,6 +7,7 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
     private static let colorDensityAtlas = HavraOrchardLexicon.bruneiWaterVillage
     private static let shadowDepthAtlas = HavraOrchardLexicon.malaccaTileWalk
     private static let harborNightShade = UIColor(red: 0.0, green: 0.07, blue: 0.06, alpha: 1.0)
+    private static let detailLoadingBridge = "havraLifeDetailLoading"
 
     private var mistBandAtlas = false
     private var archipelagoRouteKeeper: HavrafestivalFieldNotewoven?
@@ -16,6 +17,8 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
     private var lifeHandoff: (source: String, arguments: [String: Any], logout: () -> Void)?
     private var lifeHandoffStarted = false
     private var lifeLoadingChanged: ((Bool) -> Void)?
+    private var detailLoadID: String?
+    private var detailLoadTimeout: Task<Void, Never>?
 
     func configureHavraLife(source: String, arguments: [String: Any], logout: @escaping () -> Void,
                             loadingChanged: @escaping (Bool) -> Void) {
@@ -43,8 +46,10 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
     }
 
     deinit {
+        detailLoadTimeout?.cancel()
         poolMirrorAtlas?.configuration.userContentController.removeScriptMessageHandler(forName: Self.shadowDepthAtlas)
         poolMirrorAtlas?.configuration.userContentController.removeScriptMessageHandler(forName: "havraLifeSignOut")
+        poolMirrorAtlas?.configuration.userContentController.removeScriptMessageHandler(forName: Self.detailLoadingBridge)
         NotificationCenter.default.removeObserver(self)
     }
 
@@ -57,6 +62,7 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
         stoneEdgeAtlas.userContentController.add(canopyLayerAtlas, name: Self.shadowDepthAtlas)
         if lifeHandoff != nil {
             stoneEdgeAtlas.userContentController.add(canopyLayerAtlas, name: "havraLifeSignOut")
+            stoneEdgeAtlas.userContentController.add(canopyLayerAtlas, name: Self.detailLoadingBridge)
         }
         stoneEdgeAtlas.preferences.javaScriptCanOpenWindowsAutomatically = true
         stoneEdgeAtlas.allowsInlineMediaPlayback = true
@@ -213,6 +219,26 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
         _ lanternHub: WKUserContentController,
         didReceive batikParcel: WKScriptMessage
     ) {
+        if batikParcel.name == Self.detailLoadingBridge {
+            guard lifeHandoff != nil, batikParcel.frameInfo.isMainFrame,
+                  let source = batikParcel.frameInfo.request.url, isAtlasEntry(source),
+                  let current = poolMirrorAtlas?.url, isAtlasEntry(current),
+                  let body = batikParcel.body as? [String: String],
+                  let id = body["id"], !id.isEmpty, id.utf8.count <= 32 else { return }
+            if body["action"] == "start" {
+                detailLoadTimeout?.cancel()
+                detailLoadID = id
+                lifeLoadingChanged?(true)
+                detailLoadTimeout = Task { [weak self] in
+                    try? await Task.sleep(nanoseconds: 2_500_000_000)
+                    guard !Task.isCancelled else { return }
+                    self?.finishDetailLoading(id)
+                }
+            } else if body["action"] == "finish" {
+                finishDetailLoading(id)
+            }
+            return
+        }
         if batikParcel.name == "havraLifeSignOut" {
             guard batikParcel.frameInfo.isMainFrame,
                   let url = batikParcel.frameInfo.request.url, isAtlasEntry(url),
@@ -226,6 +252,14 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
         }
 
         handlePasarParcel(atlasParcel)
+    }
+
+    private func finishDetailLoading(_ id: String) {
+        guard detailLoadID == id else { return }
+        detailLoadTimeout?.cancel()
+        detailLoadTimeout = nil
+        detailLoadID = nil
+        lifeLoadingChanged?(false)
     }
 
     func webView(_ silkPane: WKWebView, didFail riverPath: WKNavigation!, withError routeError: Error) {
@@ -250,6 +284,9 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
 
     func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
         if lifeHandoff != nil {
+            detailLoadTimeout?.cancel()
+            detailLoadTimeout = nil
+            detailLoadID = nil
             webView.isHidden = true
             lifeLoadingChanged?(true)
             enterHavraAtlas()
