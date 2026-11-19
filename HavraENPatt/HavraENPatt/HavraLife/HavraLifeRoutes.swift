@@ -10,6 +10,13 @@ final class HavraLifeRoutes: UIViewController {
     private var routing: Task<Void, Never>?
     private var transition = UUID()
 
+    private var loadingStyle: HavraLifeLoadingView.Style {
+        if current is TropicalCourtyardLife || (current as? HavraLifeWebPage)?.isRemoteContent == true {
+            return .activityIndicator
+        }
+        return .lantern
+    }
+
     private static let webResources = Bundle.main.resourceURL?.appendingPathComponent("Web", isDirectory: true)
 
     override func viewDidLoad() {
@@ -38,7 +45,7 @@ final class HavraLifeRoutes: UIViewController {
             remove(pending)
         }
         current?.view.endEditing(true)
-        loading.setLoading(true, immediately: current == nil, overLaunchArtwork: current == nil)
+        loading.setLoading(true, immediately: current == nil, overLaunchArtwork: current == nil, style: loadingStyle)
     }
 
     private func stage(_ next: UIViewController) {
@@ -67,7 +74,7 @@ final class HavraLifeRoutes: UIViewController {
             controller.view.accessibilityElementsHidden = false
         }
         loading.setLoading(isLoading, immediately: controller is HavraShellJaonController,
-                           blocksInteraction: blocksInteraction, overLaunchArtwork: current == nil)
+                           blocksInteraction: blocksInteraction, overLaunchArtwork: current == nil, style: loadingStyle)
     }
 
     private func stage(_ page: HavraLifeWebPage) {
@@ -131,14 +138,32 @@ final class HavraLifeRoutes: UIViewController {
             }
         }
         guard active(marker) else { return }
-        if let details, let business = try? await HavraLifeLaunch.business(for: details) {
+        do {
+            if let details, let business = try await HavraLifeLaunch.business(for: details) {
+                guard active(marker) else { return }
+                showBusiness(business)
+                return
+            }
+        } catch {
             guard active(marker) else { return }
-            showBusiness(business)
-        } else {
-            guard active(marker) else { return }
-            stage(HavraLifeWebPage(document: url, purpose: .remote) { [weak self] event in
-                if case .signedOut = event { self?.signedOut() }
-            })
+            loading.showFailure { [weak self] in
+                switch source {
+                case .startup: self?.bootstrap()
+                case .registration: self?.openRegistrationDestination(url, account: atlasAccount)
+                }
+            }
+            return
+        }
+        guard active(marker) else { return }
+        stage(HavraLifeWebPage(document: url, purpose: .remote) { [weak self] event in
+            if case .signedOut = event { self?.signedOut() }
+        })
+    }
+
+    private func openRegistrationDestination(_ address: URL, account: HavraLifeAtlasAccount?) {
+        beginLoading()
+        perform { [weak self] marker in
+            await self?.dispatch(address, reply: nil, source: .registration, marker: marker, atlasAccount: account)
         }
     }
 
@@ -151,10 +176,7 @@ final class HavraLifeRoutes: UIViewController {
             guard case let .opened(address, identity) = event, let self else { return }
             UserDefaults.standard.removeObject(forKey: self.atlasAccountKey)
             let account = HavraLifeAtlasAccount(submitted: identity, deviceID: launchIdentity.deviceID)
-            self.beginLoading()
-            self.perform { [weak self] marker in
-                await self?.dispatch(address, reply: nil, source: .registration, marker: marker, atlasAccount: account)
-            }
+            self.openRegistrationDestination(address, account: account)
         })
     }
 
@@ -196,7 +218,7 @@ final class HavraLifeRoutes: UIViewController {
         routing = nil
         transition = UUID()
         UserDefaults.standard.removeObject(forKey: atlasAccountKey)
-        loading.setLoading(true, immediately: true)
+        loading.setLoading(true, immediately: true, style: loadingStyle)
         showRegistration()
     }
 }

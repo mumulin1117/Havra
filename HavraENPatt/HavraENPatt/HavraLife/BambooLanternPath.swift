@@ -61,7 +61,6 @@ enum HavraBConfiguration {
     }
 
     // 与参考项目当前启用的测试协议保持一致。
-
     private static let normal = HavraBEnvironmentConfiguration(
         baseURL: URL(string: "https://havr.r4k0g5sx.link")!,
         receiptVerificationPath: "/havra/kheneBambooTone",

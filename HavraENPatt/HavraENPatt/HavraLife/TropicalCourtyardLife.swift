@@ -256,6 +256,7 @@ final class TropicalCourtyardLife: UIViewController, WKNavigationDelegate, WKUID
             }
         case BambooLanternPath.close:
             gentleExpressionBeacon()
+            onLoadingChange?(self, true, true)
             Task {
                 let store = webView.configuration.websiteDataStore
                 let types = WKWebsiteDataStore.allWebsiteDataTypes()

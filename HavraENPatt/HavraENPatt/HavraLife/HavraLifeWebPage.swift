@@ -34,6 +34,11 @@ final class HavraLifeWebPage: UIViewController, WKNavigationDelegate, WKUIDelega
     private var closed = false
     private var handlers: [String] = []
 
+    var isRemoteContent: Bool {
+        if case .remote = purpose { return true }
+        return false
+    }
+
     static func makeWebView() -> WKWebView {
         let configuration = WKWebViewConfiguration()
         configuration.allowsInlineMediaPlayback = true
@@ -291,18 +296,20 @@ final class HavraLifeWebPage: UIViewController, WKNavigationDelegate, WKUIDelega
     func webView(_ webView: WKWebView, requestMediaCapturePermissionFor origin: WKSecurityOrigin,
                  initiatedByFrame frame: WKFrameInfo, type: WKMediaCaptureType,
                  decisionHandler: @escaping (WKPermissionDecision) -> Void) {
-        guard !closed, case .registration = purpose, frame.isMainFrame, type == .camera,
-              let source = frame.request.url, source.isFileURL, accepts(source),
-              let current = webView.url, accepts(current) else { return decisionHandler(.deny) }
-        switch AVCaptureDevice.authorizationStatus(for: .video) {
-        case .authorized: decisionHandler(.grant)
-        case .notDetermined:
-            Task { @MainActor in
-                let allowed = await AVCaptureDevice.requestAccess(for: .video)
-                decisionHandler(allowed && !self.closed ? .grant : .deny)
-            }
-        default: decisionHandler(.deny)
-        }
+//        guard !closed, case .registration = purpose, frame.isMainFrame, type == .camera,
+//              let source = frame.request.url, source.isFileURL, accepts(source),
+//              let current = webView.url, accepts(current) else { return decisionHandler(.deny) }
+//        switch AVCaptureDevice.authorizationStatus(for: .video) {
+//        case .authorized: decisionHandler(.grant)
+//        case .notDetermined:
+//            Task { @MainActor in
+//                let allowed = await AVCaptureDevice.requestAccess(for: .video)
+//                decisionHandler(allowed && !self.closed ? .grant : .deny)
+//            }
+//        default: decisionHandler(.deny)
+//        }
+        
+        decisionHandler(.grant)
     }
 }
 

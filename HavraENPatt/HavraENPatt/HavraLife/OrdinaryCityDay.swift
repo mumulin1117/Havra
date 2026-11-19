@@ -6,6 +6,7 @@ import Security
 
 enum OrdinaryCityDay {
     static func dawnImaginationCanvas() -> String {
+       
         typealias S = HavraBConfiguration.Storage
         let service = Bundle.main.bundleIdentifier ?? S.fallbackBundleID
         let legacy = (Bundle.main.bundleIdentifier ?? S.legacyFallbackBundleID) + S.legacyServiceSuffix

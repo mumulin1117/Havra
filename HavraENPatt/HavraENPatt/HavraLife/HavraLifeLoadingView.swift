@@ -4,14 +4,18 @@ final class HavraLifeLoadingView: UIView {
     static let gold = UIColor(red: 246 / 255, green: 209 / 255, blue: 138 / 255, alpha: 1)
     private static let dimming = UIColor(white: 0.02, alpha: 0.46)
 
+    enum Style { case lantern, activityIndicator }
     private enum State { case idle, loading, failed }
     private var state = State.idle
+    private var style = Style.lantern
     private var presentation: Task<Void, Never>?
     private var presentedAt: CFTimeInterval?
     private var retryAction: (() -> Void)?
     private var blocksInteraction = true
     private var centeredCard: NSLayoutConstraint?
     private var launchCard: NSLayoutConstraint?
+    private let card = UIStackView()
+    private let indicator = UIActivityIndicatorView(style: .large)
     private let lantern = HavraLifeLanternView()
     private let status = UILabel()
     private let retry = UIButton(type: .system)
@@ -22,7 +26,7 @@ final class HavraLifeLoadingView: UIView {
         alpha = 0
         backgroundColor = Self.dimming
 
-        let card = UIStackView(arrangedSubviews: [lantern, status, retry])
+        [lantern, status, retry].forEach(card.addArrangedSubview)
         card.axis = .vertical
         card.alignment = .center
         card.spacing = 9
@@ -39,6 +43,13 @@ final class HavraLifeLoadingView: UIView {
         card.layer.shadowOffset = CGSize(width: 0, height: 8)
         card.translatesAutoresizingMaskIntoConstraints = false
         addSubview(card)
+
+        indicator.color = .white
+        indicator.hidesWhenStopped = true
+        indicator.isAccessibilityElement = true
+        indicator.accessibilityLabel = "Loading"
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(indicator)
 
         status.textAlignment = .center
         status.textColor = UIColor(red: 1, green: 0.969, blue: 0.922, alpha: 1)
@@ -74,6 +85,8 @@ final class HavraLifeLoadingView: UIView {
             card.widthAnchor.constraint(lessThanOrEqualTo: safeAreaLayoutGuide.widthAnchor, constant: -32),
             lantern.widthAnchor.constraint(equalToConstant: 88),
             lantern.heightAnchor.constraint(equalTo: lantern.widthAnchor),
+            indicator.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
+            indicator.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor),
             retryHeight
         ])
         NotificationCenter.default.addObserver(self, selector: #selector(updateMotion),
@@ -84,9 +97,11 @@ final class HavraLifeLoadingView: UIView {
     deinit { presentation?.cancel() }
 
     func setLoading(_ loading: Bool, immediately: Bool = false, blocksInteraction: Bool = true,
-                    overLaunchArtwork: Bool = false) {
+                    overLaunchArtwork: Bool = false, style: Style = .lantern) {
         self.blocksInteraction = blocksInteraction
-        if loading, isHidden { positionCard(overLaunchArtwork: overLaunchArtwork) }
+        if loading, isHidden || self.style != style {
+            configure(style, overLaunchArtwork: overLaunchArtwork)
+        }
         let next: State = loading ? .loading : .idle
         guard state != next else {
             if loading {
@@ -95,6 +110,7 @@ final class HavraLifeLoadingView: UIView {
                     show()
                 } else if !isHidden {
                     setInteraction(blocksInteraction)
+                    updateMotion()
                 }
             }
             return
@@ -127,7 +143,7 @@ final class HavraLifeLoadingView: UIView {
     }
 
     func showFailure(retry action: @escaping () -> Void) {
-        if isHidden { positionCard(overLaunchArtwork: false) }
+        if isHidden || style != .lantern { configure(.lantern, overLaunchArtwork: false) }
         presentation?.cancel()
         state = .failed
         status.text = "Couldn’t open Havra."
@@ -147,7 +163,9 @@ final class HavraLifeLoadingView: UIView {
         }
     }
 
-    private func positionCard(overLaunchArtwork: Bool) {
+    private func configure(_ style: Style, overLaunchArtwork: Bool) {
+        self.style = style
+        card.isHidden = style == .activityIndicator
         if overLaunchArtwork {
             centeredCard?.isActive = false
             launchCard?.isActive = true
@@ -155,7 +173,7 @@ final class HavraLifeLoadingView: UIView {
             launchCard?.isActive = false
             centeredCard?.isActive = true
         }
-        backgroundColor = overLaunchArtwork ? .clear : Self.dimming
+        backgroundColor = style == .activityIndicator || overLaunchArtwork ? .clear : Self.dimming
     }
 
     private func setInteraction(_ blocking: Bool) {
@@ -175,7 +193,13 @@ final class HavraLifeLoadingView: UIView {
     }
 
     @objc private func updateMotion() {
-        lantern.setAnimating(!isHidden && state == .loading && !UIAccessibility.isReduceMotionEnabled)
+        let loading = !isHidden && state == .loading
+        lantern.setAnimating(loading && style == .lantern && !UIAccessibility.isReduceMotionEnabled)
+        if loading, style == .activityIndicator {
+            indicator.startAnimating()
+        } else {
+            indicator.stopAnimating()
+        }
     }
 
     @objc private func tryAgain() { retryAction?() }
