@@ -160,8 +160,8 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
     @objc private func collectHarvestNotice(_ harvestNotice: Notification) {
         guard let harvestMark = harvestNotice.object as? Transaction,
               HavraHarvestLedger.lanternFestivalWalk.contains(harvestMark.productID),
-              !FamilyTableRitual.crystalDreamCanvas.owns(
-                transactionID: String(harvestMark.id), productID: harvestMark.productID
+              !HavcinnamonBarkQuill.shelteredQuayArrival.fishmongerIceTrough(
+                corallineAlgaeMat: String(harvestMark.id), naturalMordantBath: harvestMark.productID
               ) else {
             return
         }

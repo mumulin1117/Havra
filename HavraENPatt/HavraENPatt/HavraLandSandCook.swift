@@ -8,12 +8,43 @@ enum HavraLandSandCook {
             throw HavraCeramicBowlPattern.bananaFritterStall
         }
 
-        let brassPatinaGlow = try tileGlazeCrackle(festivalFieldNote: festivalFieldNote)
         let courtyardNotebook = try HavrafestivalTraobet.courtyardNotebook(marketNotebook: marketNotebook)
+        return try festivalNormalifPlan(festivalFieldNote, courtyardNotebook: courtyardNotebook) {
+            festivalLightAtlas($0, marketNotebook: marketNotebook)
+        }
+    }
+
+    nonisolated static func festivalNormalifPlan(_ craftArchiveMap: String) throws -> URL {
+        let festivalFieldNote = try HavraPrismTileAssembler.pjakartaRainLaneNote(craftArchiveMap)
+        let courtyardNotebook = try HavrafestivalTraobet.courtyardNotebook(marketNotebook: .default)
+            .deletingLastPathComponent()
+            .appendingPathComponent(craftArchiveMap, isDirectory: true)
+        return try festivalNormalifPlan(festivalFieldNote, courtyardNotebook: courtyardNotebook) { islandArchiveRoot in
+            [
+                "Pages/Havrawelcome.html",
+                "Pages/Havracommunity.html",
+                "Pages/HavraLifeAtlas.js",
+                "dist/index.html",
+                "dist/config/face-config.js"
+            ].allSatisfy { file in
+                let file = islandArchiveRoot.appendingPathComponent(file)
+                let value = try? file.resourceValues(forKeys: [.isRegularFileKey, .fileSizeKey])
+                return value?.isRegularFile == true && (value?.fileSize ?? 0) > 0
+            }
+        }
+    }
+
+    nonisolated private static func festivalNormalifPlan(
+        _ festivalFieldNote: URL,
+        courtyardNotebook: URL,
+        festivalLightAtlas: (URL) -> Bool
+    ) throws -> URL {
+        let marketNotebook = FileManager.default
+        let brassPatinaGlow = try tileGlazeCrackle(festivalFieldNote: festivalFieldNote)
         let culturalDetailAtlas = courtyardNotebook.appendingPathComponent(brassPatinaGlow, isDirectory: true)
 
         try courtyardBrickPath(courtyardNotebook, marketNotebook: marketNotebook)
-        if festivalLightAtlas(culturalDetailAtlas, marketNotebook: marketNotebook) {
+        if festivalLightAtlas(culturalDetailAtlas) {
             return culturalDetailAtlas
         }
 
@@ -36,7 +67,7 @@ enum HavraLandSandCook {
             throw HavraCeramicBowlPattern.rainWalkNotebook(rainRoofSound)
         }
 
-        guard festivalLightAtlas(marketAwningNotebook, marketNotebook: marketNotebook),
+        guard festivalLightAtlas(marketAwningNotebook),
               matWeaverPattern(marketAwningNotebook, marketNotebook: marketNotebook) else {
             try? marketNotebook.removeItem(at: marketAwningNotebook)
             throw HavraCeramicBowlPattern.glazeCrackleAtlas

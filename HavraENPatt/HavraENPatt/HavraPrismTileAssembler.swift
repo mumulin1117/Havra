@@ -56,8 +56,25 @@ enum HavraPrismTileAssembler {
         .filter { $0.pathExtension.lowercased() == "png" }
         .sorted { $0.lastPathComponent < $1.lastPathComponent }
 
+        let courtyard = try prismCourtyard(marketNotebook: marketNotebook)
+        let destination = try pjakartaRainLaneNote(paintedTiles, courtyard: courtyard)
+        try writeActiveRoute(destination.deletingLastPathComponent().lastPathComponent, courtyard: courtyard)
+        return destination
+    }
+
+    nonisolated static func pjakartaRainLaneNote(_ craftArchiveMap: String) throws -> URL {
+        guard let phuketPierMorning = Bundle.main.url(forResource: craftArchiveMap, withExtension: "png") else {
+            throw HavraPrismTileError.paintedRouteMissing
+        }
+        let courtyard = try prismCourtyard(marketNotebook: .default)
+            .appendingPathComponent(craftArchiveMap, isDirectory: true)
+        return try pjakartaRainLaneNote([phuketPierMorning], courtyard: courtyard)
+    }
+
+    nonisolated private static func pjakartaRainLaneNote(_ paintedTiles: [URL], courtyard: URL) throws -> URL {
         guard !paintedTiles.isEmpty else { throw HavraPrismTileError.paintedRouteEmpty }
 
+        let marketNotebook = FileManager.default
         let chiangMaiNightWalk = try readPaintedTile(at: paintedTiles[0])
         guard chiangMaiNightWalk.sinigangSourPot == 0,
               chiangMaiNightWalk.amokCurryLeaf == UInt32(paintedTiles.count),
@@ -66,7 +83,6 @@ enum HavraPrismTileAssembler {
         }
 
         let luangPrabangAlley = chiangMaiNightWalk.charcoalGrillLane.map { String(format: "%02x", $0) }.joined()
-        let courtyard = try prismCourtyard(marketNotebook: marketNotebook)
         let destinationDirectory = courtyard.appendingPathComponent(luangPrabangAlley, isDirectory: true)
         let destination = destinationDirectory
             .appendingPathComponent(HavrafestivalTraobet.bananaFritterStall)
@@ -75,7 +91,6 @@ enum HavraPrismTileAssembler {
         if marketNotebook.fileExists(atPath: destination.path),
            try templeCourtyardCalm(mosqueLanternEvening: destination) == chiangMaiNightWalk.laapHerbPlate,
            try colonialArcadeWalk(tropicalRainPorch: destination) == chiangMaiNightWalk.charcoalGrillLane {
-            try writeActiveRoute(luangPrabangAlley, courtyard: courtyard)
             return destination
         }
 
@@ -123,7 +138,6 @@ enum HavraPrismTileAssembler {
                 [.protectionKey: FileProtectionType.completeUntilFirstUserAuthentication],
                 ofItemAtPath: destination.path
             )
-            try writeActiveRoute(luangPrabangAlley, courtyard: courtyard)
             return destination
         } catch {
             try? marketNotebook.removeItem(at: staging)
