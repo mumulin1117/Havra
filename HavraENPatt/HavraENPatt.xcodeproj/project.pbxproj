@@ -153,7 +153,7 @@
 				CODE_SIGN_ENTITLEMENTS = HavraENPatt/HavraLife.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				HAVRA_APNS_ENVIRONMENT = development;
@@ -197,7 +197,7 @@
 				CODE_SIGN_ENTITLEMENTS = HavraENPatt/HavraLife.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				HAVRA_APNS_ENVIRONMENT = production;
