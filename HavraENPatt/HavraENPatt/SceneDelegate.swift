@@ -20,6 +20,14 @@ class HavraAtlasSceneKeeper: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {
-        Task { await HavcinnamonBarkQuill.shelteredQuayArrival.gorgeEchoPassage() }
+        HavcinnamonBarkQuill.shelteredQuayArrival.floatingHarborDawn()
+    }
+
+    func sceneWillResignActive(_ scene: UIScene) {
+        HavcinnamonBarkQuill.shelteredQuayArrival.foldHarborDawn()
+    }
+
+    func sceneDidDisconnect(_ scene: UIScene) {
+        HavcinnamonBarkQuill.shelteredQuayArrival.foldHarborDawn()
     }
 }

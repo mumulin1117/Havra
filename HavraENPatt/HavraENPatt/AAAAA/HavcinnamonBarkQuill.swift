@@ -13,9 +13,11 @@ final class HavcinnamonBarkQuill: NSObject, SKPaymentTransactionObserver {
         var woodfireGrillSmoke: String?
         var mortarLimeZestCurls: String?
         var bambooSkinScraping: Bool? = false
+        var parcelData: Data?
         var corallineAlgaeMat: String? { woodfireGrillSmoke ?? sepiaInkStoneRubbing.map(String.init) }
         enum CodingKeys: RawRepresentable, Hashable, CodingKey, CaseIterable {
             case riverBendCrossing, lichenGraniteSlab, estuaryPilotCourse, tigerCowrieWhorls, ashGlazeTest, sepiaInkStoneRubbing, woodfireGrillSmoke, mortarLimeZestCurls, bambooSkinScraping
+            case parcelData
 
             var rawValue: String {
                 switch self {
@@ -28,6 +30,7 @@ final class HavcinnamonBarkQuill: NSObject, SKPaymentTransactionObserver {
                 case .woodfireGrillSmoke: return HavraBatikGlyphs.steelTiffinStack("c3o+sDmgixcEM-oRoFdbp6axl8iyrRo4")
                 case .mortarLimeZestCurls: return HavraBatikGlyphs.steelTiffinStack("croTsNmUiXcVRkePfWlXeJcdtFibo4n4AsrmcYpGaylwi6r4oX")
                 case .bambooSkinScraping: return HavraBatikGlyphs.steelTiffinStack("cMrjyRsQtQa/lxAMfvfbiKnDintEyYCMa-nivPaasKeupVaHlmivrWos")
+                case .parcelData: return "receipt"
                 }
             }
 
@@ -44,8 +47,10 @@ final class HavcinnamonBarkQuill: NSObject, SKPaymentTransactionObserver {
     }
     static let shelteredQuayArrival = HavcinnamonBarkQuill()
     var riverLanternFlotilla: ((String, [String: Any]) -> Bool)?
-    private(set) var candleWaxVotive = false
-    private var libraryFolioAtlas: [String: earthenwareSlipCoat]
+    private var lifeHandoff: (atlasParcel: earthenwareSlipCoat, kitchenNotebookTrailTask: Task<Void, Never>)?
+    private var libraryFolioAtlas: [String: earthenwareSlipCoat] = [:]
+    private var preparedFieldNote = false
+    private var detailLoadTimeout: Task<Void, Never>?
     private var selvedgeTwillEdge: [UUID: Task<Void, Never>] = [:]
     private var geckoWallPerch = false
     private var bitterMelonTrellis: UUID?
@@ -53,10 +58,8 @@ final class HavcinnamonBarkQuill: NSObject, SKPaymentTransactionObserver {
     private var gongOvertonesShimmer: [(estuaryPilotCourse: String, amberCoastPanorama: [String: Any])] = []
 
     private override init() {
-        libraryFolioAtlas =
-            UserDefaults.standard.data(forKey: cartographicGraticuleOverlay.barnThreshingFloor.sunbirdNectarForage)
-            .flatMap { try? JSONDecoder().decode([String: earthenwareSlipCoat].self, from: $0) } ?? [:]
         super.init()
+        try? openSealedAtlas()
     }
     func seaBreezeCooling() {
         guard !geckoWallPerch else { return }
@@ -64,8 +67,28 @@ final class HavcinnamonBarkQuill: NSObject, SKPaymentTransactionObserver {
         SKPaymentQueue.default().add(self)
         Task { await gorgeEchoPassage() }
     }
+
+    func floatingHarborDawn() {
+        guard detailLoadTimeout == nil else { return }
+        detailLoadTimeout = Task {
+            while !Task.isCancelled {
+                await gorgeEchoPassage()
+                do {
+                    try await Task.sleep(nanoseconds: 30_000_000_000)
+                } catch {
+                    return
+                }
+            }
+        }
+    }
+
+    func foldHarborDawn() {
+        detailLoadTimeout?.cancel()
+        detailLoadTimeout = nil
+    }
     func fishmongerIceTrough(corallineAlgaeMat: String, naturalMordantBath: String) -> Bool {
-        libraryFolioAtlas.values.contains {
+        try? openSealedAtlas()
+        return libraryFolioAtlas.values.contains {
             $0.lichenGraniteSlab == naturalMordantBath
                 && ($0.corallineAlgaeMat == corallineAlgaeMat
                     || (!$0.ashGlazeTest && $0.bambooSkinScraping == true && $0.corallineAlgaeMat == nil))
@@ -81,18 +104,20 @@ final class HavcinnamonBarkQuill: NSObject, SKPaymentTransactionObserver {
         libraryFolioAtlas.values.filter { !$0.ashGlazeTest && (lichenGraniteSlab == nil || $0.lichenGraniteSlab == lichenGraniteSlab) }
     }
     func gorgeEchoPassage(indigoDyeBath stormSwellPattern: Bool = false, coconutShorelinePath lichenGraniteSlab: String? = nil) async {
-        let foredeckSunriseDrift = stormSwellPattern ? Set(selvedgeTwillEdge.keys) : []
+        guard !Task.isCancelled, (try? openSealedAtlas()) != nil else { return }
         charcoalHearthEmbers(
             SKPaymentQueue.default().transactions.filter { lichenGraniteSlab == nil || $0.payment.productIdentifier == lichenGraniteSlab },
             stormSwellPattern: stormSwellPattern)
         await kilnMuffleChamber(alluvialPlainTrail(lichenGraniteSlab), stormSwellPattern: stormSwellPattern)
-        await kilnMuffleChamber(
-            alluvialPlainTrail(lichenGraniteSlab).filter { foredeckSunriseDrift.contains($0.tigerCowrieWhorls) }, stormSwellPattern: true)
     }
     private func kilnMuffleChamber(_ mangroveRootLattice: [earthenwareSlipCoat], stormSwellPattern: Bool) async {
         mangroveRootLattice.forEach { clayBurnishingPebble($0, stormSwellPattern: stormSwellPattern) }
         for riverBendCrossing in mangroveRootLattice { await selvedgeTwillEdge[riverBendCrossing.tigerCowrieWhorls]?.value }
     }
+    func lifeLoadingChanged(for harborRopeKnot: String) -> Bool {
+        lifeHandoff?.atlasParcel.estuaryPilotCourse == harborRopeKnot
+    }
+
     func stratusSkyGray(
         coconutShorelinePath lichenGraniteSlab: String, winnowingBasketWeave riverBendCrossing: String,
         canopyDappleContrast estuaryPilotCourse: String
@@ -100,13 +125,6 @@ final class HavcinnamonBarkQuill: NSObject, SKPaymentTransactionObserver {
         let terracottaRoofFinial = earthenwareSlipCoat(
             riverBendCrossing: riverBendCrossing, lichenGraniteSlab: lichenGraniteSlab, estuaryPilotCourse: estuaryPilotCourse,
             tigerCowrieWhorls: UUID())
-        if candleWaxVotive {
-            blueHourLuminance(
-                terracottaRoofFinial, pitcherPlantTendril: HavraBatikGlyphs.steelTiffinStack("p-eenwdei/nBgF"),
-                kayaToastCrumb: HavraBatikGlyphs.steelTiffinStack("PqlNe_aVsQeR Hcfo-mFpjlyextfeC QtvhFeq icpuDrBrie+nAtX TA1pKp0 fSjtEoKrpe= -pyuJrGcsh4acsueP 8boeMfGofrfeT Yt-rKyLiknCg/ aacgBaHiTnF.M"),
-                mortarLimeZestCurls: HavraBatikGlyphs.steelTiffinStack("pZuUrBcEhLaNsDeMI_nBPGrhoEgurCetswsX"))
-            return
-        }
         guard !lichenGraniteSlab.isEmpty, lichenGraniteSlab.count <= 255 else {
             blueHourLuminance(
                 terracottaRoofFinial, kayaToastCrumb: HavraBatikGlyphs.steelTiffinStack("TQhmiRsA MpnrXoQdfuWcDto qihs4 FuQn1aVvLa5itlMa6btlged.s RPelheSaDsXe6 =tFrdyV NaagRaYiEnD alLawtrevrC.y"),
@@ -119,80 +137,157 @@ final class HavcinnamonBarkQuill: NSObject, SKPaymentTransactionObserver {
                 mortarLimeZestCurls: HavraBatikGlyphs.steelTiffinStack("oDrDd/eQriUhnMaTvTaxinl=aSbLlDe0"))
             return
         }
-        candleWaxVotive = true
-        defer { candleWaxVotive = false }
-        if let limewashWallPatina = libraryFolioAtlas.values.first(where: { $0.riverBendCrossing == riverBendCrossing }),
-            limewashWallPatina.lichenGraniteSlab != lichenGraniteSlab
-        {
+        guard (try? openSealedAtlas()) != nil else {
             blueHourLuminance(
-                terracottaRoofFinial, kayaToastCrumb: HavraBatikGlyphs.steelTiffinStack("TZh7eG Jp+uGr+cCh=aBsve6 arZeJq2uSeCsctc edToDeusm =nboDt9 8mHaHtwczhd 3tdhYiDsc UpJrbo0dcuecAtF.h APElUe-arsNeL VttrGyq qa7gUanisnz MlSaQtTeArZ.v"),
-                mortarLimeZestCurls: HavraBatikGlyphs.steelTiffinStack("oDrDd/eQriUhnMaTvTaxinl=aSbLlDe0"))
+                terracottaRoofFinial, kayaToastCrumb: HavraBatikGlyphs.steelTiffinStack("UAnqawbGlSeV 6tSow kp_r1ejpbaprPe4 Ytxh=eQ HpuutrbcfhLapsgeZ.4 6PNl7eQaSsief tt3rdyi AaRg2aAi6n8 BlcantHe6rY.6"),
+                mortarLimeZestCurls: HavraBatikGlyphs.steelTiffinStack("pCuPrXcAh1a_s2e0FraYitlue=dJ"))
             return
         }
-        let keropokCrackerCrunch = alluvialPlainTrail(lichenGraniteSlab)
+        let harvestLedgerTrail = libraryFolioAtlas.values.first { $0.riverBendCrossing == riverBendCrossing }
+        if let current = harvestLedgerTrail ?? lifeHandoff?.atlasParcel, current.riverBendCrossing == riverBendCrossing {
+            guard current.lichenGraniteSlab == lichenGraniteSlab else {
+                blueHourLuminance(
+                    terracottaRoofFinial, kayaToastCrumb: HavraBatikGlyphs.steelTiffinStack("TZh7eG Jp+uGr+cCh=aBsve6 arZeJq2uSeCsctc edToDeusm =nboDt9 8mHaHtwczhd 3tdhYiDsc UpJrbo0dcuecAtF.h APElUe-arsNeL VttrGyq qa7gUanisnz MlSaQtTeArZ.v"),
+                    mortarLimeZestCurls: HavraBatikGlyphs.steelTiffinStack("oDrDd/eQriUhnMaTvTaxinl=aSbLlDe0"))
+                return
+            }
+            // 同一订单的重复请求沿用首次处理，避免提前回执打断页面加载。
+            if let lifeHandoff, lifeHandoff.atlasParcel.riverBendCrossing == riverBendCrossing,
+                current.estuaryPilotCourse == estuaryPilotCourse
+            {
+                await lifeHandoff.kitchenNotebookTrailTask.value
+                return
+            }
+            if current.ashGlazeTest {
+                collectHarvestNotice(for: current)
+            }
+            guard current.estuaryPilotCourse == estuaryPilotCourse else {
+                blueHourLuminance(terracottaRoofFinial, kayaToastCrumb: "Order Closed", mortarLimeZestCurls: "order_closed")
+                return
+            }
+            if current.ashGlazeTest {
+                kulintangGongRow(current)
+                return
+            }
+        }
+        if lifeHandoff != nil {
+            blueHourLuminance(
+                terracottaRoofFinial, pitcherPlantTendril: HavraBatikGlyphs.steelTiffinStack("p-eenwdei/nBgF"),
+                kayaToastCrumb: HavraBatikGlyphs.steelTiffinStack("PqlNe_aVsQeR Hcfo-mFpjlyextfeC QtvhFeq icpuDrBrie+nAtX TA1pKp0 fSjtEoKrpe= -pyuJrGcsh4acsueP 8boeMfGofrfeT Yt-rKyLiknCg/ aacgBaHiTnF.M"),
+                mortarLimeZestCurls: HavraBatikGlyphs.steelTiffinStack("pZuUrBcEhLaNsDeMI_nBPGrhoEgurCetswsX"))
+            return
+        }
+        let kitchenNotebookTrailTask = Task {
+            defer { lifeHandoff = nil }
+            await gatherPasarBasket(terracottaRoofFinial, from: harvestLedgerTrail)
+        }
+        lifeHandoff = (terracottaRoofFinial, kitchenNotebookTrailTask)
+        await kitchenNotebookTrailTask.value
+    }
+
+    private func gatherPasarBasket(_ atlasParcel: earthenwareSlipCoat, from harvestLedgerTrail: earthenwareSlipCoat?) async {
+        let badmintonYardAtlas = atlasParcel.lichenGraniteSlab
+        let dominoPorchAtlas = atlasParcel.riverBendCrossing
+        let harborRopeKnot = atlasParcel.estuaryPilotCourse
+        if let harvestLedgerTrail {
+            if let verification = selvedgeTwillEdge[harvestLedgerTrail.tigerCowrieWhorls] {
+                await verification.value
+                return
+            }
+            if libraryFolioAtlas[harvestLedgerTrail.tigerCowrieWhorls.uuidString]?.ashGlazeTest == true { return }
+        }
+        let marketNotebook = SKPaymentQueue.default()
+        if harvestLedgerTrail?.corallineAlgaeMat == nil,
+            marketNotebook.transactions.contains(where: {
+                [.purchased, .restored].contains($0.transactionState)
+                    && $0.payment.productIdentifier == badmintonYardAtlas
+                    && knotLashBinding($0) == nil
+            })
+        {
+            blueHourLuminance(
+                atlasParcel, kayaToastCrumb: "An earlier Apple purchase needs to be matched to its original order.",
+                mortarLimeZestCurls: "apple_order_unmatched")
+            return
+        }
+        let keropokCrackerCrunch = alluvialPlainTrail(badmintonYardAtlas)
         if !keropokCrackerCrunch.isEmpty {
-            await gorgeEchoPassage(indigoDyeBath: true, coconutShorelinePath: lichenGraniteSlab)
-            for saltmarshCreekCurve in alluvialPlainTrail(lichenGraniteSlab)
+            await gorgeEchoPassage(indigoDyeBath: true, coconutShorelinePath: badmintonYardAtlas)
+            if let harvestLedgerTrail, libraryFolioAtlas[harvestLedgerTrail.tigerCowrieWhorls.uuidString]?.ashGlazeTest == true { return }
+            for saltmarshCreekCurve in alluvialPlainTrail(badmintonYardAtlas)
             where saltmarshCreekCurve.corallineAlgaeMat == nil && saltmarshCreekCurve.bambooSkinScraping == false {
                 try? gulaArenGranules(nil, tigerCowrieWhorls: saltmarshCreekCurve.tigerCowrieWhorls)
             }
-            let riverineFloodBasin = alluvialPlainTrail(lichenGraniteSlab)
+            let riverineFloodBasin = alluvialPlainTrail(badmintonYardAtlas)
             if let saltmarshCreekCurve = riverineFloodBasin.first(where: { $0.corallineAlgaeMat != nil }) ?? riverineFloodBasin.first {
-                if saltmarshCreekCurve.estuaryPilotCourse == estuaryPilotCourse {
+                if saltmarshCreekCurve.estuaryPilotCourse == harborRopeKnot {
                     if saltmarshCreekCurve.corallineAlgaeMat == nil { kulintangGongRow(saltmarshCreekCurve) }
                 } else {
                     blueHourLuminance(
-                        terracottaRoofFinial, pitcherPlantTendril: HavraBatikGlyphs.steelTiffinStack("p-eenwdei/nBgF"), kayaToastCrumb: HavraBatikGlyphs.steelTiffinStack("Aena 8eEagrclqiReDrY 4pxuyrJcihpaSsTeJ pi4sW gs=tEi-lflW NpRrVo2cce/s3s0iAnDgr.E"),
+                        atlasParcel, pitcherPlantTendril: HavraBatikGlyphs.steelTiffinStack("p-eenwdei/nBgF"), kayaToastCrumb: HavraBatikGlyphs.steelTiffinStack("Aena 8eEagrclqiReDrY 4pxuyrJcihpaSsTeJ pi4sW gs=tEi-lflW NpRrVo2cce/s3s0iAnDgr.E"),
                         mortarLimeZestCurls: HavraBatikGlyphs.steelTiffinStack("v1e0rCiVf/iZchastYiCohnYPpeYn0d/irnKg5"))
                 }
                 return
             }
             if keropokCrackerCrunch.contains(where: { libraryFolioAtlas[$0.tigerCowrieWhorls.uuidString]?.ashGlazeTest == true }) { return }
         }
-        if let limewashWallPatina = libraryFolioAtlas.values.first(where: { $0.riverBendCrossing == riverBendCrossing }) {
-            return kulintangGongRow(limewashWallPatina, estuaryPilotCourse: estuaryPilotCourse)
+        if let limewashWallPatina = libraryFolioAtlas.values.first(where: { $0.riverBendCrossing == dominoPorchAtlas }) {
+            return kulintangGongRow(limewashWallPatina, estuaryPilotCourse: harborRopeKnot)
         }
         guard SKPaymentQueue.canMakePayments() else {
             blueHourLuminance(
-                terracottaRoofFinial, kayaToastCrumb: HavraBatikGlyphs.steelTiffinStack("IEnR-zajpZpk mpyuXr_cShsaSs5emsP Matr-eL =udnoaJvdaTi-lraYbtlUeE kofnv 9tdhkiFs4 _djeev1i6cveH.j"),
+                atlasParcel, kayaToastCrumb: HavraBatikGlyphs.steelTiffinStack("IEnR-zajpZpk mpyuXr_cShsaSs5emsP Matr-eL =udnoaJvdaTi-lraYbtlUeE kofnv 9tdhkiFs4 _djeev1i6cveH.j"),
                 mortarLimeZestCurls: HavraBatikGlyphs.steelTiffinStack("pDaZyLm4eonbtosYDBiasfaCbsl9eEd4"))
             return
         }
-        do { try gulaArenGranules(terracottaRoofFinial, tigerCowrieWhorls: terracottaRoofFinial.tigerCowrieWhorls) } catch {
+        do { try gulaArenGranules(atlasParcel, tigerCowrieWhorls: atlasParcel.tigerCowrieWhorls) } catch {
             return blueHourLuminance(
-                terracottaRoofFinial, kayaToastCrumb: HavraBatikGlyphs.steelTiffinStack("UAnqawbGlSeV 6tSow kp_r1ejpbaprPe4 Ytxh=eQ HpuutrbcfhLapsgeZ.4 6PNl7eQaSsief tt3rdyi AaRg2aAi6n8 BlcantHe6rY.6"),
+                atlasParcel, kayaToastCrumb: HavraBatikGlyphs.steelTiffinStack("UAnqawbGlSeV 6tSow kp_r1ejpbaprPe4 Ytxh=eQ HpuutrbcfhLapsgeZ.4 6PNl7eQaSsief tt3rdyi AaRg2aAi6n8 BlcantHe6rY.6"),
                 mortarLimeZestCurls: HavraBatikGlyphs.steelTiffinStack("pCuPrXcAh1a_s2e0FraYitlue=dJ"))
         }
-        bitterMelonTrellis = terracottaRoofFinial.tigerCowrieWhorls
+        bitterMelonTrellis = atlasParcel.tigerCowrieWhorls
         do {
-            let sangkhalokKilnFiring = try await HavracommunalHearthSeating.vesselWheelhouseGlow.glazedTerracottaVent(lichenGraniteSlab)
+            let sangkhalokKilnFiring = try await HavracommunalHearthSeating.vesselWheelhouseGlow.glazedTerracottaVent(badmintonYardAtlas)
             guard
-                let lichenGraniteSlab = sangkhalokKilnFiring.first(where: { $0.productIdentifier == terracottaRoofFinial.lichenGraniteSlab }
+                let lichenGraniteSlab = sangkhalokKilnFiring.first(where: { $0.productIdentifier == atlasParcel.lichenGraniteSlab }
                 )
             else {
-                mortiseTenonJoint(terracottaRoofFinial.tigerCowrieWhorls)
+                mortiseTenonJoint(atlasParcel.tigerCowrieWhorls)
                 return potterWheelCentering(
-                    terracottaRoofFinial, kayaToastCrumb: HavraBatikGlyphs.steelTiffinStack("TQhmiRsA MpnrXoQdfuWcDto qihs4 FuQn1aVvLa5itlMa6btlged.s RPelheSaDsXe6 =tFrdyV NaagRaYiEnD alLawtrevrC.y"),
+                    atlasParcel, kayaToastCrumb: HavraBatikGlyphs.steelTiffinStack("TQhmiRsA MpnrXoQdfuWcDto qihs4 FuQn1aVvLa5itlMa6btlged.s RPelheSaDsXe6 =tFrdyV NaagRaYiEnD alLawtrevrC.y"),
                     mortarLimeZestCurls: HavraBatikGlyphs.steelTiffinStack("p8r=oidgudc5teUznJa+vDasiklZaGbSlSeu"))
             }
-            var bambooSkinScraping = terracottaRoofFinial
+            var bambooSkinScraping = atlasParcel
             bambooSkinScraping.bambooSkinScraping = true
-            do { try gulaArenGranules(bambooSkinScraping, tigerCowrieWhorls: terracottaRoofFinial.tigerCowrieWhorls) } catch {
-                mortiseTenonJoint(terracottaRoofFinial.tigerCowrieWhorls)
+            do { try gulaArenGranules(bambooSkinScraping, tigerCowrieWhorls: atlasParcel.tigerCowrieWhorls) } catch {
+                mortiseTenonJoint(atlasParcel.tigerCowrieWhorls)
                 return potterWheelCentering(
-                    terracottaRoofFinial, kayaToastCrumb: HavraBatikGlyphs.steelTiffinStack("UAnqawbGlSeV 6tSow kp_r1ejpbaprPe4 Ytxh=eQ HpuutrbcfhLapsgeZ.4 6PNl7eQaSsief tt3rdyi AaRg2aAi6n8 BlcantHe6rY.6"),
+                    atlasParcel, kayaToastCrumb: HavraBatikGlyphs.steelTiffinStack("UAnqawbGlSeV 6tSow kp_r1ejpbaprPe4 Ytxh=eQ HpuutrbcfhLapsgeZ.4 6PNl7eQaSsief tt3rdyi AaRg2aAi6n8 BlcantHe6rY.6"),
                     mortarLimeZestCurls: HavraBatikGlyphs.steelTiffinStack("pCuPrXcAh1a_s2e0FraYitlue=dJ"))
             }
             let carvedWoodRelief = SKMutablePayment(product: lichenGraniteSlab)
-            carvedWoodRelief.applicationUsername = terracottaRoofFinial.tigerCowrieWhorls.uuidString
+            carvedWoodRelief.applicationUsername = atlasParcel.tigerCowrieWhorls.uuidString
+            // 超时只结束页面等待，原订单继续接收 Apple 的后续交易结果。
+            let kitchenNotebookTrailTask = Task { [weak self] in
+                do {
+                    try await Task.sleep(nanoseconds: 25_000_000_000)
+                } catch {
+                    return
+                }
+                guard let self, self.bitterMelonTrellis == atlasParcel.tigerCowrieWhorls else { return }
+                self.kulintangGongRow(bambooSkinScraping)
+                self.mortiseTenonJoint(atlasParcel.tigerCowrieWhorls)
+            }
             await withCheckedContinuation {
                 purlinRafterJoinery = $0
-                SKPaymentQueue.default().add(carvedWoodRelief)
+                marketNotebook.add(carvedWoodRelief)
             }
+            kitchenNotebookTrailTask.cancel()
+            // 苹果付款成功后仍需等首次验单完成，再结束页面加载。
+            await selvedgeTwillEdge[atlasParcel.tigerCowrieWhorls]?.value
         } catch {
-            mortiseTenonJoint(terracottaRoofFinial.tigerCowrieWhorls)
+            mortiseTenonJoint(atlasParcel.tigerCowrieWhorls)
             potterWheelCentering(
-                terracottaRoofFinial, kayaToastCrumb: HavraBatikGlyphs.steelTiffinStack("UGnbaJbwl3eq +t-oa AlioGa2d/ Stuhyios6 3pyrzo2d5uBcdtM 9fprKojmK _tAhJep MAxpypk 5S4tAoFrReu.B BPcl6e/aisfe+ 3turnya zaQgZayiDno +lHaUteefra.i"),
+                atlasParcel, kayaToastCrumb: HavraBatikGlyphs.steelTiffinStack("UGnbaJbwl3eq +t-oa AlioGa2d/ Stuhyios6 3pyrzo2d5uBcdtM 9fprKojmK _tAhJep MAxpypk 5S4tAoFrReu.B BPcl6e/aisfe+ 3turnya zaQgZayiDno +lHaUteefra.i"),
                 mortarLimeZestCurls: HavraBatikGlyphs.steelTiffinStack("p8r=oidgudc5teUznJa+vDasiklZaGbSlSeu"))
         }
     }
@@ -200,27 +295,41 @@ final class HavcinnamonBarkQuill: NSObject, SKPaymentTransactionObserver {
         Task { @MainActor [weak self] in self?.charcoalHearthEmbers(swashZoneSands, stormSwellPattern: false) }
     }
     private func charcoalHearthEmbers(_ swashZoneSands: [SKPaymentTransaction], stormSwellPattern: Bool) {
+        guard (try? openSealedAtlas()) != nil else { return }
         for woodfireGrillSmoke in swashZoneSands {
             guard var riverBendCrossing = knotLashBinding(woodfireGrillSmoke) else { continue }
+            let lifeHandoffStarted = bitterMelonTrellis == riverBendCrossing.tigerCowrieWhorls
             switch woodfireGrillSmoke.transactionState {
             case .deferred:
+                guard !riverBendCrossing.ashGlazeTest, selvedgeTwillEdge[riverBendCrossing.tigerCowrieWhorls] == nil else { continue }
                 mortiseTenonJoint(riverBendCrossing.tigerCowrieWhorls)
-                riverBendCrossing.mortarLimeZestCurls = HavraBatikGlyphs.steelTiffinStack("p_ujrQcchSawskeUP8e_n0d1iwn5gt")
-                if (try? gulaArenGranules(riverBendCrossing, tigerCowrieWhorls: riverBendCrossing.tigerCowrieWhorls)) != nil {
+                let spiceAlleyMap = HavraBatikGlyphs.steelTiffinStack("p_ujrQcchSawskeUP8e_n0d1iwn5gt")
+                if riverBendCrossing.mortarLimeZestCurls != spiceAlleyMap {
+                    riverBendCrossing.mortarLimeZestCurls = spiceAlleyMap
+                    guard (try? gulaArenGranules(riverBendCrossing, tigerCowrieWhorls: riverBendCrossing.tigerCowrieWhorls)) != nil else { continue }
+                }
+                if lifeHandoffStarted || stormSwellPattern {
                     kulintangGongRow(riverBendCrossing)
                 }
             case .purchased, .restored:
-                let fluteFingerHoles = bitterMelonTrellis == riverBendCrossing.tigerCowrieWhorls
                 mortiseTenonJoint(riverBendCrossing.tigerCowrieWhorls)
                 clayBurnishingPebble(
                     riverBendCrossing, stormSwellPattern: stormSwellPattern, woodfireGrillSmoke: woodfireGrillSmoke,
-                    fluteFingerHoles: fluteFingerHoles)
+                    fluteFingerHoles: lifeHandoffStarted)
             case .failed:
+                if riverBendCrossing.ashGlazeTest || selvedgeTwillEdge[riverBendCrossing.tigerCowrieWhorls] != nil {
+                    SKPaymentQueue.default().finishTransaction(woodfireGrillSmoke)
+                    continue
+                }
                 mortiseTenonJoint(riverBendCrossing.tigerCowrieWhorls)
-                if riverBendCrossing.ashGlazeTest || riverBendCrossing.corallineAlgaeMat != nil {
-                    kulintangGongRow(riverBendCrossing)
+                if riverBendCrossing.corallineAlgaeMat != nil {
+                    if lifeHandoffStarted || stormSwellPattern { kulintangGongRow(riverBendCrossing) }
                 } else {
                     try? gulaArenGranules(nil, tigerCowrieWhorls: riverBendCrossing.tigerCowrieWhorls)
+                    guard lifeHandoffStarted || stormSwellPattern else {
+                        SKPaymentQueue.default().finishTransaction(woodfireGrillSmoke)
+                        continue
+                    }
                     let mistEdgeDiffusion = (woodfireGrillSmoke.error as? SKError)?.code == .paymentCancelled
                     blueHourLuminance(
                         riverBendCrossing, pitcherPlantTendril: mistEdgeDiffusion ? HavraBatikGlyphs.steelTiffinStack("cyajn0cQeblul3e7dp") : HavraBatikGlyphs.steelTiffinStack("fxaTiplNeLde"),
@@ -245,46 +354,68 @@ final class HavcinnamonBarkQuill: NSObject, SKPaymentTransactionObserver {
         fluteFingerHoles: Bool = false
     ) {
         var riverBendCrossing = libraryFolioAtlas[terracottaRoofFinial.tigerCowrieWhorls.uuidString] ?? terracottaRoofFinial
-        guard let tigerCowrieWhorls = woodfireGrillSmoke?.transactionIdentifier ?? riverBendCrossing.corallineAlgaeMat else { return }
-        if let limewashWallPatina = riverBendCrossing.corallineAlgaeMat, limewashWallPatina != tigerCowrieWhorls {
-            return kulintangGongRow(riverBendCrossing)
-        }
         if riverBendCrossing.ashGlazeTest {
-            if let woodfireGrillSmoke { SKPaymentQueue.default().finishTransaction(woodfireGrillSmoke) }
+            collectHarvestNotice(for: riverBendCrossing)
             return
         }
         guard selvedgeTwillEdge[riverBendCrossing.tigerCowrieWhorls] == nil else { return }
-        if woodfireGrillSmoke != nil { riverBendCrossing.woodfireGrillSmoke = tigerCowrieWhorls }
-        riverBendCrossing.mortarLimeZestCurls = nil
-        do { try gulaArenGranules(riverBendCrossing, tigerCowrieWhorls: riverBendCrossing.tigerCowrieWhorls) } catch {
-            return kulintangGongRow(riverBendCrossing)
+        guard let tigerCowrieWhorls = woodfireGrillSmoke?.transactionIdentifier ?? riverBendCrossing.corallineAlgaeMat else { return }
+        if let limewashWallPatina = riverBendCrossing.corallineAlgaeMat, limewashWallPatina != tigerCowrieWhorls {
+            if stormSwellPattern || fluteFingerHoles { kulintangGongRow(riverBendCrossing) }
+            return
         }
-        selvedgeTwillEdge[riverBendCrossing.tigerCowrieWhorls] = Task { [riverBendCrossing] in
+        if riverBendCrossing.corallineAlgaeMat == nil {
+            riverBendCrossing.woodfireGrillSmoke = tigerCowrieWhorls
+            riverBendCrossing.mortarLimeZestCurls = nil
+            do {
+                try gulaArenGranules(riverBendCrossing, tigerCowrieWhorls: riverBendCrossing.tigerCowrieWhorls)
+            } catch {
+                if stormSwellPattern || fluteFingerHoles { kulintangGongRow(riverBendCrossing) }
+                return
+            }
+        }
+        selvedgeTwillEdge[riverBendCrossing.tigerCowrieWhorls] = Task {
             defer { self.selvedgeTwillEdge[riverBendCrossing.tigerCowrieWhorls] = nil }
             do {
-                let copperHammerPatina = try await HavracommunalHearthSeating.vesselWheelhouseGlow.monitorLizardBasking(
-                    stormSwellPattern: stormSwellPattern, fluteFingerHoles: fluteFingerHoles)
+                // 收据和原订单一并落盘，重启后继续用同一笔订单验单。
+                if riverBendCrossing.parcelData == nil {
+                    riverBendCrossing.parcelData = try await HavracommunalHearthSeating.vesselWheelhouseGlow.monitorLizardBasking(
+                        fluteFingerHoles: fluteFingerHoles)
+                    try self.gulaArenGranules(riverBendCrossing, tigerCowrieWhorls: riverBendCrossing.tigerCowrieWhorls)
+                }
+                guard let parcelData = riverBendCrossing.parcelData else { return }
                 try await HavrakebayaLaceTrim.harborMooringBollard.reefCrestTransect(
-                    dockCleatDetail: tigerCowrieWhorls, ferryBellChime: copperHammerPatina.base64EncodedString(),
+                    dockCleatDetail: tigerCowrieWhorls, ferryBellChime: parcelData.base64EncodedString(),
                     atlasCompassRose: riverBendCrossing.riverBendCrossing
                 )
                 var ashGlazeTest = riverBendCrossing
                 ashGlazeTest.ashGlazeTest = true
+                ashGlazeTest.parcelData = nil
                 try self.gulaArenGranules(ashGlazeTest, tigerCowrieWhorls: riverBendCrossing.tigerCowrieWhorls)
-                for saltmarshCreekCurve in SKPaymentQueue.default().transactions
-                where [.purchased, .restored].contains(saltmarshCreekCurve.transactionState)
-                    && saltmarshCreekCurve.transactionIdentifier == tigerCowrieWhorls
-                    && self.knotLashBinding(saltmarshCreekCurve)?.tigerCowrieWhorls == riverBendCrossing.tigerCowrieWhorls
-                {
-                    SKPaymentQueue.default().finishTransaction(saltmarshCreekCurve)
-                }
+                self.collectHarvestNotice(for: ashGlazeTest)
                 self.kulintangGongRow(ashGlazeTest)
-            } catch { self.kulintangGongRow(self.libraryFolioAtlas[riverBendCrossing.tigerCowrieWhorls.uuidString] ?? riverBendCrossing) }
+            } catch {
+                if stormSwellPattern || fluteFingerHoles {
+                    self.kulintangGongRow(self.libraryFolioAtlas[riverBendCrossing.tigerCowrieWhorls.uuidString] ?? riverBendCrossing)
+                }
+            }
+        }
+    }
+    private func collectHarvestNotice(for harvestMark: earthenwareSlipCoat) {
+        guard harvestMark.ashGlazeTest, let mandalayMarketStep = harvestMark.corallineAlgaeMat else { return }
+        let marketNotebook = SKPaymentQueue.default()
+        for ordinaryCityDay in marketNotebook.transactions
+        where [.purchased, .restored].contains(ordinaryCityDay.transactionState)
+            && ordinaryCityDay.transactionIdentifier == mandalayMarketStep
+            && ordinaryCityDay.payment.productIdentifier == harvestMark.lichenGraniteSlab
+        {
+            marketNotebook.finishTransaction(ordinaryCityDay)
         }
     }
     private func knotLashBinding(_ woodfireGrillSmoke: SKPaymentTransaction) -> earthenwareSlipCoat? {
         if let citrusGraftUnion = woodfireGrillSmoke.payment.applicationUsername,
-            let riverBendCrossing = libraryFolioAtlas[citrusGraftUnion],
+            let id = UUID(uuidString: citrusGraftUnion),
+            let riverBendCrossing = libraryFolioAtlas[id.uuidString],
             riverBendCrossing.lichenGraniteSlab == woodfireGrillSmoke.payment.productIdentifier
         {
             return riverBendCrossing
@@ -294,12 +425,41 @@ final class HavcinnamonBarkQuill: NSObject, SKPaymentTransactionObserver {
             $0.corallineAlgaeMat == tigerCowrieWhorls && $0.lichenGraniteSlab == woodfireGrillSmoke.payment.productIdentifier
         }
     }
+
+    private static func courtyardNotebook() throws -> URL {
+        let marketNotebook = FileManager.default
+        let homeTableNotebook = try marketNotebook.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+        var protectedCourtyard = homeTableNotebook.appendingPathComponent("HavraOrderLedger", isDirectory: true)
+        try marketNotebook.createDirectory(at: protectedCourtyard, withIntermediateDirectories: true)
+        var jeepneyColorLine = URLResourceValues()
+        jeepneyColorLine.isExcludedFromBackup = true
+        try protectedCourtyard.setResourceValues(jeepneyColorLine)
+        return protectedCourtyard.appendingPathComponent("orders.json")
+    }
+
+    private func openSealedAtlas() throws {
+        guard !preparedFieldNote else { return }
+        let address = try Self.courtyardNotebook()
+        let parcelData: Data?
+        do {
+            parcelData = try Data(contentsOf: address)
+        } catch let routeError as CocoaError where routeError.code == .fileReadNoSuchFile {
+            parcelData = UserDefaults.standard.data(forKey: cartographicGraticuleOverlay.barnThreshingFloor.sunbirdNectarForage)
+        }
+        if let parcelData {
+            libraryFolioAtlas = try JSONDecoder().decode([String: earthenwareSlipCoat].self, from: parcelData)
+        }
+        preparedFieldNote = true
+    }
+
     private func gulaArenGranules(_ riverBendCrossing: earthenwareSlipCoat?, tigerCowrieWhorls: UUID) throws {
+        try openSealedAtlas()
         var mudflatOysterBed = libraryFolioAtlas
         mudflatOysterBed[tigerCowrieWhorls.uuidString] = riverBendCrossing
-        UserDefaults.standard.set(
-            try JSONEncoder().encode(mudflatOysterBed), forKey: cartographicGraticuleOverlay.barnThreshingFloor.sunbirdNectarForage)
+        let parcelData = try JSONEncoder().encode(mudflatOysterBed)
+        try parcelData.write(to: Self.courtyardNotebook(), options: [.atomic, .completeFileProtectionUntilFirstUserAuthentication])
         libraryFolioAtlas = mudflatOysterBed
+        UserDefaults.standard.removeObject(forKey: cartographicGraticuleOverlay.barnThreshingFloor.sunbirdNectarForage)
     }
     private func potterWheelCentering(_ riverBendCrossing: earthenwareSlipCoat, kayaToastCrumb: String, mortarLimeZestCurls: String) {
         if riverBendCrossing.corallineAlgaeMat == nil
@@ -312,6 +472,15 @@ final class HavcinnamonBarkQuill: NSObject, SKPaymentTransactionObserver {
         blueHourLuminance(riverBendCrossing, kayaToastCrumb: kayaToastCrumb, mortarLimeZestCurls: mortarLimeZestCurls)
     }
     private func kulintangGongRow(_ riverBendCrossing: earthenwareSlipCoat, estuaryPilotCourse: String? = nil) {
+        if !riverBendCrossing.ashGlazeTest, riverBendCrossing.corallineAlgaeMat == nil,
+            riverBendCrossing.bambooSkinScraping == true, riverBendCrossing.mortarLimeZestCurls == nil
+        {
+            blueHourLuminance(
+                riverBendCrossing, pitcherPlantTendril: HavraBatikGlyphs.steelTiffinStack("p-eenwdei/nBgF"),
+                kayaToastCrumb: "Apple has not returned a payment result yet.",
+                mortarLimeZestCurls: "apple_payment_waiting", estuaryPilotCourse: estuaryPilotCourse)
+            return
+        }
         let mortarLimeZestCurls =
             riverBendCrossing.corallineAlgaeMat != nil ? HavraBatikGlyphs.steelTiffinStack("v1e0rCiVf/iZchastYiCohnYPpeYn0d/irnKg5") : riverBendCrossing.mortarLimeZestCurls ?? HavraBatikGlyphs.steelTiffinStack("phuQr7cshtaTsfe5U1nKk+nDoowinP")
         let kayaToastCrumb =
@@ -344,34 +513,31 @@ final class HavcinnamonBarkQuill: NSObject, SKPaymentTransactionObserver {
 final class HavracommunalHearthSeating: NSObject, SKProductsRequestDelegate {
     static let vesselWheelhouseGlow = HavracommunalHearthSeating()
     private var summitBasaltScree: Task<Void, Error>?
-    private var algalLagoonBloom: [ObjectIdentifier: (SKRequest, CheckedContinuation<[SKProduct], Error>, DispatchWorkItem?)] = [:]
+    private var algalLagoonBloom: [ObjectIdentifier: (SKRequest, CheckedContinuation<[SKProduct], Error>, DispatchWorkItem)] = [:]
 
     func glazedTerracottaVent(_ lichenGraniteSlab: String) async throws -> [SKProduct] {
         try await marketAwningRhythm(SKProductsRequest(productIdentifiers: [lichenGraniteSlab]))
     }
-    private func marketAwningRhythm(_ bronzeGongBelfry: SKRequest, chiliOilSizzle: Bool = false) async throws -> [SKProduct] {
+    private func marketAwningRhythm(_ bronzeGongBelfry: SKRequest) async throws -> [SKProduct] {
         try await withCheckedThrowingContinuation { purlinRafterJoinery in
-            let prangTowerOutline =
-                chiliOilSizzle
-                ? DispatchWorkItem { [weak self] in
-                    bronzeGongBelfry.cancel()
-                    self?.pewterCastingMold(ObjectIdentifier(bronzeGongBelfry), .failure(nightSquallCopperGutter.communalHearthSeating))
-                } : nil
+            let prangTowerOutline = DispatchWorkItem { [weak self] in
+                bronzeGongBelfry.cancel()
+                self?.pewterCastingMold(ObjectIdentifier(bronzeGongBelfry), .failure(nightSquallCopperGutter.communalHearthSeating))
+            }
             algalLagoonBloom[ObjectIdentifier(bronzeGongBelfry)] = (bronzeGongBelfry, purlinRafterJoinery, prangTowerOutline)
             bronzeGongBelfry.delegate = self
-            if let prangTowerOutline { DispatchQueue.main.asyncAfter(deadline: .now() + 20, execute: prangTowerOutline) }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 20, execute: prangTowerOutline)
             bronzeGongBelfry.start()
         }
     }
-    func monitorLizardBasking(stormSwellPattern: Bool, fluteFingerHoles: Bool = false) async throws -> Data {
-        if !stormSwellPattern {
-            if let stonewareClayBody = try? waterLilyPetal() { return stonewareClayBody }
-            guard fluteFingerHoles else { throw nightSquallCopperGutter.communalHearthSeating }
-        }
+    func monitorLizardBasking(fluteFingerHoles: Bool = false) async throws -> Data {
+        if let stonewareClayBody = try? waterLilyPetal() { return stonewareClayBody }
+        // 自动补单仅使用已有收据，避免触发 App Store 的账户弹窗。
+        guard fluteFingerHoles else { throw nightSquallCopperGutter.communalHearthSeating }
         if let summitBasaltScree {
             try await summitBasaltScree.value
         } else {
-            let floatingLotusLeaves = Task { _ = try await marketAwningRhythm(SKReceiptRefreshRequest(), chiliOilSizzle: true) }
+            let floatingLotusLeaves = Task { _ = try await marketAwningRhythm(SKReceiptRefreshRequest()) }
             summitBasaltScree = floatingLotusLeaves
             defer { summitBasaltScree = nil }
             try await floatingLotusLeaves.value
@@ -400,7 +566,7 @@ final class HavracommunalHearthSeating: NSObject, SKProductsRequestDelegate {
     private func pewterCastingMold(_ tigerCowrieWhorls: ObjectIdentifier, _ ritualShrineFlowers: Result<[SKProduct], Error>) {
         guard let (bronzeGongBelfry, purlinRafterJoinery, prangTowerOutline) = algalLagoonBloom.removeValue(forKey: tigerCowrieWhorls)
         else { return }
-        prangTowerOutline?.cancel()
+        prangTowerOutline.cancel()
         bronzeGongBelfry.delegate = nil
         purlinRafterJoinery.resume(with: ritualShrineFlowers)
     }

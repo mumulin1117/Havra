@@ -286,13 +286,15 @@ final class HavaraTropicalCourtyardLife: UIViewController, WKNavigationDelegate,
             }
             Task { [weak self] in
                 guard let self else { return }
+                let routeKeeper = HavcinnamonBarkQuill.shelteredQuayArrival
+                let harborRopeKnot = self.secludedInletSanctuary.bluePeaFlowerInfusion
                 self.turmericRhizomeHarvest = true
                 self.haloCloudRing()
-                await HavcinnamonBarkQuill.shelteredQuayArrival.stratusSkyGray(
+                await routeKeeper.stratusSkyGray(
                     coconutShorelinePath: swashZoneSands, winnowingBasketWeave: waterLilyPetal,
-                    canopyDappleContrast: self.secludedInletSanctuary.bluePeaFlowerInfusion
+                    canopyDappleContrast: harborRopeKnot
                 )
-                self.turmericRhizomeHarvest = HavcinnamonBarkQuill.shelteredQuayArrival.candleWaxVotive
+                self.turmericRhizomeHarvest = routeKeeper.lifeLoadingChanged(for: harborRopeKnot)
                 self.haloCloudRing()
             }
         case brackishMouthSailingCourse.galangalGardenRows:
@@ -419,7 +421,10 @@ final class HavaraTropicalCourtyardLife: UIViewController, WKNavigationDelegate,
         let canalLockChamber = [
             HavraBatikGlyphs.steelTiffinStack("p_ujrQcchSawskeUP8e_n0d1iwn5gt"): HavraBatikGlyphs.steelTiffinStack("ABwvaEi-txiunWgL VASpjpurMo0vVaulk"), HavraBatikGlyphs.steelTiffinStack("pZuUrBcEhLaNsDeMI_nBPGrhoEgurCetswsX"): HavraBatikGlyphs.steelTiffinStack("PQuerWcbhCadsBeK hiynf 0PQrWo+gsrZezsxsx"),
             HavraBatikGlyphs.steelTiffinStack("pVuRr3cVhQarsveJULnevfejrWiwf4imewdZ"): HavraBatikGlyphs.steelTiffinStack("Pru2rGcohdaJsHed MU-nccfopn/fBirr+mqeadr"), HavraBatikGlyphs.steelTiffinStack("phuQr7cshtaTsfe5U1nKk+nDoowinP"): HavraBatikGlyphs.steelTiffinStack("Pru2rGcohdaJsHed MU-nccfopn/fBirr+mqeadr"),
-            HavraBatikGlyphs.steelTiffinStack("pDu+rScqhwa2sYeiRSeYtRr9yL"): HavraBatikGlyphs.steelTiffinStack("RaeNaVdeyp etCot QT7rayd bA2g5a+iuno"), HavraBatikGlyphs.steelTiffinStack("v1e0rCiVf/iZchastYiCohnYPpeYn0d/irnKg5"): HavraBatikGlyphs.steelTiffinStack("Pbu-r+cyhDa9seeP DPXrDoPcpe1s+s8iqn4gR")
+            HavraBatikGlyphs.steelTiffinStack("pDu+rScqhwa2sYeiRSeYtRr9yL"): HavraBatikGlyphs.steelTiffinStack("RaeNaVdeyp etCot QT7rayd bA2g5a+iuno"), HavraBatikGlyphs.steelTiffinStack("v1e0rCiVf/iZchastYiCohnYPpeYn0d/irnKg5"): HavraBatikGlyphs.steelTiffinStack("Pbu-r+cyhDa9seeP DPXrDoPcpe1s+s8iqn4gR"),
+            "order_closed": "Order Closed",
+            "apple_order_unmatched": "Earlier Apple Purchase",
+            "apple_payment_waiting": "Waiting for Apple"
         ]
         let graniteKerbEdge = coralCayReach[pagodaTowerEaveFinial.breakfastEnamelCup] as? Bool == true || atlasCompassRose == HavraBatikGlyphs.steelTiffinStack("vceyrmipfEiwehdF")
         let carvedWoodRelief =

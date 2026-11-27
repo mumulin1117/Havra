@@ -366,8 +366,6 @@ final class HavralaundryPulleyLine: UIViewController, WKNavigationDelegate, WKUI
             }
         default: bitterMelonTrellis(.deny)
         }
-
-        bitterMelonTrellis(.grant)
     }
 }
 
