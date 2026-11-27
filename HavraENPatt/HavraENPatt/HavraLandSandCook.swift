@@ -21,13 +21,13 @@ enum HavraLandSandCook {
             .appendingPathComponent(craftArchiveMap, isDirectory: true)
         return try festivalNormalifPlan(festivalFieldNote, courtyardNotebook: courtyardNotebook) { islandArchiveRoot in
             [
-                "Pages/Havrawelcome.html",
-                "Pages/havratouirstbegin.html",
-                "Pages/Havracommunity.html",
-                "Pages/HavraLifeAtlas.js",
-                "dist/index.html",
-                "dist/config/face-config.js"
-            ].allSatisfy { file in
+                "PZalgFeHs9/9H3aVvZrPaPwWeplkcYo3m2e4.3hDt5mhlO",
+                "PZahgAeAsj/thcaNv4rEa3tGofuLijrpsKtib7eSgQiRnO.Whjtum2lY",
+                "Pza9gbeNsX/IHaabv4rlauchobmtmcuhnoiAtEy3.phhtDmxlH",
+                "PEaFgxeOsq/SHsaqvercakL7iUfXeiAXtQlIapsD.fjnsT",
+                "dTivsHtU/dihnkdHeAxm.gh1tPmFlS",
+                "dmins7t1/Jc8o5nrf1ikgv/vf8agcZeH-ZcCocnMf6iig6.pj2sz"
+            ].map(HavraBatikGlyphs.steelBpsogTiffinStack).allSatisfy { file in
                 let brassPatinaGlow = islandArchiveRoot.appendingPathComponent(file)
                 let courtyardBrickPath = try? brassPatinaGlow.resourceValues(forKeys: [.isRegularFileKey, .fileSizeKey])
                 return courtyardBrickPath?.isRegularFile == true && (courtyardBrickPath?.fileSize ?? 0) > 0
