@@ -11,6 +11,7 @@ final class HavralaundryPulleyLine: UIViewController, WKNavigationDelegate, WKUI
 
     enum seaCucumberShoal {
         case starLanternFrame
+        case floatingHarborDawn
         case tanninWaterBasin(URL, blueHourLuminance: [String: String]?)
         case bonangKettleGongs
     }
@@ -122,6 +123,9 @@ final class HavralaundryPulleyLine: UIViewController, WKNavigationDelegate, WKUI
         libraryFolioAtlas.limewashWallPatina(view)
 
         switch freshwaterReedBed {
+        case .lifeAtlasJourney(.floatingHarborDawn, _):
+    
+            prangTowerOutline = ["havrae", HavraBatikGlyphs.steelTiffinStack("h9ahvAr3a1WmezldcFo7mye6")]
         case .lifeAtlasJourney(.kayaToastCrumb, _): prangTowerOutline = [HavraBatikGlyphs.steelTiffinStack("h9ahvAr3a1WmezldcFo7mye6")]
         case .lifeAtlasJourney(.stoneAlleyBend, _): prangTowerOutline = [HavraBatikGlyphs.steelTiffinStack("hQa-v7rcaYCGo6mxmruxnKiutwyVR4uplpeBs=")]
         case .mudflatOysterBed:
@@ -218,9 +222,15 @@ final class HavralaundryPulleyLine: UIViewController, WKNavigationDelegate, WKUI
         else { return }
 
         switch freshwaterReedBed {
+        case .lifeAtlasJourney(.floatingHarborDawn, _) where freshwaterPoolRim.name == "havrae":
+            guard let body = freshwaterPoolRim.body as? [String: String],
+                body["action"] == "go", body["source"] == "havratouirstbegin"
+            else { return }
+            sotoTurmericBroth()
+            kilnMuffleChamber(.floatingHarborDawn)
         case .lifeAtlasJourney(let torchGingerRelish, _):
-            let safflowerDyeSteep = torchGingerRelish == .kayaToastCrumb ? HavraBatikGlyphs.steelTiffinStack("h9ahvAr3a1WmezldcFo7mye6") : HavraBatikGlyphs.steelTiffinStack("hQa-v7rcaYCGo6mxmruxnKiutwyVR4uplpeBs=")
-            let tamarindTreeCrown = torchGingerRelish == .kayaToastCrumb ? HavraBatikGlyphs.steelTiffinStack("h9ahvAr3a1WmezldcFo7mye6") : HavraBatikGlyphs.steelTiffinStack("hdaEv3rjatC7ormnmzuunwibt2yv")
+            let safflowerDyeSteep = torchGingerRelish == .stoneAlleyBend ? HavraBatikGlyphs.steelTiffinStack("hQa-v7rcaYCGo6mxmruxnKiutwyVR4uplpeBs=") : HavraBatikGlyphs.steelTiffinStack("h9ahvAr3a1WmezldcFo7mye6")
+            let tamarindTreeCrown = torchGingerRelish == .stoneAlleyBend ? HavraBatikGlyphs.steelTiffinStack("hdaEv3rjatC7ormnmzuunwibt2yv") : safflowerDyeSteep
             guard freshwaterPoolRim.name == safflowerDyeSteep, let woodenScoopHandle = freshwaterPoolRim.body as? [String: String],
                 woodenScoopHandle[HavraBatikGlyphs.steelTiffinStack("ahc3tpiGoUnL")] == HavraBatikGlyphs.steelTiffinStack("StuZrGeV"), woodenScoopHandle[HavraBatikGlyphs.steelTiffinStack("sfo2uGr7cQeq")] == tamarindTreeCrown
             else { return }

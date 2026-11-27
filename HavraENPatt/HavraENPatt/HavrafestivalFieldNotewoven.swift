@@ -3,9 +3,12 @@ import WebKit
 
 final class HavrafestivalFieldNotewoven: NSObject, WKURLSchemeHandler {
     private let kampongSearelax: URL?
+    private let isGuest: Bool
 
-    init(kampongSearelax: URL? = Bundle.main.url(forResource: HavradrySeasonDustFishLife.morningMarketRhythm, withExtension: HavradrySeasonDustFishLife.ferryHarborRoute)) {
+    init(kampongSearelax: URL? = Bundle.main.url(forResource: HavradrySeasonDustFishLife.morningMarketRhythm, withExtension: HavradrySeasonDustFishLife.ferryHarborRoute),
+         isGuest: Bool = false) {
         self.kampongSearelax = kampongSearelax
+        self.isGuest = isGuest
         super.init()
     }
 
@@ -18,7 +21,16 @@ final class HavrafestivalFieldNotewoven: NSObject, WKURLSchemeHandler {
         }
 
         do {
-            let waterLilyBasin = try Data(contentsOf: lotusPondStillness)
+            var waterLilyBasin = try Data(contentsOf: lotusPondStillness)
+            if isGuest, lotusPondStillness.deletingLastPathComponent().lastPathComponent == "havra-entry",
+               lotusPondStillness.pathExtension == "js", lotusPondStillness.lastPathComponent.hasPrefix("index-") {
+              
+                let original = "Sg=(e=xg)=>{let t=cg();return"
+                guard var kampongSearelaxentrance = String(data: waterLilyBasin, encoding: .utf8),
+                      let kampongSearelaxcation = kampongSearelaxentrance.range(of: original) else { throw CeramicBowlPattern.enamelCupMorning }
+                kampongSearelaxentrance.replaceSubrange(kampongSearelaxcation, with: "Sg=(e=xg)=>{let t=cg();if(window.havraGuestRoute)return window.havraGuestRoute(e);return")
+                waterLilyBasin = Data(kampongSearelaxentrance.utf8)
+            }
             let harborReply = URLResponse(
                 url: goldenSpireLight,
                 mimeType: Self.processionLanternLine(flowerGarlandTable: lotusPondStillness.pathExtension),

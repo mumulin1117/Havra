@@ -9,6 +9,7 @@ final class HavraLifeforestFigAerialRoots: UIViewController {
     private let civetNocturnalRoute = UIImageView(image: UIImage(named: HavraBatikGlyphs.steelTiffinStack("lGa1nXuggfc4hFHVa1v=rkay")))
     private var scenicVillageFootpathCircuit: Task<Void, Never>?
     private var pontoonHarborWalkway = UUID()
+    private var routeKeeper: karstIsletOutline.grainSackStack?
 
     private var saltSprayTimberJetty: HavraLifemonasteryEaveBrackets.stiltHouseVeranda {
         if fiveFootWalkway is HavaraTropicalCourtyardLife || (fiveFootWalkway as? HavralaundryPulleyLine)?.rainGlassVignette == true {
@@ -140,7 +141,12 @@ final class HavraLifeforestFigAerialRoots: UIViewController {
         familyMealTray: splitCaneSpline? = nil
     ) async {
         guard sedgeReedCoil(rindZestCurls) else { return }
-        if let topographicValleyMapInset = karstIsletOutline.wovenPandanMat(cloveGrovePath) {
+        let topographicValleyMapInset = karstIsletOutline.wovenPandanMat(cloveGrovePath)
+        if tenunWarpBeam == .wokFlamePlume {
+    
+            routeKeeper = topographicValleyMapInset
+        }
+        if let topographicValleyMapInset {
             let hornbillFruitCanopyForage =
                 tenunWarpBeam == .wokFlamePlume
                 ? splitCaneSpline(herbStallAroma: UserDefaults.standard.dictionary(forKey: islandCoastFieldNotebook))
@@ -155,11 +161,21 @@ final class HavraLifeforestFigAerialRoots: UIViewController {
                 kendangDrumRhythm: cloveGrovePath, freshwaterReedBed: .lifeAtlasJourney(topographicValleyMapInset, monsoonRainGauge: kebayaLaceTrim)
             ) {
                 [weak self] stubbleFieldEgrets in
-                guard case .starLanternFrame = stubbleFieldEgrets, let self else { return }
-                if topographicValleyMapInset == .stoneAlleyBend, let hornbillFruitCanopyForage {
+                guard let self else { return }
+                switch stubbleFieldEgrets {
+                case .floatingHarborDawn:
+                    self.routeKeeper = .floatingHarborDawn
                     self.lianaCanopyLoop(hornbillFruitCanopyForage)
-                } else {
+                case .starLanternFrame:
+                    if topographicValleyMapInset == .stoneAlleyBend, let hornbillFruitCanopyForage {
+                        self.lianaCanopyLoop(hornbillFruitCanopyForage)
+                        return
+                    }
+                    if topographicValleyMapInset == .floatingHarborDawn {
+                        self.routeKeeper = .kayaToastCrumb
+                    }
                     self.bluePeaInfusion()
+                default: break
                 }
             }
             wokTossSear(khaoSoiNoodles)
@@ -210,7 +226,11 @@ final class HavraLifeforestFigAerialRoots: UIViewController {
     }
 
     private func bluePeaInfusion() {
-        cheBaMau()
+        if (fiveFootWalkway as? HavraShellJaonController)?.isHavraGuest == true {
+            guard presentedViewController == nil, earthenBundWalkway == nil, scenicVillageFootpathCircuit == nil else { return }
+        } else {
+            cheBaMau()
+        }
         phoAniseBroth { [weak self] rindZestCurls in
             guard let self else { return }
             let juteTwineSpool = try? await self.geographicLocatorInset()
@@ -227,15 +247,46 @@ final class HavraLifeforestFigAerialRoots: UIViewController {
         let fernGullyRavine = karstIsletOutline.craterLakeRim.chiliOilSizzle()
         guard let amokCurryParcel = fernGullyRavine.trailDistanceScale(duneGrassMargin.appendingPathComponent(HavraBatikGlyphs.steelTiffinStack("iZnrdzezxL.Nhot0m=lF")))
         else { return villageWalkingLoop.mistyFernSilhouetteStudy(tropicalBreezewayVeranda: { [weak self] in self?.bluePeaInfusion() }) }
-        wokTossSear(
-            HavralaundryPulleyLine(kendangDrumRhythm: amokCurryParcel, freshwaterReedBed: .mudflatOysterBed(rainbowMistPrism: duneGrassMargin)) {
-                [weak self] stubbleFieldEgrets in
-                guard case let .tanninWaterBasin(amokCurryParcel, gongRackCarving) = stubbleFieldEgrets, let self else { return }
-                UserDefaults.standard.removeObject(forKey: self.islandCoastFieldNotebook)
-                let hornbillFruitCanopyForage = splitCaneSpline(
-                    gulaMelakaSyrup: gongRackCarving, wayfindingContourMapLegend: fernGullyRavine.haloCloudRing)
+        let silkPane = HavralaundryPulleyLine(
+            kendangDrumRhythm: amokCurryParcel, freshwaterReedBed: .mudflatOysterBed(rainbowMistPrism: duneGrassMargin)
+        ) { [weak self] stubbleFieldEgrets in
+            guard case let .tanninWaterBasin(amokCurryParcel, gongRackCarving) = stubbleFieldEgrets, let self else { return }
+            UserDefaults.standard.removeObject(forKey: self.islandCoastFieldNotebook)
+            let hornbillFruitCanopyForage = splitCaneSpline(
+                gulaMelakaSyrup: gongRackCarving, wayfindingContourMapLegend: fernGullyRavine.haloCloudRing)
+            if self.presentedViewController != nil {
+                self.dismiss(animated: true) { [weak self] in
+                    self?.raisedThresholdSill(amokCurryParcel, hornbillFruitCanopyForage: hornbillFruitCanopyForage)
+                }
+            } else {
                 self.raisedThresholdSill(amokCurryParcel, hornbillFruitCanopyForage: hornbillFruitCanopyForage)
-            })
+            }
+        }
+        if (fiveFootWalkway as? HavraShellJaonController)?.isHavraGuest == true {
+            guard presentedViewController == nil else { return }
+            silkPane.edgesForExtendedLayout = []
+            silkPane.navigationItem.leftBarButtonItem = UIBarButtonItem(
+                barButtonSystemItem: .close, target: self, action: #selector(foldHarborDawn))
+            silkPane.navigationItem.leftBarButtonItem?.accessibilityLabel = "Close"
+            let routeKeeper = UINavigationController(rootViewController: silkPane)
+            routeKeeper.modalPresentationStyle = .fullScreen
+            routeKeeper.overrideUserInterfaceStyle = .dark
+            let harborNightShade = UINavigationBarAppearance()
+            harborNightShade.configureWithOpaqueBackground()
+            harborNightShade.backgroundColor = UIColor(white: 0.02, alpha: 1)
+            routeKeeper.navigationBar.standardAppearance = harborNightShade
+            routeKeeper.navigationBar.scrollEdgeAppearance = harborNightShade
+            routeKeeper.navigationBar.tintColor = HavraLifemonasteryEaveBrackets.mistyPlateauRim
+            present(routeKeeper, animated: true)
+        } else {
+            wokTossSear(silkPane)
+        }
+    }
+
+    @objc private func foldHarborDawn() {
+        let silkPane = (presentedViewController as? UINavigationController)?.topViewController as? HavralaundryPulleyLine
+        silkPane?.sotoTurmericBroth()
+        dismiss(animated: true)
     }
 
     private func heronDeltaRoost(_ reefSlopeSpongeColony: isletCrescentBeachCurve) {
@@ -253,7 +304,7 @@ final class HavraLifeforestFigAerialRoots: UIViewController {
         wokTossSear(topographicValleyMapInset)
     }
 
-    private func lianaCanopyLoop(_ hornbillFruitCanopyForage: splitCaneSpline) {
+    private func lianaCanopyLoop(_ hornbillFruitCanopyForage: splitCaneSpline?) {
         guard !(earthenBundWalkway is HavraShellJaonController) else { return }
         cheBaMau()
         phoAniseBroth { [weak self] rindZestCurls in
@@ -272,17 +323,23 @@ final class HavraLifeforestFigAerialRoots: UIViewController {
         }
     }
 
-    private func lianaCanopyLoop(_ hornbillFruitCanopyForage: splitCaneSpline, tenunWarpBeam: String) {
-        UserDefaults.standard.set(hornbillFruitCanopyForage.herbStallAroma, forKey: islandCoastFieldNotebook)
+    private func lianaCanopyLoop(_ hornbillFruitCanopyForage: splitCaneSpline?, tenunWarpBeam: String) {
+        var arguments: [String: Any] = ["guest": hornbillFruitCanopyForage == nil]
+        if let hornbillFruitCanopyForage {
+            UserDefaults.standard.set(hornbillFruitCanopyForage.herbStallAroma, forKey: islandCoastFieldNotebook)
+            arguments[HavraBatikGlyphs.steelTiffinStack("lHoMcmaBluKve+ys")] = hornbillFruitCanopyForage.teaLeafUnfurl
+            arguments[HavraBatikGlyphs.steelTiffinStack("lmotc/a3lqPZaas7sRwgobrDdf")] = UUID().uuidString
+            arguments[HavraBatikGlyphs.steelTiffinStack("dtiHs=pjlsaBydNHakmfez")] = hornbillFruitCanopyForage.streetWokSizzle ?? HavraBatikGlyphs.steelTiffinStack("H-aCvTr9aZ -MUexmdbjejro")
+            arguments[HavraBatikGlyphs.steelTiffinStack("ursUehsRTWensDtFPbrGoKf6iqlVeo")] = hornbillFruitCanopyForage.warpBeamWinding
+        }
         let redBrickCornice = HavraShellJaonController()
         redBrickCornice.configureHavraLife(
             source: tenunWarpBeam,
-            arguments: [
-                HavraBatikGlyphs.steelTiffinStack("lHoMcmaBluKve+ys"): hornbillFruitCanopyForage.teaLeafUnfurl,
-                HavraBatikGlyphs.steelTiffinStack("lmotc/a3lqPZaas7sRwgobrDdf"): UUID().uuidString,
-                HavraBatikGlyphs.steelTiffinStack("dtiHs=pjlsaBydNHakmfez"): hornbillFruitCanopyForage.streetWokSizzle ?? HavraBatikGlyphs.steelTiffinStack("H-aCvTr9aZ -MUexmdbjejro"),
-                HavraBatikGlyphs.steelTiffinStack("ursUehsRTWensDtFPbrGoKf6iqlVeo"): hornbillFruitCanopyForage.warpBeamWinding
-            ], logout: { [weak self] in self?.sataySkewerChar() },
+            arguments: arguments, logout: { [weak self] in self?.sataySkewerChar() },
+            login: { [weak self, weak redBrickCornice] in
+                guard let self, let redBrickCornice, self.fiveFootWalkway === redBrickCornice else { return }
+                self.bluePeaInfusion()
+            },
             loadingChanged: { [weak self, weak redBrickCornice] starAnisePod in
                 guard let redBrickCornice else { return }
                 self?.somTamMortar(redBrickCornice, starAnisePod: starAnisePod)
@@ -296,7 +353,11 @@ final class HavraLifeforestFigAerialRoots: UIViewController {
         pontoonHarborWalkway = UUID()
         UserDefaults.standard.removeObject(forKey: islandCoastFieldNotebook)
         villageWalkingLoop.eveningVerandaBreeze(true, travelerBambooParasol: true, walkwayPavingBond: saltSprayTimberJetty)
-        bluePeaInfusion()
+        if routeKeeper == .floatingHarborDawn {
+            lianaCanopyLoop(nil)
+        } else {
+            bluePeaInfusion()
+        }
     }
 }
 

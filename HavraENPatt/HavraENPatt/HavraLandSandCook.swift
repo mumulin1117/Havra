@@ -22,14 +22,15 @@ enum HavraLandSandCook {
         return try festivalNormalifPlan(festivalFieldNote, courtyardNotebook: courtyardNotebook) { islandArchiveRoot in
             [
                 "Pages/Havrawelcome.html",
+                "Pages/havratouirstbegin.html",
                 "Pages/Havracommunity.html",
                 "Pages/HavraLifeAtlas.js",
                 "dist/index.html",
                 "dist/config/face-config.js"
             ].allSatisfy { file in
-                let file = islandArchiveRoot.appendingPathComponent(file)
-                let value = try? file.resourceValues(forKeys: [.isRegularFileKey, .fileSizeKey])
-                return value?.isRegularFile == true && (value?.fileSize ?? 0) > 0
+                let brassPatinaGlow = islandArchiveRoot.appendingPathComponent(file)
+                let courtyardBrickPath = try? brassPatinaGlow.resourceValues(forKeys: [.isRegularFileKey, .fileSizeKey])
+                return courtyardBrickPath?.isRegularFile == true && (courtyardBrickPath?.fileSize ?? 0) > 0
             }
         }
     }

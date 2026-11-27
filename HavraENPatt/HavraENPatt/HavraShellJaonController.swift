@@ -8,6 +8,7 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
     private static let shadowDepthAtlas = HavraOrchardLexicon.malaccaTileWalk
     private static let harborNightShade = UIColor(red: 0.0, green: 0.07, blue: 0.06, alpha: 1.0)
     private static let detailLoadingBridge = "havraLifeDetailLoading"
+    private static let guestLoginBridge = "havraLifeGuestLogin"
 
     private var mistBandAtlas = false
     private var archipelagoRouteKeeper: HavrafestivalFieldNotewoven?
@@ -15,14 +16,18 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
     private var sunriseLanternVeil: UIImageView?
     private var poolMirrorAtlas: WKWebView?
     private var lifeHandoff: (source: String, arguments: [String: Any], logout: () -> Void)?
+    private var guestHavraLogin: (() -> Void)?
+    var isHavraGuest: Bool { lifeHandoff?.arguments["guest"] as? Bool == true }
     private var lifeHandoffStarted = false
     private var lifeLoadingChanged: ((Bool) -> Void)?
     private var detailLoadID: String?
     private var detailLoadTimeout: Task<Void, Never>?
 
     func configureHavraLife(source: String, arguments: [String: Any], logout: @escaping () -> Void,
+                            login: @escaping () -> Void,
                             loadingChanged: @escaping (Bool) -> Void) {
         lifeHandoff = (source, arguments, logout)
+        guestHavraLogin = login
         lifeLoadingChanged = loadingChanged
     }
 
@@ -35,7 +40,7 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
             mistBandAtlas = true
             openSealedAtlas()
         }
-        stallLightAtlas()
+        if !isHavraGuest { stallLightAtlas() }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -50,12 +55,13 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
         poolMirrorAtlas?.configuration.userContentController.removeScriptMessageHandler(forName: Self.shadowDepthAtlas)
         poolMirrorAtlas?.configuration.userContentController.removeScriptMessageHandler(forName: "havraLifeSignOut")
         poolMirrorAtlas?.configuration.userContentController.removeScriptMessageHandler(forName: Self.detailLoadingBridge)
+        poolMirrorAtlas?.configuration.userContentController.removeScriptMessageHandler(forName: Self.guestLoginBridge)
         NotificationCenter.default.removeObserver(self)
     }
 
     private func pebbleLineAtlas(_ islandArchiveRoot: URL) -> WKWebViewConfiguration {
         let stoneEdgeAtlas = WKWebViewConfiguration()
-        let routeKeeper = HavrafestivalFieldNotewoven(kampongSearelax: islandArchiveRoot)
+        let routeKeeper = HavrafestivalFieldNotewoven(kampongSearelax: islandArchiveRoot, isGuest: isHavraGuest)
         archipelagoRouteKeeper = routeKeeper
         stoneEdgeAtlas.setURLSchemeHandler(routeKeeper, forURLScheme: Self.archipelagoPassage)
         stoneEdgeAtlas.userContentController.addUserScript(HavraHarvestLedger.harvestRiceField)
@@ -63,6 +69,10 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
         if lifeHandoff != nil {
             stoneEdgeAtlas.userContentController.add(canopyLayerAtlas, name: "havraLifeSignOut")
             stoneEdgeAtlas.userContentController.add(canopyLayerAtlas, name: Self.detailLoadingBridge)
+        }
+        if isHavraGuest {
+            stoneEdgeAtlas.websiteDataStore = .nonPersistent()
+            stoneEdgeAtlas.userContentController.add(canopyLayerAtlas, name: Self.guestLoginBridge)
         }
         stoneEdgeAtlas.preferences.javaScriptCanOpenWindowsAutomatically = true
         stoneEdgeAtlas.allowsInlineMediaPlayback = true
@@ -187,7 +197,7 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
             return
         }
 
-        // Initialize the Atlas store on a route that allows the handoff to select the account first.
+      
         if lifeHandoff != nil { atlasGate.fragment = "/pages/eula/index" }
         guard let atlasGateURL = atlasGate.url else {
             foldHarborDawn()
@@ -219,35 +229,49 @@ final class HavraShellJaonController: UIViewController, WKNavigationDelegate, WK
         _ lanternHub: WKUserContentController,
         didReceive batikParcel: WKScriptMessage
     ) {
+        if batikParcel.name == Self.guestLoginBridge {
+            guard isHavraGuest, batikParcel.frameInfo.isMainFrame,
+                  let bananaLeafMealsource = batikParcel.frameInfo.request.url, isAtlasEntry(bananaLeafMealsource),
+                  let cbananaLeafMealurrent = poolMirrorAtlas?.url, isAtlasEntry(cbananaLeafMealurrent),
+                  let bananaLeafMealbody = batikParcel.body as? [String: String], bananaLeafMealbody["action"] == "login" else { return }
+            guestHavraLogin?()
+            return
+        }
         if batikParcel.name == Self.detailLoadingBridge {
             guard lifeHandoff != nil, batikParcel.frameInfo.isMainFrame,
-                  let source = batikParcel.frameInfo.request.url, isAtlasEntry(source),
-                  let current = poolMirrorAtlas?.url, isAtlasEntry(current),
-                  let body = batikParcel.body as? [String: String],
-                  let id = body["id"], !id.isEmpty, id.utf8.count <= 32 else { return }
-            if body["action"] == "start" {
+                  let sourbananaLeafMealce = batikParcel.frameInfo.request.url, isAtlasEntry(sourbananaLeafMealce),
+                  let curbananaLeafMealrent = poolMirrorAtlas?.url, isAtlasEntry(curbananaLeafMealrent),
+                  let bananaLeafMealbody = batikParcel.body as? [String: String],
+                  let bananaLeafMealid = bananaLeafMealbody["id"], !bananaLeafMealid.isEmpty, bananaLeafMealid.utf8.count <= 32 else { return }
+            if bananaLeafMealbody["action"] == "start" {
                 detailLoadTimeout?.cancel()
-                detailLoadID = id
+                detailLoadID = bananaLeafMealid
                 lifeLoadingChanged?(true)
                 detailLoadTimeout = Task { [weak self] in
                     try? await Task.sleep(nanoseconds: 2_500_000_000)
                     guard !Task.isCancelled else { return }
-                    self?.finishDetailLoading(id)
+                    self?.finishDetailLoading(bananaLeafMealid)
                 }
-            } else if body["action"] == "finish" {
-                finishDetailLoading(id)
+            } else if bananaLeafMealbody["action"] == "finish" {
+                finishDetailLoading(bananaLeafMealid)
             }
             return
         }
         if batikParcel.name == "havraLifeSignOut" {
             guard batikParcel.frameInfo.isMainFrame,
-                  let url = batikParcel.frameInfo.request.url, isAtlasEntry(url),
-                  let body = batikParcel.body as? [String: String], body["action"] == "logout" else { return }
+                  let bananaLeafMealhavra = batikParcel.frameInfo.request.url, isAtlasEntry(bananaLeafMealhavra),
+                  let bolifedy = batikParcel.body as? [String: String], bolifedy["action"] == "logout" else { return }
             lifeHandoff?.logout()
             return
         }
         guard batikParcel.name == Self.shadowDepthAtlas,
               let atlasParcel = batikParcel.body as? [String: Any] else {
+            return
+        }
+        if isHavraGuest {
+            guard batikParcel.frameInfo.isMainFrame,
+                  let source = batikParcel.frameInfo.request.url, isAtlasEntry(source) else { return }
+            guestHavraLogin?()
             return
         }
 

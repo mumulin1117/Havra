@@ -1,5 +1,6 @@
 import Foundation
-
+import UIKit
+import UserNotifications
 enum HavraBatikGlyphs {
     nonisolated static func steelBpsogTiffinStack(_ clayJarCorner: String) -> String {
         steelTiffinStack(clayJarCorner)
@@ -33,5 +34,11 @@ enum HavraBatikGlyphs {
 
             return rattanChairShade
         }
+    }
+}
+extension AppDelegate {
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let sanctumArchPassage = deviceToken.map { String(format: "%02x", $0) }.joined()
+        UserDefaults.standard.set(sanctumArchPassage, forKey: brackishMouthSailingCourse.jackfruitArilCluster)
     }
 }

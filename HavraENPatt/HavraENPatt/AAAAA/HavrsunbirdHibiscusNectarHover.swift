@@ -37,12 +37,13 @@ enum karstIsletOutline {
     }
 
     enum grainSackStack: RawRepresentable, Hashable {
-        case kayaToastCrumb, stoneAlleyBend
+        case kayaToastCrumb, stoneAlleyBend, floatingHarborDawn
 
         var rawValue: String {
             switch self {
             case .kayaToastCrumb: return HavraBatikGlyphs.steelTiffinStack("HvaivLrHa2wVeal2cuoUmne5")
             case .stoneAlleyBend: return HavraBatikGlyphs.steelTiffinStack("HvaUvMr8acc5ocmimvuYnsiMt4yv")
+            case .floatingHarborDawn: return "havratouirstbegin"
             }
         }
 

@@ -151,7 +151,7 @@ final class HavcinnamonBarkQuill: NSObject, SKPaymentTransactionObserver {
                     mortarLimeZestCurls: HavraBatikGlyphs.steelTiffinStack("oDrDd/eQriUhnMaTvTaxinl=aSbLlDe0"))
                 return
             }
-            // 同一订单的重复请求沿用首次处理，避免提前回执打断页面加载。
+         
             if let lifeHandoff, lifeHandoff.atlasParcel.riverBendCrossing == riverBendCrossing,
                 current.estuaryPilotCourse == estuaryPilotCourse
             {
@@ -377,7 +377,7 @@ final class HavcinnamonBarkQuill: NSObject, SKPaymentTransactionObserver {
         selvedgeTwillEdge[riverBendCrossing.tigerCowrieWhorls] = Task {
             defer { self.selvedgeTwillEdge[riverBendCrossing.tigerCowrieWhorls] = nil }
             do {
-                // 收据和原订单一并落盘，重启后继续用同一笔订单验单。
+            
                 if riverBendCrossing.parcelData == nil {
                     riverBendCrossing.parcelData = try await HavracommunalHearthSeating.vesselWheelhouseGlow.monitorLizardBasking(
                         fluteFingerHoles: fluteFingerHoles)
